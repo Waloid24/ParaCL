@@ -1,0 +1,4 @@
+a = 10;
+b = ?;
+print a;
+print b;

@@ -29,30 +29,30 @@
 %right MINUS
 
 %token
-    ASSIGN      "="
-    MINUS       "-"
-    PLUS        "+"
-    SCOLON      ";"
-    MULTIPLY    "*" 
-    DIVIDE      "/"
-    LPAREN      "("
-    RPAREN      ")"
-    LBRACE      "{"
-    RBRACE      "}"
-    LESS        "<"
-    GREATER     ">"
-    GREATEREQ   ">="
-    LESSEQ      "<="
-    NOTEQUAL    "!="
-    EQUAL       "=="
-    AND         "&&"
-    OR          "||"
-    INPUT       "?"
+    ASSIGN          "="
+    MINUS           "-"
+    PLUS            "+"
+    SCOLON          ";"
+    MULTIPLY        "*" 
+    DIVIDE          "/"
+    LPAREN          "("
+    RPAREN          ")"
+    LBRACE          "{"
+    RBRACE          "}"
+    LESS            "<"
+    GREATER         ">"
+    GREATEREQ       ">="
+    LESSEQ          "<="
+    NOTEQUAL        "!="
+    EQUAL           "=="
+    AND             "&&"
+    OR              "||"
+    QUESTION_MARK   "?"
 
-    IF          "if"
-    WHILE       "while"
-    ELSE        "else"
-    PRINT       "print"
+    IF              "if"
+    WHILE           "while"
+    ELSE            "else"
+    PRINT           "print"
 
     ERR
 ;
@@ -70,6 +70,8 @@
 %nterm <int> statement
 %nterm <int> statement_list
 %nterm <int> else_maybe
+%nterm <int> input
+
 
 %start program
 
@@ -81,15 +83,18 @@ program: statement_list { std::cout << "Parsing complete!" << std::endl; }
 statement_list: statement | statement_list statement
 ;
 
-statement: assign | conditional | cycle | expression SCOLON
+statement: assign | conditional | cycle | input | expression SCOLON
 ;
 
-assign: TYPE_ID ASSIGN expression SCOLON {  
-    if ($3 == -1) {
-        std::cout << "Enter a value: " << std::endl;
-        std::cin >> $3;
-    }
+input: TYPE_ID ASSIGN QUESTION_MARK SCOLON { 
+    std::cout << "Введите значение для переменной: ";
+    std::cin >> $$;
+}
+;
 
+
+
+assign: TYPE_ID ASSIGN expression SCOLON {  
     $$ = $3;
     std::cout << $3 << " assigned for " << $1 << std::endl;
     std::cout << "Result: " << $$ << std::endl;
@@ -107,8 +112,6 @@ expression: expression AND boolean {
 }
 
 | boolean
-
-| INPUT { $$ = -1; }
 ;
 
 cycle: WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE {
@@ -171,6 +174,7 @@ term: term MULTIPLY primary { $$ = $1 * $3; }
 primary: MINUS primary { $$ = -$2; }
        
 | LPAREN expression RPAREN { $$ = $2; }
+
        
 | TYPE_NUM { 
     $$ = $1;
@@ -181,6 +185,16 @@ primary: MINUS primary { $$ = -$2; }
     $$ = $1;
     std::cout << "Встретили переменную со значением: " << $1 << std::endl;
 }
+
+| PRINT TYPE_ID {
+    $$ = $2;
+    std::cout << $2 << std::endl;
+}
+
+| PRINT TYPE_NUM {
+    std::cout << $2 << std::endl;
+}
+;
  
 
 %%
