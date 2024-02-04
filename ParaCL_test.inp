@@ -1,0 +1,12 @@
+//fst = 0; // все типы int
+snd = 1;
+iters = ?;
+
+while (iter > 0) {
+    tmp = fst;
+ //   fst = snd;
+ //   snd = snd + tmp;
+ //   iters = iters - 1;
+}
+
+//print snd; 
