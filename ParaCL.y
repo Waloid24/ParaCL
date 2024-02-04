@@ -62,14 +62,18 @@
 %nterm <int> assign
 %nterm <int> expression
 %nterm <int> arithmetic
-%nterm <int> cycle
-%nterm <int> conditional
+%nterm <int> cycle_statement
+%nterm <int> condition
+%nterm <int> if_condition
+%nterm <int> while_condition
+%nterm <int> body
+%nterm <int> if_statement
 %nterm <int> boolean
 %nterm <int> term
 %nterm <int> primary
 %nterm <int> statement
 %nterm <int> statement_list
-%nterm <int> else_maybe
+
 %nterm <int> input
 
 
@@ -83,7 +87,7 @@ program: statement_list { std::cout << "Parsing complete!" << std::endl; }
 statement_list: statement | statement_list statement
 ;
 
-statement: assign | conditional | cycle | input | expression SCOLON
+statement: assign | if_statement | cycle_statement | input | expression SCOLON
 ;
 
 input: TYPE_ID ASSIGN QUESTION_MARK SCOLON { 
@@ -91,8 +95,6 @@ input: TYPE_ID ASSIGN QUESTION_MARK SCOLON {
     std::cin >> $$;
 }
 ;
-
-
 
 assign: TYPE_ID ASSIGN expression SCOLON {  
     $$ = $3;
@@ -114,22 +116,36 @@ expression: expression AND boolean {
 | boolean
 ;
 
-cycle: WHILE LPAREN expression RPAREN LBRACE statement_list RBRACE {
-    std::cout << "Цикл" <<std::endl;
-    std::cout << "Условие равно: " << $3 << std::endl;
-    if ($3 != 0) {
+cycle_statement: while_condition body   {
+    while ($1) {
         std::cout << "Выполняю тело цикла " << std::endl;
-        $6;
+        $$ = $2;
     }
 }
 ;
 
-
-conditional: IF LPAREN expression RPAREN LBRACE statement_list RBRACE else_maybe
+if_statement: if_condition body ELSE body { 
+    if($1) {
+        $$ = $2;
+    }
+    else $$ = $4;
+    
+}
+| condition body {
+    if($1) {
+        $$ = $2;
+    }
+}
 ;
 
-else_maybe: ELSE LBRACE statement_list RBRACE { $$ = $3; }
-    | %empty { $$ = 0; }
+if_condition: IF LPAREN expression RPAREN { $$ = $3; }
+;
+
+while_condition: WHILE LPAREN expression RPAREN { $$ = $3; }
+;
+
+body: LBRACE statement_list RBRACE { $$ = $2; }
+| statement { $$ = $1; }
 ;
 
 boolean: boolean GREATEREQ arithmetic {
@@ -159,7 +175,7 @@ arithmetic: arithmetic PLUS term { $$ = $1 + $3; }
 
 | arithmetic MINUS term { $$ = $1 - $3; }
 
-| term
+| term { $$ = $1; }
 
 | %empty { $$ = 0; }
 ;
@@ -168,7 +184,7 @@ term: term MULTIPLY primary { $$ = $1 * $3; }
 
 | term DIVIDE primary { $$ = $1 / $3; }
     
-| primary
+| primary { $$ = $1; }
 ;
 
 primary: MINUS primary { $$ = -$2; }
@@ -178,7 +194,7 @@ primary: MINUS primary { $$ = -$2; }
        
 | TYPE_NUM { 
     $$ = $1;
-    std::cout << "Встретили число со значением " << $1 << std::endl; 
+    std::cout << "Встретили число со значением " << $1 << "\n----------------------------\n" << std::endl; 
 }
 
 | TYPE_ID {
