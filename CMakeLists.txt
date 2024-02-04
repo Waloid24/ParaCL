@@ -1,12 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-
-project(grammar LANGUAGES CXX)
-
-if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE Release)
-endif()
-
-set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+project(ParaCL LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -15,28 +8,32 @@ find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 
 if (NOT DEFINED GRAMMAR)
-  set(GRAMMAR "grammar-sr.y" CACHE STRING "file with grammar" FORCE)
+  set(GRAMMAR "parser.y" CACHE STRING "file with grammar" FORCE)
 endif()
 
+# set(CMAKE_CXX_FLAGS_DEBUG "-Wall -O2")
+# set(CMAKE_CXX_FLAGS_RELEASE "-O2")
+
+set(PARSER parser/parser.y)
+set(LEXER parser/lexer.l)
+set(DRIVER parser/driver.cpp)
+
 flex_target(scanner
-  lex.l
-  ${CMAKE_CURRENT_BINARY_DIR}/lexer.cpp
+  ${LEXER}
+  ${CMAKE_CURRENT_BINARY_DIR}/lexer.cc
 )
 
 bison_target(parser
-  ${GRAMMAR}
+  ${PARSER}
   ${CMAKE_CURRENT_BINARY_DIR}/parser.cc
   COMPILE_FLAGS "--defines=${CMAKE_CURRENT_BINARY_DIR}/grammar.tab.hh")
 
 add_flex_bison_dependency(scanner parser)
 
-add_compile_options(${CMAKE_CXX_FLAGS_RELEASE})
-
-message("CMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}")
-message("CMAKE_CXX_FLAGS=${CMAKE_CXX_FLAGS_RELEASE}")
+# add_compile_options(${CMAKE_CXX_FLAGS_RELEASE})
 
 add_executable(${PROJECT_NAME} 
-  driver.cpp  
+  ${DRIVER} 
   ${BISON_parser_OUTPUTS}
   ${FLEX_scanner_OUTPUTS}
 )
