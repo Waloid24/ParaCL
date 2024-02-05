@@ -14,9 +14,9 @@ endif()
 # set(CMAKE_CXX_FLAGS_DEBUG "-Wall -O2")
 # set(CMAKE_CXX_FLAGS_RELEASE "-O2")
 
-set(PARSER parser/parser.y)
-set(LEXER parser/lexer.l)
-set(DRIVER parser/driver.cpp)
+set(PARSER analyzers/parser.y)
+set(LEXER analyzers/lexer.l)
+set(DRIVER src/driver.cpp)
 
 flex_target(scanner
   ${LEXER}
@@ -30,10 +30,8 @@ bison_target(parser
 
 add_flex_bison_dependency(scanner parser)
 
-# add_compile_options(${CMAKE_CXX_FLAGS_RELEASE})
-
-add_executable(${PROJECT_NAME} 
-  ${DRIVER} 
+add_executable(${PROJECT_NAME}
+  ${DRIVER}
   ${BISON_parser_OUTPUTS}
   ${FLEX_scanner_OUTPUTS}
 )
