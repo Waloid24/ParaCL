@@ -55,21 +55,22 @@
     ERR
 ;
 
-%token <int> TYPE_NUM
-%token <int> TYPE_ID
-%nterm <int> assign
-%nterm <int> expression
-%nterm <int> arithmetic
-%nterm <int> cycle_statement
-%nterm <int> if_condition
-%nterm <int> while_condition
-%nterm <int> body
-%nterm <int> if_statement
-%nterm <int> boolean
+%token <int> NUM
+%token <int> ID
+
+%nterm <int> stmt_list
+%nterm <int> stmt
+%nterm <int> assign_stmt
+%nterm <int> expr
+%nterm <int> while_stmt
+%nterm <int> if_stmt
+%nterm <int> if_cond
+%nterm <int> while_cond
+%nterm <int> block
+%nterm <int> bool_expr
+%nterm <int> arith_expr
 %nterm <int> term
-%nterm <int> primary
-%nterm <int> statement
-%nterm <int> statement_list
+%nterm <int> primary_expr
 
 %left AND OR
 %left EQUAL NOT_EQUAL
@@ -81,36 +82,36 @@
 
 %%
 
-program: statement_list { std::cout << "Parsing complete!" << std::endl; }
+program: stmt_list { std::cout << "Parsing complete!" << std::endl; }
 ;
 
-statement_list: statement | statement_list statement
+stmt_list: stmt | stmt_list stmt
 ;
 
-statement: assign | if_statement | cycle_statement | expression SCOLON
+stmt: assign_stmt | if_stmt | while_stmt | expr SCOLON
 ;
 
-assign: TYPE_ID ASSIGN expression SCOLON {
+assign_stmt: ID ASSIGN expr SCOLON {
     std::cout << $3 << " assigned for " << $1 << std::endl;
     $$ = $3;
     std::cout << "Result: " << $$ << std::endl;
 }
 ;
 
-expression: expression AND boolean {
+expr: expr AND bool_expr {
     $$ = ($1 && $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| expression OR boolean {
+| expr OR bool_expr {
     $$ = ($1 || $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| boolean
+| bool_expr
 ;
 
-cycle_statement: while_condition body {
+while_stmt: while_cond block {
     while ($1) {
         std::cout << "Выполняю тело цикла " << std::endl;
         $$ = $2;
@@ -118,7 +119,7 @@ cycle_statement: while_condition body {
 }  
 ;
 
-if_statement: if_condition body ELSE body  { 
+if_stmt: if_cond block ELSE block  { 
     if($1) {
         $$ = $2;
     }
@@ -126,75 +127,75 @@ if_statement: if_condition body ELSE body  {
 } 
 ;
 
-if_condition: IF LPAREN expression RPAREN { $$ = $3; }
+if_cond: IF LPAREN expr RPAREN { $$ = $3; }
 ;
 
-while_condition: WHILE LPAREN expression RPAREN  { $$ = $3; }
+while_cond: WHILE LPAREN expr RPAREN  { $$ = $3; }
 ;
 
-body: LBRACE statement_list RBRACE  { $$ = $2; }
-| statement { $$ = $1; }
+block: LBRACE stmt_list RBRACE  { $$ = $2; }
+| stmt { $$ = $1; }
 ;
 
-boolean: boolean GREATEREQ arithmetic {
+bool_expr: bool_expr GREATEREQ arith_expr {
     $$ = ($1 >= $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| boolean LESSEQ arithmetic {
+| bool_expr LESSEQ arith_expr {
     $$ = ($1 <= $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| boolean LESS arithmetic  {
+| bool_expr LESS arith_expr  {
     $$ = ($1 < $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| boolean GREATER arithmetic  {
+| bool_expr GREATER arith_expr  {
     $$ = ($1 > $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| arithmetic { $$ = $1; }
+| arith_expr { $$ = $1; }
 ;
 
-arithmetic: arithmetic PLUS term { $$ = $1 + $3; }
+arith_expr: arith_expr PLUS term { $$ = $1 + $3; }
 
-| arithmetic MINUS term { $$ = $1 - $3; }
+| arith_expr MINUS term { $$ = $1 - $3; }
 
 | term  { $$ = $1; }
 
 ;
 
-term: term MULTIPLY primary { $$ = $1 * $3; }
+term: term MULTIPLY primary_expr { $$ = $1 * $3; }
 
-| term DIVIDE primary { $$ = $1 / $3; }
+| term DIVIDE primary_expr { $$ = $1 / $3; }
     
-| primary { $$ = $1; }
+| primary_expr { $$ = $1; }
 ;
 
-primary: MINUS primary { $$ = -$2; }
+primary_expr: MINUS primary_expr { $$ = -$2; }
        
-| LPAREN expression RPAREN { $$ = $2; }
+| LPAREN expr RPAREN { $$ = $2; }
 
        
-| TYPE_NUM { 
+| NUM { 
     $$ = $1;
     std::cout << "Встретили число со значением " << $1 << "\n----------------------------\n" << std::endl; 
 }
 
-| TYPE_ID {
+| ID {
     $$ = $1;
     std::cout << "Встретили переменную со значением: " << $1 << std::endl;
 }
 
 
-| PRINT "(" expression ")" {
+| PRINT LPAREN expr RPAREN {
     $$ = $3;
     std::cout << $3 << std::endl;
 }
-| QUESTION_MARK "(" TYPE_ID ")" {
+| QUESTION_MARK LPAREN ID RPAREN {
     std::cout << "Введите значение для переменной: ";
     std::cin >> $$;
 }

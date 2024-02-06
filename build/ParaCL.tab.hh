@@ -368,21 +368,21 @@ namespace yy {
     /// An auxiliary type to compute the largest semantic type.
     union union_type
     {
-      // TYPE_NUM
-      // TYPE_ID
-      // assign
-      // expression
-      // arithmetic
-      // cycle_statement
-      // if_condition
-      // while_condition
-      // body
-      // if_statement
-      // boolean
+      // NUM
+      // ID
+      // stmt_list
+      // stmt
+      // assign_stmt
+      // expr
+      // while_stmt
+      // if_stmt
+      // if_cond
+      // while_cond
+      // block
+      // bool_expr
+      // arith_expr
       // term
-      // primary
-      // statement
-      // statement_list
+      // primary_expr
       char dummy1[sizeof (int)];
     };
 
@@ -446,8 +446,8 @@ namespace yy {
         ELSE = 279,
         PRINT = 280,
         ERR = 281,
-        TYPE_NUM = 282,
-        TYPE_ID = 283,
+        NUM = 282,
+        ID = 283,
         NOT_EQUAL = 284,
         LESS_EQUAL = 285,
         GREATER_EQUAL = 286
@@ -535,21 +535,21 @@ namespace yy {
         // Type destructor.
 switch (yytype)
     {
-      case 27: // TYPE_NUM
-      case 28: // TYPE_ID
-      case 33: // assign
-      case 34: // expression
-      case 35: // arithmetic
-      case 36: // cycle_statement
-      case 37: // if_condition
-      case 38: // while_condition
-      case 39: // body
-      case 40: // if_statement
-      case 41: // boolean
-      case 42: // term
-      case 43: // primary
-      case 44: // statement
-      case 45: // statement_list
+      case 27: // NUM
+      case 28: // ID
+      case 33: // stmt_list
+      case 34: // stmt
+      case 35: // assign_stmt
+      case 36: // expr
+      case 37: // while_stmt
+      case 38: // if_stmt
+      case 39: // if_cond
+      case 40: // while_cond
+      case 41: // block
+      case 42: // bool_expr
+      case 43: // arith_expr
+      case 44: // term
+      case 45: // primary_expr
         value.template destroy< int > ();
         break;
 
@@ -639,13 +639,13 @@ switch (yytype)
       symbol_type (int tok, int v)
         : super_type(token_type (tok), std::move (v))
       {
-        YY_ASSERT (tok == token::TYPE_NUM || tok == token::TYPE_ID);
+        YY_ASSERT (tok == token::NUM || tok == token::ID);
       }
 #else
       symbol_type (int tok, const int& v)
         : super_type(token_type (tok), v)
       {
-        YY_ASSERT (tok == token::TYPE_NUM || tok == token::TYPE_ID);
+        YY_ASSERT (tok == token::NUM || tok == token::ID);
       }
 #endif
     };
@@ -1047,31 +1047,31 @@ switch (yytype)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TYPE_NUM (int v)
+      make_NUM (int v)
       {
-        return symbol_type (token::TYPE_NUM, std::move (v));
+        return symbol_type (token::NUM, std::move (v));
       }
 #else
       static
       symbol_type
-      make_TYPE_NUM (const int& v)
+      make_NUM (const int& v)
       {
-        return symbol_type (token::TYPE_NUM, v);
+        return symbol_type (token::NUM, v);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_TYPE_ID (int v)
+      make_ID (int v)
       {
-        return symbol_type (token::TYPE_ID, std::move (v));
+        return symbol_type (token::ID, std::move (v));
       }
 #else
       static
       symbol_type
-      make_TYPE_ID (const int& v)
+      make_ID (const int& v)
       {
-        return symbol_type (token::TYPE_ID, v);
+        return symbol_type (token::ID, v);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1422,7 +1422,7 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 94,     ///< Last index in yytable_.
+      yylast_ = 90,     ///< Last index in yytable_.
       yynnts_ = 15,  ///< Number of nonterminal symbols.
       yyfinal_ = 46, ///< Termination state number.
       yyntokens_ = 32  ///< Number of tokens.

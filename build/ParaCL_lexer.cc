@@ -752,12 +752,12 @@ return yy::parser::token_type::AND;
 case 26:
 YY_RULE_SETUP
 #line 48 "ParaCL_lexer.l"
-return yy::parser::token_type::TYPE_NUM;
+return yy::parser::token_type::NUM;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
 #line 49 "ParaCL_lexer.l"
-return yy::parser::token_type::TYPE_ID;
+return yy::parser::token_type::ID;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP

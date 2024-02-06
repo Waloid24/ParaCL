@@ -13,7 +13,7 @@ public:
 
   parser::token_type yylex(parser::semantic_type *yylval) {
     parser::token_type tt = static_cast<parser::token_type>(plex_->yylex());
-    if (tt == yy::parser::token_type::TYPE_NUM)
+    if (tt == yy::parser::token_type::NUM)
       yylval->as<int>() = std::stoi(plex_->YYText());
     return tt;
   }
