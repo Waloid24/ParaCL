@@ -9,6 +9,7 @@
 {
     #include <iostream>
     #include <string>
+    #include <unordered_map>
 
     namespace yy { class Driver; }
 }
@@ -21,12 +22,10 @@
         parser::token_type yylex(parser::semantic_type* yyval,
                                  Driver* driver);
     }
+    struct VariableStore {
+        std::unordered_map<std::string, int> variables;
+    };
 }
-
-%right OR
-%right AND
-%left GREATER GREATEREQ LESS LESSEQ
-%right MINUS
 
 %token
     ASSIGN          "="
@@ -53,7 +52,6 @@
     WHILE           "while"
     ELSE            "else"
     PRINT           "print"
-
     ERR
 ;
 
@@ -63,7 +61,6 @@
 %nterm <int> expression
 %nterm <int> arithmetic
 %nterm <int> cycle_statement
-%nterm <int> condition
 %nterm <int> if_condition
 %nterm <int> while_condition
 %nterm <int> body
@@ -74,8 +71,11 @@
 %nterm <int> statement
 %nterm <int> statement_list
 
-%nterm <int> input
-
+%left AND OR
+%left EQUAL NOT_EQUAL
+%left LESS LESS_EQUAL GREATER GREATER_EQUAL 
+%left PLUS MINUS
+%left MULTIPLY DIVIDE
 
 %start program
 
@@ -87,18 +87,12 @@ program: statement_list { std::cout << "Parsing complete!" << std::endl; }
 statement_list: statement | statement_list statement
 ;
 
-statement: assign | if_statement | cycle_statement | input | expression SCOLON
+statement: assign | if_statement | cycle_statement | expression SCOLON
 ;
 
-input: TYPE_ID ASSIGN QUESTION_MARK SCOLON { 
-    std::cout << "Введите значение для переменной: ";
-    std::cin >> $$;
-}
-;
-
-assign: TYPE_ID ASSIGN expression SCOLON {  
-    $$ = $3;
+assign: TYPE_ID ASSIGN expression SCOLON {
     std::cout << $3 << " assigned for " << $1 << std::endl;
+    $$ = $3;
     std::cout << "Result: " << $$ << std::endl;
 }
 ;
@@ -116,35 +110,29 @@ expression: expression AND boolean {
 | boolean
 ;
 
-cycle_statement: while_condition body   {
+cycle_statement: while_condition body {
     while ($1) {
         std::cout << "Выполняю тело цикла " << std::endl;
         $$ = $2;
     }
-}
+}  
 ;
 
-if_statement: if_condition body ELSE body { 
+if_statement: if_condition body ELSE body  { 
     if($1) {
         $$ = $2;
     }
     else $$ = $4;
-    
-}
-| condition body {
-    if($1) {
-        $$ = $2;
-    }
-}
+} 
 ;
 
 if_condition: IF LPAREN expression RPAREN { $$ = $3; }
 ;
 
-while_condition: WHILE LPAREN expression RPAREN { $$ = $3; }
+while_condition: WHILE LPAREN expression RPAREN  { $$ = $3; }
 ;
 
-body: LBRACE statement_list RBRACE { $$ = $2; }
+body: LBRACE statement_list RBRACE  { $$ = $2; }
 | statement { $$ = $1; }
 ;
 
@@ -158,12 +146,12 @@ boolean: boolean GREATEREQ arithmetic {
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| boolean LESS arithmetic {
+| boolean LESS arithmetic  {
     $$ = ($1 < $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
 
-| boolean GREATER arithmetic {
+| boolean GREATER arithmetic  {
     $$ = ($1 > $3);
     std::cout << "Checking: " << $1 << " vs " << $3 << "; Result: " << $$ << std::endl;
 }
@@ -175,9 +163,8 @@ arithmetic: arithmetic PLUS term { $$ = $1 + $3; }
 
 | arithmetic MINUS term { $$ = $1 - $3; }
 
-| term { $$ = $1; }
+| term  { $$ = $1; }
 
-| %empty { $$ = 0; }
 ;
 
 term: term MULTIPLY primary { $$ = $1 * $3; }
@@ -202,17 +189,18 @@ primary: MINUS primary { $$ = -$2; }
     std::cout << "Встретили переменную со значением: " << $1 << std::endl;
 }
 
-| PRINT TYPE_ID {
-    $$ = $2;
-    std::cout << $2 << std::endl;
-}
 
-| PRINT TYPE_NUM {
-    std::cout << $2 << std::endl;
+| PRINT "(" expression ")" {
+    $$ = $3;
+    std::cout << $3 << std::endl;
+}
+| QUESTION_MARK "(" TYPE_ID ")" {
+    std::cout << "Введите значение для переменной: ";
+    std::cin >> $$;
 }
 ;
- 
 
+;
 %%
 
 namespace yy {

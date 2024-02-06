@@ -1,0 +1,9 @@
+a = 1;
+b = 0;
+
+if (a > b) {
+    max = b;
+}
+else { max = a; }
+
+print (max);
