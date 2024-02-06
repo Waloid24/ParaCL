@@ -62,11 +62,8 @@
 %nterm <int> stmt
 %nterm <int> assign_stmt
 %nterm <int> expr
-%nterm <int> while_stmt
-%nterm <int> if_stmt
-%nterm <int> if_cond
-%nterm <int> while_cond
-%nterm <int> block
+%nterm <int> stmt_1
+%nterm <int> stmt_2
 %nterm <int> bool_expr
 %nterm <int> arith_expr
 %nterm <int> term
@@ -88,8 +85,54 @@ program: stmt_list { std::cout << "Parsing complete!" << std::endl; }
 stmt_list: stmt | stmt_list stmt
 ;
 
-stmt: assign_stmt | if_stmt | while_stmt | expr SCOLON
+
+stmt_1: '{' stmt_list '}' { $$ = $2; }
+        | expr SCOLON { $$ = $1; }
+        | IF '(' expr ')' stmt_1 ELSE stmt_1
+        {
+            if ($3) 
+            {
+                $5;
+            }
+            else 
+            {
+                $7;
+            }
+            std::cout << "If-else stmt" << std::endl;
+        }
+        | WHILE '(' expr ')' stmt_1 
+        {
+            while ($3)
+            {
+                $5;
+            }
+            std::cout << "While stmt-1" << std::endl;
+        }
+        | assign_stmt
 ;
+
+stmt_2: IF '(' expr ')' stmt
+        {
+            if ($3) { $5; };
+            std::cout << "If-stmt" << std::endl;
+        }
+
+        | IF '(' expr ')' stmt_1 ELSE stmt_2
+        {
+            if ($3) { $5; } else { $7; };
+            std::cout << "If-else stmt" << std::endl;
+        }
+
+        | WHILE '(' expr ')' stmt_2 
+        {
+            while ($3) { $5; };
+            std::cout << "While-stmt" << std::endl;
+        }
+;
+
+stmt: stmt_1 | stmt_2
+;
+
 
 assign_stmt: ID ASSIGN expr SCOLON {
     std::cout << $3 << " assigned for " << $1 << std::endl;
@@ -109,32 +152,6 @@ expr: expr AND bool_expr {
 }
 
 | bool_expr
-;
-
-while_stmt: while_cond block {
-    while ($1) {
-        std::cout << "Выполняю тело цикла " << std::endl;
-        $$ = $2;
-    }
-}  
-;
-
-if_stmt: if_cond block ELSE block  { 
-    if($1) {
-        $$ = $2;
-    }
-    else $$ = $4;
-} 
-;
-
-if_cond: IF LPAREN expr RPAREN { $$ = $3; }
-;
-
-while_cond: WHILE LPAREN expr RPAREN  { $$ = $3; }
-;
-
-block: LBRACE stmt_list RBRACE  { $$ = $2; }
-| stmt { $$ = $1; }
 ;
 
 bool_expr: bool_expr GREATEREQ arith_expr {
