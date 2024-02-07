@@ -95,7 +95,7 @@
 %%
 
 program: stms                           {
-                                            driver->calc();
+                                            driver->process();
                                         }
 ;
 
@@ -103,9 +103,6 @@ stms:     statement                     {
                                             driver->add_branch($1);
                                         }
         | stms statement                {
-                                            driver->add_branch($2);
-                                        }
-        | stms scope                    {
                                             driver->add_branch($2);
                                         }
 ;
@@ -116,7 +113,7 @@ scope: open_scope stms close_scope      {
 ;
 
 open_scope: "{"                         {
-                                            driver->cur_scope = new Scope_node(cur_scope);
+                                            driver->cur_scope = new Scope_node(driver->cur_scope);
                                         }
 ;
 
@@ -135,29 +132,32 @@ statement:    open_statement            {
 ;
 
 open_statement:   IF "(" expression ")" statement
+                                        {
+                                            $$ = new If_node($3, $5);
+                                        }
                 | IF "(" expression ")" closed_statement ELSE open_statement
                                         {
-                                            
+                                            $$ = new If_node($3, $5, $7);
                                         }
                 | WHILE "(" expression ")" open_statement
                                         {
-                                            
+                                            $$ = new While_node($3, $5);
                                         }
 ;
 
 closed_statement:     simple_statement  {
-                                            m
+                                            $$ = $1;
                                         }
                     | "{" stms "}"      {
-                                            m
+                                            $$ = $1;
                                         }
                     | IF "(" expression ")" closed_statement ELSE closed_statement 
                                         {
-                                            m
+                                            $$ = new If_node($3, $5, $7);
                                         }
                     | WHILE "(" expression ")" closed_statement
                                         {
-                                            m
+                                            $$ = new While_node($3, $5);
                                         }
 ;
 
@@ -170,22 +170,19 @@ simple_statement:     assign            {
 ;
 
 assign: lval ASSIGN expression SCOLON   {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, ASSIGN, $1, $3);
+                                            $$ = new Bin_op_node(ASSIGN, $1, $3);
                                         }
 ;
 
 lval: ID                                {
-                                            Name* name = driver->lookup($1)
-                                            Var* var = nullptr;
-                                            if (name == nullptr)
+                                            Var* var = driver->lookup($1);
+                                            if (var == nullptr)
                                             {
-                                                Var* var = new Var{$1}
-                                                driver->insert(var)
+                                                Var* var = new Var{};
+                                                driver->insert(var, $1);
                                             }
-                                            else
-                                                var = dynamic_cast<Var*>(name);
 
-                                            $$ = new Var_node($1, var);
+                                            $$ = new Id_node($1, var);
                                         }
 ;
 
@@ -256,11 +253,11 @@ term:         term "*" primary          {
 ;
 
 primary:      "-" primary               {
-                                            $$ = new Un_op_node(node_type::UN_OP, un_op_type::MINUS,
+                                            $$ = new Un_op_node(un_op_type::U_MINUS,
                                                                 $2);
                                         }
             | "(" expression ")"        {
-                                            
+                                            $$ = $2;
                                         }
             | INTEGER                   { 
                                             $$ = new Integer_node($1); 
@@ -280,11 +277,11 @@ primary:      "-" primary               {
                                             $$ = new Func_node(func_type::OUTPUT, $3);
                                         }
             | INPUT "(" ID ")"          {
-                                            if (!$3)
+                                            if (driver->lookup($3) == nullptr)
                                             {
-                                                YYLTYPE *info = &@1;
+                                                YYLTYPE *info = &@3;
                                                 printError("Using undeclared variable! %s - Line %d:c%d to %d:c%d",
-                                                            $1,
+                                                            $3,
                                                             info->first_line, info->first_column,
                                                             info->last_line, info->last_column);
                                                 throw std::runtime_error("Compilation failed!")

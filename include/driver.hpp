@@ -29,14 +29,20 @@ public:
         return !res;
     }
 
-    void lookup(Variable var)
+    Var* lookup(const std::string& name)
     {
-        if (std::find(vars.begin(), vars.end(), var.name) != vars.end())
-            return true;
-        else
-            return false;
+        return (symtab.lookup(name));
     }
 
+    void insert(const Var& var, const std::string& name)
+    {
+        cur_scope_->emplace(var, name);
+    }
+
+    void process(Var* var)
+    {
+        cur_scope_->emplace();
+    }
 };
 
 } 
