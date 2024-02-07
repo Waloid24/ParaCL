@@ -1,6 +1,6 @@
 //fst = 0; // все типы int
 snd = 1;
-iters = 0;
+iters = ?;
 
 while (iter > 0) {
     tmp = fst;

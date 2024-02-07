@@ -8,6 +8,8 @@ if (NOT DEFINED GRAMMAR)
   set(GRAMMAR "ParaCL.y" CACHE STRING "file with grammar" FORCE)
 endif()
 
+set(BISON_FLAGS "-t")
+
 flex_target(scanner
   ParaCL_lexer.l
   ${CMAKE_CURRENT_BINARY_DIR}/ParaCL_lexer.cc

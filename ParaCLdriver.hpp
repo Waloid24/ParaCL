@@ -16,10 +16,16 @@ public:
     if (tt == yy::parser::token_type::NUM)
       yylval->as<int>() = std::stoi(plex_->YYText());
     return tt;
+
+    if (tt == yy::parser::token_type::ERR) {
+      std::cout << "syntax error" << std::endl;
+    }
+
   }
 
   bool parse() {
     parser parser(this);
+    // std::cout << "in bool parse()" << std::endl;
     bool res = parser.parse();
     return !res;
   }

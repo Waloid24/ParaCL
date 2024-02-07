@@ -3,6 +3,7 @@
 %{
 #include "ParaCL.tab.hh"
 %}
+%option yylineno
 
 WS          [ \t\n\v]+
 COMMENT     \/\/[^\n]*
@@ -14,8 +15,8 @@ TYPE_NUM    [0-9]+
 {WS}                /* skip blanks and tabs */
 {COMMENT}           /* skip comments        */
 
-print               return yy::parser::token_type::PRINT;
 "?"                 return yy::parser::token_type::QUESTION_MARK;
+print               return yy::parser::token_type::PRINT;
 
 "if"                return yy::parser::token_type::IF;
 "while"             return yy::parser::token_type::WHILE;
@@ -31,7 +32,7 @@ print               return yy::parser::token_type::PRINT;
 ">"                 return yy::parser::token_type::GREATER;
 "<="                return yy::parser::token_type::LESSEQ;
 ">="                return yy::parser::token_type::GREATEREQ;
-"!="                return yy::parser::token_type::NOTEQUAL;
+"!="                return yy::parser::token_type::NONEQUAL;
 "=="                return yy::parser::token_type::EQUAL;
 
 "{"                 return yy::parser::token_type::LBRACE;

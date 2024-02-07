@@ -9,6 +9,10 @@
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.cc
 iostream
 -
+fstream
+-
+string
+-
 ParaCLdriver.hpp
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.hpp
 

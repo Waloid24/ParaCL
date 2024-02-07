@@ -171,8 +171,27 @@ extern int yyleng;
 #define EOB_ACT_END_OF_FILE 1
 #define EOB_ACT_LAST_MATCH 2
     
-    #define YY_LESS_LINENO(n)
-    #define YY_LINENO_REWIND_TO(ptr)
+    /* Note: We specifically omit the test for yy_rule_can_match_eol because it requires
+     *       access to the local variable yy_act. Since yyless() is a macro, it would break
+     *       existing scanners that call yyless() from OUTSIDE yylex.
+     *       One obvious solution it to make yy_act a global. I tried that, and saw
+     *       a 5% performance hit in a non-yylineno scanner, because yy_act is
+     *       normally declared as a register variable-- so it is not worth it.
+     */
+    #define  YY_LESS_LINENO(n) \
+            do { \
+                int yyl;\
+                for ( yyl = n; yyl < yyleng; ++yyl )\
+                    if ( yytext[yyl] == '\n' )\
+                        --yylineno;\
+            }while(0)
+    #define YY_LINENO_REWIND_TO(dst) \
+            do {\
+                const char *p;\
+                for ( p = yy_cp-1; p >= (dst); --p)\
+                    if ( *p == '\n' )\
+                        --yylineno;\
+            }while(0)
     
 /* Return all but the first "n" matched characters back to the input stream. */
 #define yyless(n) \
@@ -323,10 +342,10 @@ struct yy_trans_info
 static const flex_int16_t yy_accept[53] =
     {   0,
         0,    0,   30,   28,    1,    1,   28,   28,   20,   21,
-       23,    9,   10,   22,   26,    8,   12,   11,   13,    4,
+       23,    9,   10,   22,   26,    8,   12,   11,   13,    3,
        27,   27,   27,   27,   27,   18,   28,   19,    1,   16,
        25,    2,   26,   14,   17,   15,   27,   27,    5,   27,
-       27,   24,    2,   27,   27,   27,    7,   27,   27,    3,
+       27,   24,    2,   27,   27,   27,    7,   27,   27,    4,
         6,    0
     } ;
 
@@ -420,6 +439,12 @@ static const flex_int16_t yy_chk[97] =
 
     } ;
 
+/* Table of booleans, true if rule could match eol. */
+static const flex_int32_t yy_rule_can_match_eol[30] =
+    {   0,
+1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0,     };
+
 /* The intent behind this definition is that it'll catch
  * any uses of REJECT which flex missed.
  */
@@ -430,8 +455,8 @@ static const flex_int16_t yy_chk[97] =
 #line 1 "ParaCL_lexer.l"
 #line 4 "ParaCL_lexer.l"
 #include "ParaCL.tab.hh"
-#line 434 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
-#line 435 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
+#line 459 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
+#line 460 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
 
 #define INITIAL 0
 
@@ -563,10 +588,10 @@ YY_DECL
 		}
 
 	{
-#line 12 "ParaCL_lexer.l"
+#line 13 "ParaCL_lexer.l"
 
 
-#line 570 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
+#line 595 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -612,6 +637,16 @@ yy_find_action:
 
 		YY_DO_BEFORE_ACTION;
 
+		if ( yy_act != YY_END_OF_BUFFER && yy_rule_can_match_eol[yy_act] )
+			{
+			int yyl;
+			for ( yyl = 0; yyl < yyleng; ++yyl )
+				if ( yytext[yyl] == '\n' )
+					
+    yylineno++;
+;
+			}
+
 do_action:	/* This label is used only to access EOF actions. */
 
 		switch ( yy_act )
@@ -626,150 +661,150 @@ do_action:	/* This label is used only to access EOF actions. */
 case 1:
 /* rule 1 can match eol */
 YY_RULE_SETUP
-#line 14 "ParaCL_lexer.l"
+#line 15 "ParaCL_lexer.l"
 /* skip blanks and tabs */
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 15 "ParaCL_lexer.l"
+#line 16 "ParaCL_lexer.l"
 /* skip comments        */
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 17 "ParaCL_lexer.l"
-return yy::parser::token_type::PRINT;
-	YY_BREAK
-case 4:
-YY_RULE_SETUP
 #line 18 "ParaCL_lexer.l"
 return yy::parser::token_type::QUESTION_MARK;
 	YY_BREAK
+case 4:
+YY_RULE_SETUP
+#line 19 "ParaCL_lexer.l"
+return yy::parser::token_type::PRINT;
+	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 20 "ParaCL_lexer.l"
+#line 21 "ParaCL_lexer.l"
 return yy::parser::token_type::IF;
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 21 "ParaCL_lexer.l"
+#line 22 "ParaCL_lexer.l"
 return yy::parser::token_type::WHILE;
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 22 "ParaCL_lexer.l"
+#line 23 "ParaCL_lexer.l"
 return yy::parser::token_type::ELSE;
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 24 "ParaCL_lexer.l"
+#line 25 "ParaCL_lexer.l"
 return yy::parser::token_type::SCOLON;
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 26 "ParaCL_lexer.l"
+#line 27 "ParaCL_lexer.l"
 return yy::parser::token_type::PLUS;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 27 "ParaCL_lexer.l"
+#line 28 "ParaCL_lexer.l"
 return yy::parser::token_type::MINUS;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 28 "ParaCL_lexer.l"
+#line 29 "ParaCL_lexer.l"
 return yy::parser::token_type::ASSIGN;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 30 "ParaCL_lexer.l"
+#line 31 "ParaCL_lexer.l"
 return yy::parser::token_type::LESS;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 31 "ParaCL_lexer.l"
+#line 32 "ParaCL_lexer.l"
 return yy::parser::token_type::GREATER;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 32 "ParaCL_lexer.l"
+#line 33 "ParaCL_lexer.l"
 return yy::parser::token_type::LESSEQ;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 33 "ParaCL_lexer.l"
+#line 34 "ParaCL_lexer.l"
 return yy::parser::token_type::GREATEREQ;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 34 "ParaCL_lexer.l"
-return yy::parser::token_type::NOTEQUAL;
+#line 35 "ParaCL_lexer.l"
+return yy::parser::token_type::NONEQUAL;
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 35 "ParaCL_lexer.l"
+#line 36 "ParaCL_lexer.l"
 return yy::parser::token_type::EQUAL;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 37 "ParaCL_lexer.l"
+#line 38 "ParaCL_lexer.l"
 return yy::parser::token_type::LBRACE;
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 38 "ParaCL_lexer.l"
+#line 39 "ParaCL_lexer.l"
 return yy::parser::token_type::RBRACE;
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 39 "ParaCL_lexer.l"
+#line 40 "ParaCL_lexer.l"
 return yy::parser::token_type::LPAREN;
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 40 "ParaCL_lexer.l"
+#line 41 "ParaCL_lexer.l"
 return yy::parser::token_type::RPAREN;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 42 "ParaCL_lexer.l"
+#line 43 "ParaCL_lexer.l"
 return yy::parser::token_type::DIVIDE;
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 43 "ParaCL_lexer.l"
+#line 44 "ParaCL_lexer.l"
 return yy::parser::token_type::MULTIPLY;
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 45 "ParaCL_lexer.l"
+#line 46 "ParaCL_lexer.l"
 return yy::parser::token_type::OR;
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 46 "ParaCL_lexer.l"
+#line 47 "ParaCL_lexer.l"
 return yy::parser::token_type::AND;
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 48 "ParaCL_lexer.l"
+#line 49 "ParaCL_lexer.l"
 return yy::parser::token_type::NUM;
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 49 "ParaCL_lexer.l"
+#line 50 "ParaCL_lexer.l"
 return yy::parser::token_type::ID;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 51 "ParaCL_lexer.l"
+#line 52 "ParaCL_lexer.l"
 return yy::parser::token_type::ERR;
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 53 "ParaCL_lexer.l"
+#line 54 "ParaCL_lexer.l"
 ECHO;
 	YY_BREAK
-#line 773 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
+#line 808 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1256,6 +1291,10 @@ int yyFlexLexer::yy_get_next_buffer()
 
 	*--yy_cp = (char) c;
 
+    if ( c == '\n' ){
+        --yylineno;
+    }
+
 	(yytext_ptr) = yy_bp;
 	(yy_hold_char) = *yy_cp;
 	(yy_c_buf_p) = yy_cp;
@@ -1325,6 +1364,11 @@ int yyFlexLexer::yy_get_next_buffer()
 	c = *(unsigned char *) (yy_c_buf_p);	/* cast for 8-bit char's */
 	*(yy_c_buf_p) = '\0';	/* preserve yytext */
 	(yy_hold_char) = *++(yy_c_buf_p);
+
+	if ( c == '\n' )
+		
+    yylineno++;
+;
 
 	return c;
 }
@@ -1732,5 +1776,5 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 53 "ParaCL_lexer.l"
+#line 54 "ParaCL_lexer.l"
 
