@@ -61,7 +61,7 @@ class Integer_node final : public Base_node {
 
     public:
         Integer_node(int value): Base_node{node_type::INTEGER}, value_{value} {}
-
+        ~Integer_node(){};
         int process_node() override { return value_; }
 };
 
@@ -73,7 +73,8 @@ class Id_node final: public Base_node {
     public:
 
         Id_node(std::string &name, Var* var) : Base_node{node_type::ID}, name_{name}, var_{var} {}
-        int process_node() override;
+        ~Id_node(){}
+        int process_node() override { return var_->value_; }
         void assign_value(int value);
 };
 
@@ -87,11 +88,11 @@ class Scope_node final : public Base_node {
         
         Scope_node(Scope_node *prev) : Base_node{node_type::SCOPE}, branches_{},
                                       prev_{prev}, table_{} {}
-
+        ~Scope_node(){}
         int process_node() override;
         Var* lookup(const std::string& name) const;
         void emplace(const std::string& name, Var* var) { table_->emplace(name, var); }
-        Scope_node* reset_scope();
+        Scope_node* reset_scope() { return prev_; }
         void add_branch(Base_node* node);
 };
 
@@ -111,6 +112,7 @@ class Bin_op_node final : public Base_node {
                 throw std::runtime_error("The binary operator has no argument (nullptr)!");
             }
         }
+        ~Bin_op_node(){}
 
         int process_node() override;
 
@@ -130,6 +132,7 @@ class Un_op_node final : public Base_node {
                 throw std::runtime_error("The unary operator has no argument (nullptr)!");
             }
         }
+        ~Un_op_node(){}
         int process_node() override;
 };
 
@@ -144,8 +147,8 @@ class If_node final : public Base_node {
                     Base_node{node_type::IF}, condition_{condition}, 
                     then_expr_{then_expr}, else_expr_{else_expr} {}
         
+        ~If_node(){}
         int process_node() override;
-
 };
 
 class While_node final : public Base_node {
@@ -158,7 +161,7 @@ class While_node final : public Base_node {
                     Base_node{node_type::WHILE}, condition_{condition}, then_expr_{then_expr} {}
 
         int process_node() override;
-
+        ~While_node(){}
 };
 
 }

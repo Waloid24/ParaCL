@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <utility>
 
-class Var final {
+struct Var final {
 
     int value_;
 
