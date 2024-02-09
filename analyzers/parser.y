@@ -7,8 +7,10 @@
 
 %code requires
 {
-    #include <iostream>
-    #include <string>
+    #include "../include/node.hpp"
+    #include "../include/symtab.hpp"
+
+    //TODO: why #include driver from %code{} section doesn't work?
 
     // forward decl of argument to parser
     namespace yy { class Driver; }
@@ -102,7 +104,6 @@ program: stms                           {
 ;
 
 stms:     statement                     {
-                                            int a = $1;
                                             driver->add_branch($1);
                                         }
         | stms statement                {
@@ -173,7 +174,7 @@ simple_statement:     assign            {
 ;
 
 assign: lval ASSIGN expression SCOLON   {
-                                            $$ = new Bin_op_node(ASSIGN, $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::ASSIGN, $1, $3);
                                         }
 ;
 
@@ -190,12 +191,10 @@ lval: ID                                {
 ;
 
 expression:   expression "&&" boolean   {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::AND,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::AND, $1, $3);
                                         }
             | expression "||" boolean   {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::OR,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::OR, $1, $3);
                                         }
             | boolean                   {
                                             $$ = $1;
@@ -203,28 +202,22 @@ expression:   expression "&&" boolean   {
 ;
 
 boolean:      boolean "==" arithmetic   {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::EQUAL,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::EQUAL, $1, $3);
                                         }
             | boolean "!=" arithmetic   {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::NOT_EQUAL,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::NOT_EQUAL, $1, $3);
                                         }
             | boolean ">" arithmetic    {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::GREATER,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::GREATER, $1, $3);
                                         }
             | boolean ">=" arithmetic   {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::GREATER_EQUAL,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::GREATER_EQUAL, $1, $3);
                                         }
             | boolean "<" arithmetic    {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::LESS,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::LESS, $1, $3);
                                         }
             | boolean "<=" arithmetic   {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::LESS_EQUAL,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::LESS_EQUAL, $1, $3);
                                         }
             | arithmetic                {
                                             $$ = $1;
@@ -232,10 +225,10 @@ boolean:      boolean "==" arithmetic   {
 ;
 
 arithmetic:   arithmetic "+" term       {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::PLUS, $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::PLUS, $1, $3);
                                         }
             | arithmetic "-" term       {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::MINUS, $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::MINUS, $1, $3);
                                         }
             | term                      {
                                             $$ = $1;
@@ -243,12 +236,10 @@ arithmetic:   arithmetic "+" term       {
 ;
 
 term:         term "*" primary          {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::MUL,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::MUL, $1, $3);
                                         }
             | term "/" primary          {
-                                            $$ = new Bin_op_node(node_type::BIN_OP, bin_op_type::DIV,
-                                                                 $1, $3);
+                                            $$ = new Bin_op_node(bin_op_type::DIV, $1, $3);
                                         }
             | primary                   {
                                             $$ = $1;
@@ -269,11 +260,12 @@ primary:      "-" primary               {
                                             Var* var = driver->lookup($1);
                                             if (var == nullptr)
                                             {
-                                                YYLTYPE *info = &@1;
+                                                /* YYLTYPE *info = &@1;
                                                 printError("Using undeclared variable! %s - Line %d:c%d to %d:c%d",
                                                             $1,
                                                             info->first_line, info->first_column,
-                                                            info->last_line, info->last_column);
+                                                            info->last_line, info->last_column); */
+                                                std::cout << "You have an error, haha" << std::endl;
                                             }
                                             $$ = new Id_node($1, var);
                                         }

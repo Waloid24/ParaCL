@@ -9,6 +9,7 @@ class Var final {
     int value_;
 
     public:
+        Var() : value_{} {}
         Var(int value) : value_{value} {}
         void change_value(int value) { value_ = value; }
 };
@@ -23,9 +24,9 @@ class Symtab {
 
         Var* lookup(const std::string &name) const;
 
-        void emplace(const std::string &name, const Var* var)
+        void emplace(const std::string &name, Var* var)
         {
-            syms_.emplace(std::make_pair(name, var));
+            syms_[name] = var;
         }
 
         void change_value(const Var);        

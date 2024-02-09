@@ -38,7 +38,7 @@ enum class bin_op_type {
     ASSIGN
 };
 
-enum class un_op_node {
+enum class un_op_type {
     U_PLUS,
     U_MINUS,
     NOT
@@ -85,12 +85,12 @@ class Scope_node final : public Base_node {
 
     public:
         
-        Scope_node(Scope_node *prev): Base_node{node_type::SCOPE}, branches_{},
-                                      prev_{prev}, table_{} {};
+        Scope_node(Scope_node *prev) : Base_node{node_type::SCOPE}, branches_{},
+                                      prev_{prev}, table_{} {}
 
         int process_node() override;
         Var* lookup(const std::string& name) const;
-        void emplace(const std::string& name, const Var* var) { table_->emplace(name, var); }
+        void emplace(const std::string& name, Var* var) { table_->emplace(name, var); }
         Scope_node* reset_scope();
         void add_branch(Base_node* node);
 };
@@ -118,11 +118,11 @@ class Bin_op_node final : public Base_node {
 
 class Un_op_node final : public Base_node {
 
-    un_op_node un_node_;
+    un_op_type un_node_;
     Base_node* first_;
 
     public:
-        Un_op_node(un_op_node un_node, Base_node* first) :
+        Un_op_node(un_op_type un_node, Base_node* first) :
                     Base_node{node_type::UN_OP}, un_node_{un_node}, first_{first}
         {
             if (first_ == nullptr)

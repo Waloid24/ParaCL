@@ -1,9 +1,9 @@
 #pragma once
 #include <memory>
-#include "grammar.tab.hh"
 #include <FlexLexer.h>
-#include "node.hpp"
-#include "symtab.hpp"
+#include "grammar.tab.hh"
+
+
 
 namespace yy {
 
@@ -37,12 +37,12 @@ public:
         return (cur_scope_->lookup(name));
     }
 
-    void emplace(const std::string& name, const Var* var)
+    void emplace(const std::string& name, Var* var)
     {
         cur_scope_->emplace(name, var);
     }
 
-    void add_branch(nodes::Scope_node* scope)
+    void add_branch(nodes::Base_node* scope)
     {
         if(scope != nullptr)
             cur_scope_->add_branch(scope);

@@ -51,11 +51,11 @@ int Un_op_node::process_node()
 {
     switch(un_node_)
     {
-        case un_op_node::U_PLUS:
+        case un_op_type::U_PLUS:
             return first_->process_node();
-        case un_op_node::U_MINUS:
+        case un_op_type::U_MINUS:
             return -(first_->process_node());
-        case un_op_node::NOT:
+        case un_op_type::NOT:
             return !(first_->process_node());
         default:
             throw std::runtime_error("Unexpected error of the unary operator!");
@@ -103,10 +103,7 @@ Var* Scope_node::lookup(const std::string& name) const
     return nullptr;
 }
 
-Scope_node* Scope_node::reset_scope()
-{
-    return prev_; 
-}
+Scope_node* Scope_node::reset_scope() { return prev_; }
 
 void Scope_node::add_branch(Base_node* node)
 {
