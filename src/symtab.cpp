@@ -1,10 +1,11 @@
+#include <string>
 #include "../include/symtab.hpp"
 
-Var* Symtab::lookup(const Var &name) const
+Var* Symtab::lookup(const std::string &name) const
 {
-    auto result = syms_.find();
+    auto result = syms_.find(name);
     if (result != syms_.end())
-        return *result;
+        return result->second;
     else
         return nullptr;
 }

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <memory>
-#include "driver.hpp"
+#include "../include/driver.hpp"
 
 int yyFlexLexer::yywrap() { return 1; }
 

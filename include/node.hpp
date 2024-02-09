@@ -1,9 +1,12 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
+#include <vector>
+#include <string>
+#include <stdexcept>
 #include "symtab.hpp"
 
-using namespace nodes
+namespace nodes
 {
 
 enum class node_type {
@@ -39,7 +42,7 @@ enum class un_op_node {
     U_PLUS,
     U_MINUS,
     NOT
-}
+};
 
 class Base_node {
 
@@ -57,19 +60,9 @@ class Integer_node final : public Base_node {
     int value_;
 
     public:
-        Integer_node(int value): value_{value} {}
+        Integer_node(int value): Base_node{node_type::INTEGER}, value_{value} {}
 
         int process_node() override { return value_; }
-};
-
-class Var final {
-
-    std::string name_;
-    int value_;
-
-    public:
-        Var(std::string name, int value = 0) : name_{name}, value_{value} {}
-        void change_value(int value) { value_ = value; }
 };
 
 class Id_node final: public Base_node {
@@ -79,24 +72,27 @@ class Id_node final: public Base_node {
 
     public:
 
-        Id_node(std::string name, Var* var) : name_{name}, var_{var} {}
+        Id_node(std::string &name, Var* var) : Base_node{node_type::ID}, name_{name}, var_{var} {}
         int process_node() override;
-        void assign_value();
+        void assign_value(int value);
 };
 
 class Scope_node final : public Base_node {
 
-    std::vector<Base_node *> instructions;
+    std::vector<Base_node *> branches_;
     Scope_node *prev_;
     Symtab *table_;
 
     public:
         
-        Scope_node(Scope_node *prev): Base_node{node_type::SCOPE}, instructions{},
+        Scope_node(Scope_node *prev): Base_node{node_type::SCOPE}, branches_{},
                                       prev_{prev}, table_{} {};
 
         int process_node() override;
         Var* lookup(const std::string& name) const;
+        void emplace(const std::string& name, const Var* var) { table_->emplace(name, var); }
+        Scope_node* reset_scope();
+        void add_branch(Base_node* node);
 };
 
 class Bin_op_node final : public Base_node {
@@ -150,7 +146,7 @@ class If_node final : public Base_node {
         
         int process_node() override;
 
-}
+};
 
 class While_node final : public Base_node {
 
@@ -159,7 +155,7 @@ class While_node final : public Base_node {
 
     public:
         While_node(Base_node* condition, Base_node* then_expr) :
-                    condition_{condition}, then_expr_{then_expr} {}
+                    Base_node{node_type::WHILE}, condition_{condition}, then_expr_{then_expr} {}
 
         int process_node() override;
 

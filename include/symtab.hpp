@@ -4,7 +4,14 @@
 #include <unordered_map>
 #include <utility>
 
-namespace ... {
+class Var final {
+
+    int value_;
+
+    public:
+        Var(int value) : value_{value} {}
+        void change_value(int value) { value_ = value; }
+};
 
 class Symtab {
 
@@ -12,20 +19,16 @@ class Symtab {
 
     public:
 
-        Var* lookup(const Var &name) const;
+        Symtab(){}
 
-        bool emplace(const Var &var, const std::string &name)
+        Var* lookup(const std::string &name) const;
+
+        void emplace(const std::string &name, const Var* var)
         {
-            return (syms_.emplace(std::make_pair(name, var))).second;
+            syms_.emplace(std::make_pair(name, var));
         }
 
-        change_value(const Var);
-
-        
-
-        
+        void change_value(const Var);        
 };
-
-}
 
 #endif

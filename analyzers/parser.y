@@ -16,7 +16,7 @@
 
 %code
 {
-    #include "parser/driver.hpp"
+    #include "../include/driver.hpp"
 
     using namespace nodes;
 
@@ -66,11 +66,14 @@
 %token <int> INTEGER
 %token <std::string> ID
 
-/*
 %nterm <nodes::Base_node*> program
 %nterm <nodes::Base_node*> stms
 %nterm <nodes::Base_node*> scope
+%nterm <nodes::Base_node*> open_scope
+%nterm <nodes::Base_node*> close_scope
 %nterm <nodes::Base_node*> statement
+%nterm <nodes::Base_node*> closed_statement
+%nterm <nodes::Base_node*> open_statement
 %nterm <nodes::Base_node*> simple_statement
 %nterm <nodes::Base_node*> assign
 %nterm <nodes::Base_node*> lval
@@ -79,7 +82,6 @@
 %nterm <nodes::Base_node*> arithmetic
 %nterm <nodes::Base_node*> term
 %nterm <nodes::Base_node*> primary
-*/
 
 /* Priority * and / is higher than + and - */
 %left AND OR
@@ -100,6 +102,7 @@ program: stms                           {
 ;
 
 stms:     statement                     {
+                                            int a = $1;
                                             driver->add_branch($1);
                                         }
         | stms statement                {
@@ -113,13 +116,13 @@ scope: open_scope stms close_scope      {
 ;
 
 open_scope: "{"                         {
-                                            driver->cur_scope = new Scope_node(driver->cur_scope);
+                                            driver->cur_scope_ = new Scope_node(driver->cur_scope_);
                                         }
 ;
 
 close_scope: "}"                        {
-                                            $$ = driver->cur_scope;
-                                            driver->cur_scope = driver->cur_scope->reset_scope();
+                                            $$ = driver->cur_scope_;
+                                            driver->cur_scope_ = driver->cur_scope_->reset_scope();
                                         }
 ;
 
@@ -148,10 +151,10 @@ open_statement:   IF "(" expression ")" statement
 closed_statement:     simple_statement  {
                                             $$ = $1;
                                         }
-                    | "{" stms "}"      {
+                    | scope             {
                                             $$ = $1;
                                         }
-                    | IF "(" expression ")" closed_statement ELSE closed_statement 
+                    | IF "(" expression ")" closed_statement ELSE closed_statement
                                         {
                                             $$ = new If_node($3, $5, $7);
                                         }
@@ -179,7 +182,7 @@ lval: ID                                {
                                             if (var == nullptr)
                                             {
                                                 Var* var = new Var{};
-                                                driver->insert(var, $1);
+                                                driver->emplace($1, var);
                                             }
 
                                             $$ = new Id_node($1, var);
@@ -195,7 +198,7 @@ expression:   expression "&&" boolean   {
                                                                  $1, $3);
                                         }
             | boolean                   {
-                                            $$ = $1
+                                            $$ = $1;
                                         }
 ;
 
@@ -263,8 +266,8 @@ primary:      "-" primary               {
                                             $$ = new Integer_node($1); 
                                         }
             | ID                        { 
-                                            $$ = currentScope->visible($1);
-                                            if (!$$)
+                                            Var* var = driver->lookup($1);
+                                            if (var == nullptr)
                                             {
                                                 YYLTYPE *info = &@1;
                                                 printError("Using undeclared variable! %s - Line %d:c%d to %d:c%d",
@@ -272,23 +275,9 @@ primary:      "-" primary               {
                                                             info->first_line, info->first_column,
                                                             info->last_line, info->last_column);
                                             }
+                                            $$ = new Id_node($1, var);
                                         }
-            | OUTPUT "(" expression ")" {
-                                            $$ = new Func_node(func_type::OUTPUT, $3);
-                                        }
-            | INPUT "(" ID ")"          {
-                                            if (driver->lookup($3) == nullptr)
-                                            {
-                                                YYLTYPE *info = &@3;
-                                                printError("Using undeclared variable! %s - Line %d:c%d to %d:c%d",
-                                                            $3,
-                                                            info->first_line, info->first_column,
-                                                            info->last_line, info->last_column);
-                                                throw std::runtime_error("Compilation failed!")
-                                            }
-                                            else
-                                                $$ = new Func_node(func_type::INPUT, $3);
-                                        }
+
 ;
 
 %%

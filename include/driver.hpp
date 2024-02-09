@@ -2,6 +2,8 @@
 #include <memory>
 #include "grammar.tab.hh"
 #include <FlexLexer.h>
+#include "node.hpp"
+#include "symtab.hpp"
 
 namespace yy {
 
@@ -9,10 +11,11 @@ class Driver {
 
     FlexLexer* plex_;
 
-public:
-    Scope_node* cur_scope_;
 
-    Driver(FlexLexer* plex): plex_(plex), cur_scope_{new Scope_node(nullptr)} {}
+public:
+    nodes::Scope_node* cur_scope_;
+
+    Driver(FlexLexer* plex): plex_(plex), cur_scope_{new nodes::Scope_node(nullptr)} {}
 
     parser::token_type yylex(parser::semantic_type* yylval) 
     {
@@ -31,17 +34,23 @@ public:
 
     Var* lookup(const std::string& name)
     {
-        return (symtab.lookup(name));
+        return (cur_scope_->lookup(name));
     }
 
-    void insert(const Var& var, const std::string& name)
+    void emplace(const std::string& name, const Var* var)
     {
-        cur_scope_->emplace(var, name);
+        cur_scope_->emplace(name, var);
     }
 
-    void process(Var* var)
+    void add_branch(nodes::Scope_node* scope)
     {
-        cur_scope_->emplace();
+        if(scope != nullptr)
+            cur_scope_->add_branch(scope);
+    }
+
+    int process() const 
+    {
+        return cur_scope_->process_node();
     }
 };
 

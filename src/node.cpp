@@ -1,5 +1,7 @@
 #include "../include/node.hpp"
 
+namespace nodes
+{
 void Id_node::assign_value(int value)
 {
     var_->change_value(value);
@@ -36,9 +38,9 @@ int Bin_op_node::process_node()
         case bin_op_type::AND:
             return first_->process_node() && second_->process_node();
         case bin_op_type::ASSIGN:
-            Id_node* lval = static_cast<Id_node*> first_;
+            Id_node* lval = static_cast<Id_node*>(first_);
             value = second_->process_node();
-            first_->assign_value(value);
+            lval->assign_value(value);
             return value;
         default:
             throw std::runtime_error("Unexpected error of the binary operator!");
@@ -81,7 +83,7 @@ int While_node::process_node()
     while (condition_->process_node())
         then_expr_->process_node();
 
-    return ????;
+    return 0;
 }
 
 Var* Scope_node::lookup(const std::string& name) const 
@@ -96,15 +98,29 @@ Var* Scope_node::lookup(const std::string& name) const
             return result;
         scope = scope->prev_;
     }
-    while (scope != nullptr)
+    while (scope != nullptr);
 
     return nullptr;
 }
 
-void Scope_node::emplace(const Var* var, const std::string& name)
+Scope_node* Scope_node::reset_scope()
 {
-    if (!table_->emplace(var))
-        throw std::runtime_error("Unexpected error when inserting characters into the table");
-
-    table_->emplace(var, name);
+    return prev_; 
 }
+
+void Scope_node::add_branch(Base_node* node)
+{
+    branches_.push_back(node);
+}
+
+int Scope_node::process_node()
+{
+    for (auto branch : branches_)
+    {
+        branch->process_node();
+    }
+    return 0;
+}
+
+}
+
