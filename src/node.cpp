@@ -1,5 +1,5 @@
 #include "../include/node.hpp"
-
+#include <iostream>
 namespace nodes
 {
 void Id_node::assign_value(int value)
@@ -32,6 +32,8 @@ int Bin_op_node::process_node()
             return (first_->process_node() < second_->process_node());
         case bin_op_type::LESS_EQUAL:
             return (first_->process_node() <= second_->process_node());
+        case bin_op_type::EQUAL:
+            return (first_->process_node() == second_->process_node());
         case bin_op_type::NOT_EQUAL:
             return (first_->process_node() != second_->process_node());
         case bin_op_type::OR:
@@ -39,6 +41,7 @@ int Bin_op_node::process_node()
         case bin_op_type::AND:
             return (first_->process_node() && second_->process_node());
         case bin_op_type::ASSIGN:
+            std::cout << "Into bin_op_type::ASSIGN" << std::endl;
             lval = static_cast<Id_node*>(first_);
             value = second_->process_node();
             lval->assign_value(value);
@@ -65,12 +68,18 @@ int Un_op_node::process_node()
 
 int If_node::process_node()
 {
+    std::cout << "Into If_node::process_node()" << std::endl;
     if (condition_ == nullptr || then_expr_ == nullptr)
         throw std::runtime_error("Unexpected absence of condition!");
     int res = 0;
 
+    std::cout << "llalalla" << std::endl;
     if (condition_->process_node())
+    {
+        std::cout << "Into If_node::process_node() into if()" << std::endl;
         res = then_expr_->process_node();
+    }
+        
     else if (else_expr_ != nullptr)
         res = else_expr_->process_node();
     return res;
@@ -116,6 +125,27 @@ int Scope_node::process_node()
         branch->process_node();
     }
     return 0;
+}
+
+int Func_node::process_node()
+{
+    int expr = 0;
+    switch (f_type_)
+    {
+        case func_type::INPUT:
+            std::cout << "Func_node::process_node INPUT" << std::endl;
+            std::cin >> expr;
+            return expr;
+        
+        case func_type::OUTPUT:
+            expr = expr_->process_node();
+            std::cout << expr << std::endl;;
+            return expr;
+
+        default:
+            std::cout << "Unexpected error" << std::endl;
+    }
+    return expr;
 }
 
 }

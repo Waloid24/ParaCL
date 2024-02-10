@@ -1,6 +1,7 @@
 #pragma once
 #include <memory>
 #include <FlexLexer.h>
+#include <fstream>
 #include "grammar.tab.hh"
 
 
@@ -9,25 +10,40 @@ namespace yy {
 
 class Driver {
 
+    const char* file_name_;
     FlexLexer* plex_;
-
+    std::ifstream input_file_;
 
 public:
     nodes::Scope_node* cur_scope_;
 
-    Driver(FlexLexer* plex): plex_(plex), cur_scope_{new nodes::Scope_node(nullptr)} {}
+    Driver(const char* file_name): file_name_{file_name}, plex_{new yyFlexLexer}, 
+                                    cur_scope_{new nodes::Scope_node(nullptr)}
+    {
+        input_file_.open(file_name_);
+        plex_->switch_streams(input_file_, std::cout);
+    }
 
     parser::token_type yylex(parser::semantic_type* yylval) 
     {
         parser::token_type tt = static_cast<parser::token_type>(plex_->yylex());
+
         if (tt == yy::parser::token_type::INTEGER)
             yylval->as<int>() = std::stoi(plex_->YYText());
+        if (tt == yy::parser::token_type::ID)
+        {
+            std::string name(plex_->YYText());
+            parser::semantic_type tmp;
+            tmp.as<std::string>() = name;
+            yylval->swap<std::string>(tmp);
+
+        }
         return tt;
     }
 
     bool parse() 
     {
-        parser parser(this);
+        parser parser{this};
         bool res = parser.parse();
         return !res;
     }
@@ -50,6 +66,7 @@ public:
 
     int process() const 
     {
+        std::cout << "Into driver->process()!" << std::endl;
         return cur_scope_->process_node();
     }
 };

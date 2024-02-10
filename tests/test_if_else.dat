@@ -1,0 +1,7 @@
+a = 5;
+n = 1;
+
+if (n == 1)
+    print a;
+else
+    print a+10;

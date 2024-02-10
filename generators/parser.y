@@ -99,38 +99,46 @@
 %%
 
 program: stms                           {
+                                            std::cout << "Into program: stms" << std::endl;
                                             driver->process();
                                         }
 ;
 
 stms:     statement                     {
+                                            std::cout << "stms: statement" << std::endl;
                                             driver->add_branch($1);
                                         }
         | stms statement                {
+                                            std::cout << "stms: stms statement" << std::endl;
                                             driver->add_branch($2);
                                         }
 ;
 
 scope: open_scope stms close_scope      {
+                                            std::cout << "scope:" << std::endl;
                                             $$ = $3;
                                         }
 ;
 
 open_scope: "{"                         {
+                                            std::cout << "open_scope:" << std::endl;
                                             driver->cur_scope_ = new Scope_node(driver->cur_scope_);
                                         }
 ;
 
 close_scope: "}"                        {
+                                            std::cout << "close_scope:" << std::endl;
                                             $$ = driver->cur_scope_;
                                             driver->cur_scope_ = driver->cur_scope_->reset_scope();
                                         }
 ;
 
 statement:    open_statement            {
+                                            std::cout << "statement: open_statement" << std::endl;
                                             $$ = $1;
                                         }
             | closed_statement          {
+                                            std::cout << "statement: closed_statement" << std::endl;
                                             $$ = $1;
                                         }
 ;
@@ -150,9 +158,11 @@ open_statement:   IF "(" expression ")" statement
 ;
 
 closed_statement:     simple_statement  {
+                                            std::cout << "closed_statement: simple_statement" << std::endl;
                                             $$ = $1;
                                         }
                     | scope             {
+                                            std::cout << "closed_statement: scope" << std::endl;
                                             $$ = $1;
                                         }
                     | IF "(" expression ")" closed_statement ELSE closed_statement
@@ -166,37 +176,54 @@ closed_statement:     simple_statement  {
 ;
 
 simple_statement:     assign            {
+                                            std::cout << "simple_statement: assign" << std::endl;
                                             $$ = $1;
                                         }
-                    | expression ";"    {
+                    | expression SCOLON {
+                                            std::cout << "simple_statement: expression" << std::endl;
                                             $$ = $1;
+                                        }
+                    | OUTPUT expression SCOLON  
+                                        {
+                                            std::cout << "simple_statement: OUTPUT" << std::endl;
+                                            $$ = new Func_node(func_type::OUTPUT, $2);
                                         }
 ;
 
-assign: lval ASSIGN expression SCOLON   {
+assign:   
+        lval ASSIGN INPUT SCOLON      {
+                                            std::cout << "assign: lval INPUT" << std::endl;
+                                            Func_node* f_node = new Func_node(func_type::INPUT);
+                                            $$ = new Bin_op_node(bin_op_type::ASSIGN, $1, f_node);
+                                        }   
+        | lval ASSIGN expression SCOLON {
+                                            std::cout << "assign: lval ..." << std::endl;
                                             $$ = new Bin_op_node(bin_op_type::ASSIGN, $1, $3);
                                         }
 ;
 
 lval: ID                                {
+                                            std::cout << "lval: ID ()" << std::endl;
                                             Var* var = driver->lookup($1);
                                             if (var == nullptr)
                                             {
-                                                Var* var = new Var{};
+                                                var = new Var{};
                                                 driver->emplace($1, var);
                                             }
 
                                             $$ = new Id_node($1, var);
+                                            std::cout << "lval: ID (end)" << std::endl;
                                         }
 ;
 
-expression:   expression "&&" boolean   {
+expression:   expression "&&" boolean   {   
                                             $$ = new Bin_op_node(bin_op_type::AND, $1, $3);
                                         }
             | expression "||" boolean   {
                                             $$ = new Bin_op_node(bin_op_type::OR, $1, $3);
                                         }
             | boolean                   {
+                                            std::cout << "expression: boolean" << std::endl;
                                             $$ = $1;
                                         }
 ;
@@ -220,6 +247,7 @@ boolean:      boolean "==" arithmetic   {
                                             $$ = new Bin_op_node(bin_op_type::LESS_EQUAL, $1, $3);
                                         }
             | arithmetic                {
+                                            std::cout << "boolean: arithmetic" << std::endl;
                                             $$ = $1;
                                         }
 ;
@@ -231,6 +259,7 @@ arithmetic:   arithmetic "+" term       {
                                             $$ = new Bin_op_node(bin_op_type::MINUS, $1, $3);
                                         }
             | term                      {
+                                            std::cout << "arithmetic: term" << std::endl;
                                             $$ = $1;
                                         }
 ;
@@ -242,6 +271,7 @@ term:         term "*" primary          {
                                             $$ = new Bin_op_node(bin_op_type::DIV, $1, $3);
                                         }
             | primary                   {
+                                            std::cout << "term: primary:" << std::endl;
                                             $$ = $1;
                                         }
 ;
@@ -251,12 +281,16 @@ primary:      "-" primary               {
                                                                 $2);
                                         }
             | "(" expression ")"        {
+                                            std::cout << "primary: ( expression )" << std::endl;
                                             $$ = $2;
                                         }
             | INTEGER                   { 
+                                            std::cout << "primary: INTEGER" << std::endl;
                                             $$ = new Integer_node($1); 
                                         }
             | ID                        { 
+                                            std::cout << "primary: ID" << std::endl;
+
                                             Var* var = driver->lookup($1);
                                             if (var == nullptr)
                                             {
@@ -269,7 +303,6 @@ primary:      "-" primary               {
                                             }
                                             $$ = new Id_node($1, var);
                                         }
-
 ;
 
 %%

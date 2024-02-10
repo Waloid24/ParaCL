@@ -1,0 +1,8 @@
+b = 5;
+c = 0;
+a = ?;
+
+print(b);
+b = a;
+
+print(b);

@@ -16,7 +16,8 @@ enum class node_type {
     IF,
     WHILE,
     UN_OP,
-    SCOPE
+    SCOPE,
+    FUNC_BASE
 };
 
 enum class bin_op_type {
@@ -42,6 +43,11 @@ enum class un_op_type {
     U_PLUS,
     U_MINUS,
     NOT
+};
+
+enum class func_type {
+    INPUT,
+    OUTPUT
 };
 
 class Base_node {
@@ -87,7 +93,7 @@ class Scope_node final : public Base_node {
     public:
         
         Scope_node(Scope_node *prev) : Base_node{node_type::SCOPE}, branches_{},
-                                      prev_{prev}, table_{} {}
+                                      prev_{prev}, table_{new Symtab} {}
         ~Scope_node(){}
         int process_node() override;
         Var* lookup(const std::string& name) const;
@@ -164,6 +170,19 @@ class While_node final : public Base_node {
         ~While_node(){}
 };
 
+class Func_node final : public Base_node {
+
+    func_type f_type_;
+    Base_node* expr_;
+
+    public:
+        Func_node(func_type f_type) : 
+                        Base_node{node_type::FUNC_BASE}, f_type_{f_type}, expr_{nullptr} {}
+        Func_node(func_type f_type, Base_node* expr) : 
+                        Base_node{node_type::FUNC_BASE}, f_type_{f_type}, expr_{expr} {}
+        ~Func_node(){}
+        int process_node() override;
+};
 }
 
 #endif
