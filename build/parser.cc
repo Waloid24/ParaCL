@@ -37,13 +37,13 @@
 
 
 
-#include "ParaCL.tab.hh"
+#include "compiler.tab.hh"
 
 
 // Unqualified %code blocks.
-#line 20 "ParaCL.y"
+#line 21 "compiler.y"
 
-    #include "ParaCLdriver.hpp"
+    #include "driver.hpp"
 
     namespace yy {
         parser::token_type yylex(parser::semantic_type* yyval,
@@ -158,16 +158,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.move< int > (std::move (that.value));
         break;
 
@@ -187,16 +187,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.copy< int > (YY_MOVE (that.value));
         break;
 
@@ -224,16 +224,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.move< int > (YY_MOVE (s.value));
         break;
 
@@ -329,16 +329,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
         break;
 
@@ -359,16 +359,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.move< int > (YY_MOVE (that.value));
         break;
 
@@ -389,16 +389,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.copy< int > (that.value);
         break;
 
@@ -417,16 +417,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.move< int > (that.value);
         break;
 
@@ -676,16 +676,16 @@ namespace yy {
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         yylhs.value.emplace< int > ();
         break;
 
@@ -704,287 +704,163 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 82 "ParaCL.y"
+#line 84 "compiler.y"
                    { std::cout << "Parsing complete!" << std::endl; }
 #line 710 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 3:
-#line 85 "ParaCL.y"
+#line 87 "compiler.y"
            { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
 #line 716 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 4:
-#line 85 "ParaCL.y"
-                  { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
+#line 88 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
 #line 722 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 5:
-#line 88 "ParaCL.y"
-                          { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
+  case 6:
+#line 93 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
 #line 728 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 6:
-#line 89 "ParaCL.y"
-                      { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
+  case 9:
+#line 99 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
 #line 734 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 7:
-#line 91 "ParaCL.y"
-        {
-            if (yystack_[4].value.as < int > ()) 
-            {
-                std::cout << "if " << yystack_[4].value.as < int > () << std::endl;
-                yylhs.value.as < int > () = yystack_[2].value.as < int > ();
-            }
-            else 
-            {
-                yylhs.value.as < int > () = yystack_[0].value.as < int > ();
-            }
-            std::cout << "If-else stmt" << std::endl;
-        }
-#line 751 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 8:
-#line 104 "ParaCL.y"
-        {
-            while (yystack_[2].value.as < int > ())
-            {
-                yylhs.value.as < int > () = yystack_[0].value.as < int > ();
-            }
-            std::cout << "While stmt-1" << std::endl;
-        }
-#line 763 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 9:
-#line 111 "ParaCL.y"
-          { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 769 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 10:
-#line 115 "ParaCL.y"
-        {
-            if (yystack_[2].value.as < int > ()) { yylhs.value.as < int > () = yystack_[0].value.as < int > (); };
-            std::cout << "If-stmt" << std::endl;
-        }
-#line 778 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 11:
-#line 121 "ParaCL.y"
-        {
-            if (yystack_[4].value.as < int > ()) { yylhs.value.as < int > () = yystack_[2].value.as < int > (); } else { yylhs.value.as < int > () = yystack_[0].value.as < int > (); };
-            std::cout << "If-else stmt" << std::endl;
-        }
-#line 787 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 12:
-#line 127 "ParaCL.y"
-        {
-            while (yystack_[2].value.as < int > ()) { yylhs.value.as < int > () = yystack_[0].value.as < int > (); };
-            std::cout << "While-stmt" << std::endl;
-        }
-#line 796 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
   case 13:
-#line 133 "ParaCL.y"
+#line 109 "compiler.y"
       { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 802 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 740 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 14:
-#line 133 "ParaCL.y"
+#line 109 "compiler.y"
                { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 808 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 746 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 15:
-#line 136 "ParaCL.y"
-                                   {
-    yylhs.value.as < int > () = yystack_[1].value.as < int > ();
-    std::cout << yystack_[1].value.as < int > () << " assigned for " << yystack_[3].value.as < int > () << std::endl;
-    std::cout << "Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 818 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 112 "compiler.y"
+             { yylhs.value.as < int > () = yystack_[3].value.as < int > (); }
+#line 752 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 16:
-#line 143 "ParaCL.y"
-                         {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () && yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 827 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 115 "compiler.y"
+      { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 758 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 17:
-#line 148 "ParaCL.y"
-                    {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () || yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 836 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 117 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 764 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 18:
-#line 153 "ParaCL.y"
+#line 119 "compiler.y"
   { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 842 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 770 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 19:
-#line 156 "ParaCL.y"
-                                          {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () >= yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 851 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 122 "compiler.y"
+           { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 776 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 20:
-#line 161 "ParaCL.y"
-                              {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () <= yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 860 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 124 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 782 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 21:
-#line 166 "ParaCL.y"
-                             {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () < yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 869 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 126 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 788 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 22:
-#line 171 "ParaCL.y"
-                                {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () > yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 878 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 128 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 794 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 23:
-#line 176 "ParaCL.y"
-                              {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () == yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 887 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 130 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 800 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 24:
-#line 181 "ParaCL.y"
-                                 {
-    yylhs.value.as < int > () = (yystack_[2].value.as < int > () > yystack_[0].value.as < int > ());
-    std::cout << "Checking: " << yystack_[2].value.as < int > () << " vs " << yystack_[0].value.as < int > () << "; Result: " << yylhs.value.as < int > () << std::endl;
-}
-#line 896 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 132 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 806 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 25:
-#line 186 "ParaCL.y"
-             { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 902 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 134 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
+#line 812 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 26:
-#line 189 "ParaCL.y"
-                                 { yylhs.value.as < int > () = yystack_[2].value.as < int > () + yystack_[0].value.as < int > (); }
-#line 908 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 137 "compiler.y"
+            { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 818 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 27:
-#line 191 "ParaCL.y"
-                        { yylhs.value.as < int > () = yystack_[2].value.as < int > () - yystack_[0].value.as < int > (); }
-#line 914 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 139 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 824 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 28:
-#line 193 "ParaCL.y"
-        { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 920 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 141 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
+#line 830 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 29:
-#line 197 "ParaCL.y"
-                                 { yylhs.value.as < int > () = yystack_[2].value.as < int > () * yystack_[0].value.as < int > (); }
-#line 926 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 145 "compiler.y"
+      { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 836 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 30:
-#line 199 "ParaCL.y"
-                           { yylhs.value.as < int > () = yystack_[2].value.as < int > () / yystack_[0].value.as < int > (); }
-#line 932 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 147 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[2].value.as < int > (); }
+#line 842 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 31:
-#line 201 "ParaCL.y"
-               { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 938 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 32:
-#line 204 "ParaCL.y"
-                                 { yylhs.value.as < int > () = -yystack_[0].value.as < int > (); }
-#line 944 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 33:
-#line 206 "ParaCL.y"
-                {
-    std::cout << "Enter a value: ";
-    std::cin >> yylhs.value.as < int > ();
-}
-#line 953 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 34:
-#line 211 "ParaCL.y"
-                     { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
-#line 959 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 149 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
+#line 848 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 35:
-#line 214 "ParaCL.y"
-      { 
-    yylhs.value.as < int > () = yystack_[0].value.as < int > ();
-}
-#line 967 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 159 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
+#line 854 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 36:
-#line 218 "ParaCL.y"
-     {
-    yylhs.value.as < int > () = yystack_[0].value.as < int > ();
-}
-#line 975 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 37:
-#line 222 "ParaCL.y"
-                     { 
-    yylhs.value.as < int > () = yystack_[0].value.as < int > ();
-    std::cout << yystack_[0].value.as < int > () << std::endl;
-}
-#line 984 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 161 "compiler.y"
+  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
+#line 860 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
 
-#line 988 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 864 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
             default:
               break;
@@ -1161,21 +1037,20 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -41;
+  const signed char parser::yypact_ninf_ = -43;
 
   const signed char parser::yytable_ninf_ = -1;
 
   const signed char
   parser::yypact_[] =
   {
-      25,    34,    34,   -41,   -29,   -19,    34,   -41,    36,    25,
-      25,   -41,   -41,    -3,   -41,   -41,    58,    32,    37,   -41,
-      40,   -41,   -41,    -6,    34,    34,   -41,    34,    -2,   -41,
-     -41,    34,    34,    34,    34,    34,    34,    34,    34,    34,
-      34,    34,    34,   -41,   -41,   -11,    -8,    48,   -41,    58,
-      58,    32,    32,    32,    32,    32,    32,    37,    37,   -41,
-     -41,    25,    25,   -41,   -41,    45,   -41,   -41,    25,   -41,
-     -41
+      23,    32,    32,   -43,   -30,   -22,    32,   -43,   -20,    23,
+      23,   -43,   -43,    -5,   -43,   -43,    28,    -1,    34,   -43,
+      49,   -43,   -43,    42,    32,    32,   -43,    32,    -2,   -43,
+      32,    32,   -43,    32,    32,    32,    32,    32,    32,    32,
+      32,   -43,   -43,   -12,    -8,    18,   -43,    28,    28,    -1,
+      -1,    -1,    -1,    34,    34,   -43,   -43,    23,    23,   -43,
+     -43,    55,   -43,   -43,    23,   -43,   -43
   };
 
   const signed char
@@ -1184,18 +1059,17 @@ namespace yy {
        0,     0,     0,    33,     0,     0,     0,    35,    36,     0,
        2,     3,     9,     0,    13,    14,    18,    25,    28,    31,
        0,    36,    32,     0,     0,     0,    37,     0,     0,     4,
-       6,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     1,    34,     0,     0,     0,     5,    16,
-      17,    21,    22,    19,    20,    24,    23,    27,    26,    29,
-      30,     0,     0,    15,    10,    13,     8,    12,     0,     7,
-      11
+       0,     0,     6,     0,     0,     0,     0,     0,     0,     0,
+       0,     1,    34,     0,     0,     0,     5,    16,    17,    23,
+      19,    20,    24,    27,    26,    29,    30,     0,     0,    15,
+      10,    13,     8,    12,     0,     7,    11
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -41,    47,   -10,   -41,     8,     2,   -40,    52,    44,    26,
-       0,   -41
+     -43,    47,   -10,   -43,     8,     6,   -42,    45,    38,    40,
+       0,   -43
   };
 
   const signed char
@@ -1208,51 +1082,48 @@ namespace yy {
   const signed char
   parser::yytable_[] =
   {
-      29,    22,     1,    30,    44,    24,    26,     2,    31,    32,
-      23,    31,    32,    31,    32,    25,    31,    32,    29,     3,
-       4,     5,    67,     6,    61,     7,     8,    62,    70,     1,
-       9,    48,    45,    46,     2,    47,    39,    40,     1,    27,
-      43,    59,    60,     2,    41,    42,     3,     4,     5,     0,
-       6,    64,     7,     8,    63,     3,    28,     9,     0,     6,
-       0,     7,    21,    65,    66,    57,    58,    31,    32,    68,
-      69,    33,    34,    35,    36,    37,    38,    51,    52,    53,
-      54,    55,    56,    49,    50
+      29,    22,     1,    37,    38,    24,    26,    30,    31,     2,
+      23,    30,    31,    25,    30,    31,    63,    27,    29,     3,
+       4,     5,    66,     6,    57,     7,     8,     1,    58,    32,
+       9,    46,    43,    44,     2,    45,     1,    30,    31,    55,
+      56,    39,    40,     2,     3,     4,     5,    60,     6,    41,
+       7,     8,    59,     3,    42,     9,    28,     6,     0,     7,
+      21,    30,    31,    61,    62,    33,    34,    35,    36,     0,
+      65,    49,    50,    51,    52,    47,    48,    53,    54,    64
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      10,     1,     4,     6,    10,    34,     6,     9,    19,    20,
-       2,    19,    20,    19,    20,    34,    19,    20,    28,    21,
-      22,    23,    62,    25,    35,    27,    28,    35,    68,     4,
-      32,    33,    24,    25,     9,    27,     4,     5,     4,     3,
-       0,    41,    42,     9,     7,     8,    21,    22,    23,    -1,
-      25,    61,    27,    28,     6,    21,     9,    32,    -1,    25,
-      -1,    27,    28,    61,    62,    39,    40,    19,    20,    24,
-      68,    13,    14,    15,    16,    17,    18,    33,    34,    35,
-      36,    37,    38,    31,    32
+      10,     1,     4,     4,     5,    35,     6,    19,    20,    11,
+       2,    19,    20,    35,    19,    20,    58,    37,    28,    21,
+      22,    23,    64,    25,    36,    27,    28,     4,    36,    34,
+      32,    33,    24,    25,    11,    27,     4,    19,    20,    39,
+      40,     7,     8,    11,    21,    22,    23,    57,    25,     0,
+      27,    28,    34,    21,    12,    32,     9,    25,    -1,    27,
+      28,    19,    20,    57,    58,    37,    38,    39,    40,    -1,
+      64,    33,    34,    35,    36,    30,    31,    37,    38,    24
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     4,     9,    21,    22,    23,    25,    27,    28,    32,
-      37,    38,    39,    40,    41,    42,    43,    44,    45,    46,
-      47,    28,    46,    40,    34,    34,    46,     3,    37,    38,
-       6,    19,    20,    13,    14,    15,    16,    17,    18,     4,
-       5,     7,     8,     0,    10,    40,    40,    40,    33,    43,
-      43,    44,    44,    44,    44,    44,    44,    45,    45,    46,
-      46,    35,    35,     6,    38,    41,    41,    42,    24,    41,
-      42
+       0,     4,    11,    21,    22,    23,    25,    27,    28,    32,
+      42,    43,    44,    45,    46,    47,    48,    49,    50,    51,
+      52,    28,    51,    45,    35,    35,    51,    37,    42,    43,
+      19,    20,    34,    37,    38,    39,    40,     4,     5,     7,
+       8,     0,    12,    45,    45,    45,    33,    48,    48,    49,
+      49,    49,    49,    50,    50,    51,    51,    36,    36,    34,
+      43,    46,    46,    47,    24,    46,    47
   };
 
   const signed char
   parser::yyr1_[] =
   {
-       0,    36,    47,    37,    37,    41,    41,    41,    41,    41,
-      42,    42,    42,    38,    38,    39,    40,    40,    40,    43,
-      43,    43,    43,    43,    43,    43,    44,    44,    44,    45,
-      45,    45,    46,    46,    46,    46,    46,    46
+       0,    41,    52,    42,    42,    46,    46,    46,    46,    46,
+      47,    47,    47,    43,    43,    44,    45,    45,    45,    48,
+      48,    48,    48,    48,    48,    48,    49,    49,    49,    50,
+      50,    50,    51,    51,    51,    51,    51,    51
   };
 
   const signed char
@@ -1275,19 +1146,20 @@ namespace yy {
   "\"*\"", "\"/\"", "\"(\"", "\")\"", "\"{\"", "\"}\"", "\"<\"", "\">\"",
   "\">=\"", "\"<=\"", "\"!=\"", "\"==\"", "\"&&\"", "\"||\"", "\"?\"",
   "\"if\"", "\"while\"", "\"else\"", "\"print\"", "ERR", "NUM", "ID",
-  "NOT_EQUAL", "LESS_EQUAL", "GREATER_EQUAL", "'{'", "'}'", "'('", "')'",
-  "$accept", "stmt_list", "stmt", "assign_stmt", "expr", "stmt_1",
-  "stmt_2", "bool_expr", "arith_expr", "term", "primary_expr", "program", YY_NULLPTR
+  "NOT_EQUAL", "LESS_EQUAL", "GREATER_EQUAL", "'{'", "'}'", "';'", "'('",
+  "')'", "'='", "'>'", "'<'", "'!'", "$accept", "stmt_list", "stmt",
+  "assign_stmt", "expr", "stmt_1", "stmt_2", "bool_expr", "arith_expr",
+  "term", "primary_expr", "program", YY_NULLPTR
   };
 
 
   const unsigned char
   parser::yyrline_[] =
   {
-       0,    82,    82,    85,    85,    88,    89,    90,   103,   111,
-     114,   120,   126,   133,   133,   136,   143,   148,   153,   156,
-     161,   166,   171,   176,   181,   186,   189,   191,   193,   197,
-     199,   201,   204,   206,   211,   214,   218,   222
+       0,    84,    84,    87,    88,    91,    93,    95,    97,    99,
+     102,   104,   106,   109,   109,   112,   115,   117,   119,   122,
+     124,   126,   128,   130,   132,   134,   137,   139,   141,   145,
+     147,   149,   152,   154,   156,   159,   161,   163
   };
 
   // Print the state stack on the debug stream.
@@ -1331,10 +1203,10 @@ namespace yy {
        0,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-      34,    35,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
-       2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,    40,     2,     2,     2,     2,     2,     2,
+      35,    36,     2,     2,     2,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,    34,
+      39,    37,    38,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
@@ -1369,9 +1241,11 @@ namespace yy {
   }
 
 } // yy
-#line 1373 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1245 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
-#line 229 "ParaCL.y"
+#line 167 "compiler.y"
+
+
 
 
 namespace yy {

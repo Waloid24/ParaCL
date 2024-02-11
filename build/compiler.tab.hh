@@ -32,7 +32,7 @@
 
 
 /**
- ** \file /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL.tab.hh
+ ** \file /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
  ** Define the yy::parser class.
  */
 
@@ -41,10 +41,10 @@
 // Undocumented macros, especially those whose name start with YY_,
 // are private implementation details.  Do not rely on them.
 
-#ifndef YY_YY_HOME_MASHA_CODE_PROJECTS_MIPT_ILAB_PARACL_PARACL_BUILD_PARACL_TAB_HH_INCLUDED
-# define YY_YY_HOME_MASHA_CODE_PROJECTS_MIPT_ILAB_PARACL_PARACL_BUILD_PARACL_TAB_HH_INCLUDED
+#ifndef YY_YY_HOME_MASHA_CODE_PROJECTS_MIPT_ILAB_PARACL_PARACL_BUILD_COMPILER_TAB_HH_INCLUDED
+# define YY_YY_HOME_MASHA_CODE_PROJECTS_MIPT_ILAB_PARACL_PARACL_BUILD_COMPILER_TAB_HH_INCLUDED
 // "%code requires" blocks.
-#line 9 "ParaCL.y"
+#line 10 "compiler.y"
 
     
     #include <iostream>
@@ -54,7 +54,7 @@
     namespace yy { class Driver; }
  
 
-#line 58 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL.tab.hh"
+#line 58 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 # include <cstdlib> // std::abort
@@ -188,7 +188,7 @@
 #endif
 
 namespace yy {
-#line 192 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL.tab.hh"
+#line 192 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 
@@ -536,16 +536,16 @@ switch (yytype)
     {
       case 27: // NUM
       case 28: // ID
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 42: // stmt_list
+      case 43: // stmt
+      case 44: // assign_stmt
+      case 45: // expr
+      case 46: // stmt_1
+      case 47: // stmt_2
+      case 48: // bool_expr
+      case 49: // arith_expr
+      case 50: // term
+      case 51: // primary_expr
         value.template destroy< int > ();
         break;
 
@@ -622,13 +622,13 @@ switch (yytype)
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == token::NOT_EQUAL || tok == token::LESS_EQUAL || tok == token::GREATER_EQUAL || tok == 123 || tok == 125 || tok == 40 || tok == 41);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == token::NOT_EQUAL || tok == token::LESS_EQUAL || tok == token::GREATER_EQUAL || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41 || tok == 61 || tok == 62 || tok == 60 || tok == 33);
       }
 #else
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == token::NOT_EQUAL || tok == token::LESS_EQUAL || tok == token::GREATER_EQUAL || tok == 123 || tok == 125 || tok == 40 || tok == 41);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == token::NOT_EQUAL || tok == token::LESS_EQUAL || tok == token::GREATER_EQUAL || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41 || tok == 61 || tok == 62 || tok == 60 || tok == 33);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1418,10 +1418,10 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 84,     ///< Last index in yytable_.
+      yylast_ = 79,     ///< Last index in yytable_.
       yynnts_ = 12,  ///< Number of nonterminal symbols.
-      yyfinal_ = 43, ///< Termination state number.
-      yyntokens_ = 36  ///< Number of tokens.
+      yyfinal_ = 41, ///< Termination state number.
+      yyntokens_ = 41  ///< Number of tokens.
     };
 
 
@@ -1431,10 +1431,10 @@ switch (yytype)
 
 
 } // yy
-#line 1435 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL.tab.hh"
+#line 1435 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 
 
 
-#endif // !YY_YY_HOME_MASHA_CODE_PROJECTS_MIPT_ILAB_PARACL_PARACL_BUILD_PARACL_TAB_HH_INCLUDED
+#endif // !YY_YY_HOME_MASHA_CODE_PROJECTS_MIPT_ILAB_PARACL_PARACL_BUILD_COMPILER_TAB_HH_INCLUDED

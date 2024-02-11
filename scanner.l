@@ -1,9 +1,9 @@
 %option c++
 
 %{
-#include "ParaCL.tab.hh"
+#include "compiler.tab.hh"
 %}
-%option yylineno
+
 
 WS          [ \t\n\v]+
 COMMENT     \/\/[^\n]*

@@ -57,29 +57,29 @@ include CMakeFiles/ParaCL.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/ParaCL.dir/flags.make
 
-parser.cc: ../ParaCL.y
+parser.cc: ../compiler.y
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "[BISON][parser] Building parser with bison 3.5.1"
-	cd /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL && /usr/bin/bison --defines=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL.tab.hh -d -o /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc ParaCL.y
+	cd /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL && /usr/bin/bison --defines=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh -d -o /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc compiler.y
 
 parser.hh: parser.cc
 	@$(CMAKE_COMMAND) -E touch_nocreate parser.hh
 
-ParaCL_lexer.cc: ../ParaCL_lexer.l
+scanner.cc: ../scanner.l
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "[FLEX][scanner] Building scanner with flex 2.6.4"
-	cd /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL && /usr/bin/flex -o/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc ParaCL_lexer.l
+	cd /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL && /usr/bin/flex -o/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc scanner.l
 
-CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o: CMakeFiles/ParaCL.dir/flags.make
-CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o: ../ParaCLdriver.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.cc
+CMakeFiles/ParaCL.dir/driver.cc.o: CMakeFiles/ParaCL.dir/flags.make
+CMakeFiles/ParaCL.dir/driver.cc.o: ../driver.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ParaCL.dir/driver.cc.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/driver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc
 
-CMakeFiles/ParaCL.dir/ParaCLdriver.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/ParaCLdriver.cc.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.cc > CMakeFiles/ParaCL.dir/ParaCLdriver.cc.i
+CMakeFiles/ParaCL.dir/driver.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/driver.cc.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc > CMakeFiles/ParaCL.dir/driver.cc.i
 
-CMakeFiles/ParaCL.dir/ParaCLdriver.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/ParaCLdriver.cc.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.cc -o CMakeFiles/ParaCL.dir/ParaCLdriver.cc.s
+CMakeFiles/ParaCL.dir/driver.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/driver.cc.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc -o CMakeFiles/ParaCL.dir/driver.cc.s
 
 CMakeFiles/ParaCL.dir/parser.cc.o: CMakeFiles/ParaCL.dir/flags.make
 CMakeFiles/ParaCL.dir/parser.cc.o: parser.cc
@@ -94,32 +94,32 @@ CMakeFiles/ParaCL.dir/parser.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/parser.cc.s"
 	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc -o CMakeFiles/ParaCL.dir/parser.cc.s
 
-CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o: CMakeFiles/ParaCL.dir/flags.make
-CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o: ParaCL_lexer.cc
-CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o: parser.hh
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc
+CMakeFiles/ParaCL.dir/scanner.cc.o: CMakeFiles/ParaCL.dir/flags.make
+CMakeFiles/ParaCL.dir/scanner.cc.o: scanner.cc
+CMakeFiles/ParaCL.dir/scanner.cc.o: parser.hh
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ParaCL.dir/scanner.cc.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/scanner.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc
 
-CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc > CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.i
+CMakeFiles/ParaCL.dir/scanner.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/scanner.cc.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc > CMakeFiles/ParaCL.dir/scanner.cc.i
 
-CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc -o CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.s
+CMakeFiles/ParaCL.dir/scanner.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/scanner.cc.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc -o CMakeFiles/ParaCL.dir/scanner.cc.s
 
 # Object files for target ParaCL
 ParaCL_OBJECTS = \
-"CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o" \
+"CMakeFiles/ParaCL.dir/driver.cc.o" \
 "CMakeFiles/ParaCL.dir/parser.cc.o" \
-"CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o"
+"CMakeFiles/ParaCL.dir/scanner.cc.o"
 
 # External object files for target ParaCL
 ParaCL_EXTERNAL_OBJECTS =
 
-ParaCL: CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o
+ParaCL: CMakeFiles/ParaCL.dir/driver.cc.o
 ParaCL: CMakeFiles/ParaCL.dir/parser.cc.o
-ParaCL: CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o
+ParaCL: CMakeFiles/ParaCL.dir/scanner.cc.o
 ParaCL: CMakeFiles/ParaCL.dir/build.make
 ParaCL: CMakeFiles/ParaCL.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable ParaCL"
@@ -136,7 +136,7 @@ CMakeFiles/ParaCL.dir/clean:
 
 CMakeFiles/ParaCL.dir/depend: parser.cc
 CMakeFiles/ParaCL.dir/depend: parser.hh
-CMakeFiles/ParaCL.dir/depend: ParaCL_lexer.cc
+CMakeFiles/ParaCL.dir/depend: scanner.cc
 	cd /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles/ParaCL.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ParaCL.dir/depend
 

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ParaCL.tab.hh"
+#include "compiler.tab.hh"
 #include <FlexLexer.h>
 
 namespace yy {

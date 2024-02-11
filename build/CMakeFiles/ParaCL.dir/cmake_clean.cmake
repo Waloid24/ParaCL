@@ -1,12 +1,12 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o"
-  "CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o"
+  "CMakeFiles/ParaCL.dir/driver.cc.o"
   "CMakeFiles/ParaCL.dir/parser.cc.o"
+  "CMakeFiles/ParaCL.dir/scanner.cc.o"
   "ParaCL"
   "ParaCL.pdb"
-  "ParaCL_lexer.cc"
   "parser.cc"
   "parser.hh"
+  "scanner.cc"
 )
 
 # Per-language clean rules from dependency scanning.

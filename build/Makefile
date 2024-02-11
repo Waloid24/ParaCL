@@ -123,59 +123,32 @@ ParaCL/fast:
 	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/build
 .PHONY : ParaCL/fast
 
-ParaCL_lexer.o: ParaCL_lexer.cc.o
+driver.o: driver.cc.o
 
-.PHONY : ParaCL_lexer.o
-
-# target to build an object file
-ParaCL_lexer.cc.o:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.o
-.PHONY : ParaCL_lexer.cc.o
-
-ParaCL_lexer.i: ParaCL_lexer.cc.i
-
-.PHONY : ParaCL_lexer.i
-
-# target to preprocess a source file
-ParaCL_lexer.cc.i:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.i
-.PHONY : ParaCL_lexer.cc.i
-
-ParaCL_lexer.s: ParaCL_lexer.cc.s
-
-.PHONY : ParaCL_lexer.s
-
-# target to generate assembly for a file
-ParaCL_lexer.cc.s:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/ParaCL_lexer.cc.s
-.PHONY : ParaCL_lexer.cc.s
-
-ParaCLdriver.o: ParaCLdriver.cc.o
-
-.PHONY : ParaCLdriver.o
+.PHONY : driver.o
 
 # target to build an object file
-ParaCLdriver.cc.o:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/ParaCLdriver.cc.o
-.PHONY : ParaCLdriver.cc.o
+driver.cc.o:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/driver.cc.o
+.PHONY : driver.cc.o
 
-ParaCLdriver.i: ParaCLdriver.cc.i
+driver.i: driver.cc.i
 
-.PHONY : ParaCLdriver.i
+.PHONY : driver.i
 
 # target to preprocess a source file
-ParaCLdriver.cc.i:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/ParaCLdriver.cc.i
-.PHONY : ParaCLdriver.cc.i
+driver.cc.i:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/driver.cc.i
+.PHONY : driver.cc.i
 
-ParaCLdriver.s: ParaCLdriver.cc.s
+driver.s: driver.cc.s
 
-.PHONY : ParaCLdriver.s
+.PHONY : driver.s
 
 # target to generate assembly for a file
-ParaCLdriver.cc.s:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/ParaCLdriver.cc.s
-.PHONY : ParaCLdriver.cc.s
+driver.cc.s:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/driver.cc.s
+.PHONY : driver.cc.s
 
 parser.o: parser.cc.o
 
@@ -204,6 +177,33 @@ parser.cc.s:
 	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/parser.cc.s
 .PHONY : parser.cc.s
 
+scanner.o: scanner.cc.o
+
+.PHONY : scanner.o
+
+# target to build an object file
+scanner.cc.o:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/scanner.cc.o
+.PHONY : scanner.cc.o
+
+scanner.i: scanner.cc.i
+
+.PHONY : scanner.i
+
+# target to preprocess a source file
+scanner.cc.i:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/scanner.cc.i
+.PHONY : scanner.cc.i
+
+scanner.s: scanner.cc.s
+
+.PHONY : scanner.s
+
+# target to generate assembly for a file
+scanner.cc.s:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/scanner.cc.s
+.PHONY : scanner.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ParaCL"
-	@echo "... ParaCL_lexer.o"
-	@echo "... ParaCL_lexer.i"
-	@echo "... ParaCL_lexer.s"
-	@echo "... ParaCLdriver.o"
-	@echo "... ParaCLdriver.i"
-	@echo "... ParaCLdriver.s"
+	@echo "... driver.o"
+	@echo "... driver.i"
+	@echo "... driver.s"
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"
+	@echo "... scanner.o"
+	@echo "... scanner.i"
+	@echo "... scanner.s"
 .PHONY : help
 
 

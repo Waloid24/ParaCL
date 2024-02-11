@@ -5,25 +5,24 @@ find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 
 if (NOT DEFINED GRAMMAR)
-  set(GRAMMAR "ParaCL.y" CACHE STRING "file with grammar" FORCE)
+  set(GRAMMAR "compiler.y" CACHE STRING "file with grammar" FORCE)
 endif()
 
-set(BISON_FLAGS "-t")
 
 flex_target(scanner
-  ParaCL_lexer.l
-  ${CMAKE_CURRENT_BINARY_DIR}/ParaCL_lexer.cc
+  scanner.l
+  ${CMAKE_CURRENT_BINARY_DIR}/scanner.cc
 )
 
 bison_target(parser
   ${GRAMMAR}
   ${CMAKE_CURRENT_BINARY_DIR}/parser.cc
-  COMPILE_FLAGS "--defines=${CMAKE_CURRENT_BINARY_DIR}/ParaCL.tab.hh")
+  COMPILE_FLAGS "--defines=${CMAKE_CURRENT_BINARY_DIR}/compiler.tab.hh")
 
 add_flex_bison_dependency(scanner parser)
 
 add_executable(${PROJECT_NAME} 
-  ParaCLdriver.cc  
+  driver.cc  
   ${BISON_parser_OUTPUTS}
   ${FLEX_scanner_OUTPUTS}
 )

@@ -6,23 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.cc
-iostream
--
-fstream
--
-string
--
-ParaCLdriver.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.hpp
-
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCLdriver.hpp
-ParaCL.tab.hh
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ParaCL.tab.hh
-FlexLexer.h
--
-
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL.tab.hh
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
 iostream
 -
 string
@@ -42,7 +26,7 @@ vector
 cassert
 -
 
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL_lexer.cc
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc
 inttypes.h
 -
 iostream
@@ -57,12 +41,28 @@ cstring
 -
 FlexLexer.h
 -
-ParaCL.tab.hh
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ParaCL.tab.hh
+compiler.tab.hh
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
 unistd.h
 -
 
-ParaCL.tab.hh
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc
+iostream
+-
+fstream
+-
+string
+-
+driver.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.hpp
+
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.hpp
+compiler.tab.hh
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/compiler.tab.hh
+FlexLexer.h
+-
+
+compiler.tab.hh
 iostream
 -
 string
