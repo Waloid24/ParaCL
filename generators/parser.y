@@ -10,8 +10,6 @@
     #include "../include/node.hpp"
     #include "../include/symtab.hpp"
 
-    //TODO: why #include driver from %code{} section doesn't work?
-
     // forward decl of argument to parser
     namespace yy { class Driver; }
 }
@@ -191,7 +189,7 @@ simple_statement:     assign            {
 ;
 
 assign:   
-        lval ASSIGN INPUT SCOLON      {
+        lval ASSIGN INPUT SCOLON        {
                                             std::cout << "assign: lval INPUT" << std::endl;
                                             Func_node* f_node = new Func_node(func_type::INPUT);
                                             $$ = new Bin_op_node(bin_op_type::ASSIGN, $1, f_node);
@@ -212,7 +210,6 @@ lval: ID                                {
                                             }
 
                                             $$ = new Id_node($1, var);
-                                            std::cout << "lval: ID (end)" << std::endl;
                                         }
 ;
 
@@ -292,15 +289,14 @@ primary:      "-" primary               {
                                             std::cout << "primary: ID" << std::endl;
 
                                             Var* var = driver->lookup($1);
-                                            if (var == nullptr)
+                                            /*if (var == nullptr)
                                             {
-                                                /* YYLTYPE *info = &@1;
+                                                YYLTYPE *info = &@1;
                                                 printError("Using undeclared variable! %s - Line %d:c%d to %d:c%d",
                                                             $1,
                                                             info->first_line, info->first_column,
-                                                            info->last_line, info->last_column); */
-                                                std::cout << "You have an error, haha" << std::endl;
-                                            }
+                                                            info->last_line, info->last_column);
+                                            }*/
                                             $$ = new Id_node($1, var);
                                         }
 ;

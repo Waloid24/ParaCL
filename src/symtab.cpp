@@ -9,3 +9,12 @@ Var* Symtab::lookup(const std::string &name) const
     else
         return nullptr;
 }
+
+Symtab::~Symtab()
+{
+    for (auto pair : syms_)
+    {
+        if (pair.second != nullptr)
+            delete pair.second;
+    }
+}

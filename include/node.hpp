@@ -58,6 +58,7 @@ class Base_node {
         Base_node(node_type n_type) : n_type_{n_type} {}
         virtual ~Base_node() {};
         virtual int process_node() = 0;
+        node_type get_type() { return n_type_; }
 
 };
 
@@ -94,7 +95,8 @@ class Scope_node final : public Base_node {
         
         Scope_node(Scope_node *prev) : Base_node{node_type::SCOPE}, branches_{},
                                       prev_{prev}, table_{new Symtab} {}
-        ~Scope_node(){}
+        ~Scope_node();
+
         int process_node() override;
         Var* lookup(const std::string& name) const;
         void emplace(const std::string& name, Var* var) { table_->emplace(name, var); }
@@ -121,6 +123,8 @@ class Bin_op_node final : public Base_node {
         ~Bin_op_node(){}
 
         int process_node() override;
+        Base_node* get_left_node() { return first_; }
+        Base_node* get_right_node() { return second_; }
 
 };
 
@@ -138,8 +142,9 @@ class Un_op_node final : public Base_node {
                 throw std::runtime_error("The unary operator has no argument (nullptr)!");
             }
         }
-        ~Un_op_node(){}
+        ~Un_op_node();
         int process_node() override;
+        Base_node* get_left_node() { return first_; }
 };
 
 class If_node final : public Base_node {
@@ -153,7 +158,7 @@ class If_node final : public Base_node {
                     Base_node{node_type::IF}, condition_{condition}, 
                     then_expr_{then_expr}, else_expr_{else_expr} {}
         
-        ~If_node(){}
+        ~If_node();
         int process_node() override;
 };
 
@@ -167,7 +172,7 @@ class While_node final : public Base_node {
                     Base_node{node_type::WHILE}, condition_{condition}, then_expr_{then_expr} {}
 
         int process_node() override;
-        ~While_node(){}
+        ~While_node();
 };
 
 class Func_node final : public Base_node {
@@ -180,9 +185,10 @@ class Func_node final : public Base_node {
                         Base_node{node_type::FUNC_BASE}, f_type_{f_type}, expr_{nullptr} {}
         Func_node(func_type f_type, Base_node* expr) : 
                         Base_node{node_type::FUNC_BASE}, f_type_{f_type}, expr_{expr} {}
-        ~Func_node(){}
+        ~Func_node();
         int process_node() override;
 };
+
 }
 
 #endif

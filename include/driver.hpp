@@ -4,8 +4,6 @@
 #include <fstream>
 #include "grammar.tab.hh"
 
-
-
 namespace yy {
 
 class Driver {
@@ -17,11 +15,20 @@ class Driver {
 public:
     nodes::Scope_node* cur_scope_;
 
-    Driver(const char* file_name): file_name_{file_name}, plex_{new yyFlexLexer}, 
-                                    cur_scope_{new nodes::Scope_node(nullptr)}
+    Driver(const char* file_name)
+    : file_name_{file_name}
+    , plex_{new yyFlexLexer}
+    , cur_scope_{new nodes::Scope_node(nullptr)}
     {
         input_file_.open(file_name_);
         plex_->switch_streams(input_file_, std::cout);
+    }
+    ~Driver()
+    {
+        input_file_.close();
+        
+        delete cur_scope_;
+        delete plex_;
     }
 
     parser::token_type yylex(parser::semantic_type* yylval) 
@@ -36,7 +43,6 @@ public:
             parser::semantic_type tmp;
             tmp.as<std::string>() = name;
             yylval->swap<std::string>(tmp);
-
         }
         return tt;
     }

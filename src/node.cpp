@@ -2,6 +2,64 @@
 #include <iostream>
 namespace nodes
 {
+
+// Not an anonymous namespace, because we don't want to inflate the code
+
+static Base_node* get_left_node(Base_node* node)
+{
+    node_type type = node->get_type();
+
+    switch(type)
+    {
+        case node_type::BIN_OP:
+        {
+            Bin_op_node* b_node = static_cast<Bin_op_node*>(node);
+            return b_node->get_left_node();
+        }
+        case node_type::UN_OP:
+        {
+            Un_op_node* b_node = static_cast<Un_op_node*>(node);
+            return b_node->get_left_node();
+        }
+        default:
+            return nullptr;
+    }
+}
+
+static Base_node* get_right_node(Base_node* node)
+{
+    node_type type = node->get_type();
+
+    if(type == node_type::BIN_OP)
+    {
+        Bin_op_node* b_node = static_cast<Bin_op_node*>(node);
+        return b_node->get_right_node();
+    }
+    else
+    {
+        return nullptr;
+    }
+}
+
+static void delete_tree(Base_node* node)
+{
+    if (node == nullptr) return;
+
+    node_type type = node->get_type();
+    if (type != node_type::BIN_OP)
+    {
+        delete node;
+    }
+    else
+    {
+        //we need to delete its children
+        delete_tree(get_left_node(node));
+        delete_tree(get_right_node(node));
+
+        delete node;
+    }
+}
+
 void Id_node::assign_value(int value)
 {
     var_->change_value(value);
@@ -21,9 +79,10 @@ int Bin_op_node::process_node()
             return (first_->process_node() * second_->process_node());
         case bin_op_type::DIV:
             value = second_->process_node();
-            if (value == 0)
+            if (value)
+                return (first_->process_node() / value);
+            else
                 throw std::runtime_error("Division by zero");
-            return (first_->process_node() / value);
         case bin_op_type::GREATER:
             return (first_->process_node() > second_->process_node());
         case bin_op_type::GREATER_EQUAL:
@@ -51,6 +110,7 @@ int Bin_op_node::process_node()
     }
 }
 
+//-------------------------------------Un_op_node------------------------------------------
 int Un_op_node::process_node()
 {
     switch(un_node_)
@@ -65,7 +125,14 @@ int Un_op_node::process_node()
             throw std::runtime_error("Unexpected error of the unary operator!");
     }
 }
+Un_op_node::~Un_op_node()
+{
+    if (first_ != nullptr)
+        delete_tree(first_); //TODO: is it possible to reduce it?
+}
+//-----------------------------------------------------------------------------------------
 
+//-----------------------------------If node-----------------------------------------------
 int If_node::process_node()
 {
     std::cout << "Into If_node::process_node()" << std::endl;
@@ -73,7 +140,6 @@ int If_node::process_node()
         throw std::runtime_error("Unexpected absence of condition!");
     int res = 0;
 
-    std::cout << "llalalla" << std::endl;
     if (condition_->process_node())
     {
         std::cout << "Into If_node::process_node() into if()" << std::endl;
@@ -84,7 +150,16 @@ int If_node::process_node()
         res = else_expr_->process_node();
     return res;
 }
+If_node::~If_node()
+{
+    delete_tree(condition_);
+    delete_tree(then_expr_);
+    if (else_expr_ != nullptr)
+        delete_tree(else_expr_); //TODO: it's okey?
+}
+//-----------------------------------------------------------------------------------------
 
+//-------------------------------------While node------------------------------------------
 int While_node::process_node()
 {
     if (condition_ == nullptr)
@@ -95,6 +170,14 @@ int While_node::process_node()
 
     return 0;
 }
+While_node::~While_node()
+{
+    delete_tree(condition_);
+    delete_tree(then_expr_);
+}
+//-----------------------------------------------------------------------------------------
+
+//----------------------------------------Scope node-----------------------------------------
 
 Var* Scope_node::lookup(const std::string& name) const 
 {
@@ -127,6 +210,17 @@ int Scope_node::process_node()
     return 0;
 }
 
+Scope_node::~Scope_node()
+{
+    delete table_;
+    for (Base_node* elem : branches_)
+    {
+        delete_tree(elem);
+    }
+}
+
+//-------------------------------------------Func node--------------------------------------
+
 int Func_node::process_node()
 {
     int expr = 0;
@@ -146,6 +240,10 @@ int Func_node::process_node()
             std::cout << "Unexpected error" << std::endl;
     }
     return expr;
+}
+Func_node::~Func_node()
+{
+    delete_tree(expr_);
 }
 
 }

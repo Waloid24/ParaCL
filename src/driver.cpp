@@ -6,11 +6,11 @@ int yyFlexLexer::yywrap() { return 1; }
 
 int main(int argc, char* argv[]) {
 
-    // if (argc != 2)
-    // {
-    //     std::cerr << "You should enter: ./ParaCL <program_name>" << std::endl;
-    //     return 1;
-    // }
+    if (argc != 2)
+    {
+        std::cerr << "You should enter: ./ParaCL <program_name>" << std::endl;
+        return 1;
+    }
 
     yy::Driver driver(argv[1]);
     try
@@ -23,6 +23,5 @@ int main(int argc, char* argv[]) {
         std::cerr << e.what() << std::endl;
         return 1;
     }
-    std::cout << "Without error" << std::endl;
     return 0;
 }

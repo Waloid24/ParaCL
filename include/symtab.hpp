@@ -21,7 +21,7 @@ class Symtab {
     public:
 
         Symtab(){}
-
+        ~Symtab();
         Var* lookup(const std::string &name) const;
 
         void emplace(const std::string &name, Var* var)
