@@ -46,13 +46,12 @@ static void delete_tree(Base_node* node)
     if (node == nullptr) return;
 
     node_type type = node->get_type();
-    if (type != node_type::BIN_OP)
+    if (type != node_type::BIN_OP && type != node_type::UN_OP)
     {
         delete node;
     }
     else
     {
-        //we need to delete its children
         delete_tree(get_left_node(node));
         delete_tree(get_right_node(node));
 
@@ -115,8 +114,6 @@ int Un_op_node::process_node()
 {
     switch(un_node_)
     {
-        case un_op_type::U_PLUS:
-            return first_->process_node();
         case un_op_type::U_MINUS:
             return -(first_->process_node());
         case un_op_type::NOT:
@@ -124,11 +121,6 @@ int Un_op_node::process_node()
         default:
             throw std::runtime_error("Unexpected error of the unary operator!");
     }
-}
-Un_op_node::~Un_op_node()
-{
-    if (first_ != nullptr)
-        delete_tree(first_); //TODO: is it possible to reduce it?
 }
 //-----------------------------------------------------------------------------------------
 
@@ -155,7 +147,7 @@ If_node::~If_node()
     delete_tree(condition_);
     delete_tree(then_expr_);
     if (else_expr_ != nullptr)
-        delete_tree(else_expr_); //TODO: it's okey?
+        delete_tree(else_expr_);
 }
 //-----------------------------------------------------------------------------------------
 

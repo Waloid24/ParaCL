@@ -40,6 +40,7 @@ ID      [a-zA-Z][a-zA-Z0-9]*
 
 "&&"                return yy::parser::token_type::AND;
 "||"                return yy::parser::token_type::OR;
+"!"                 return yy::parser::token_type::NOT;
 
 "="                 return yy::parser::token_type::ASSIGN;
 

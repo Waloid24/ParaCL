@@ -40,7 +40,6 @@ enum class bin_op_type {
 };
 
 enum class un_op_type {
-    U_PLUS,
     U_MINUS,
     NOT
 };
@@ -142,7 +141,7 @@ class Un_op_node final : public Base_node {
                 throw std::runtime_error("The unary operator has no argument (nullptr)!");
             }
         }
-        ~Un_op_node();
+        ~Un_op_node(){}
         int process_node() override;
         Base_node* get_left_node() { return first_; }
 };

@@ -51,6 +51,7 @@
 
     AND             "&&"
     OR              "||"
+    NOT             "!"
     
     ASSIGN          "="
 
@@ -274,8 +275,10 @@ term:         term "*" primary          {
 ;
 
 primary:      "-" primary               {
-                                            $$ = new Un_op_node(un_op_type::U_MINUS,
-                                                                $2);
+                                            $$ = new Un_op_node(un_op_type::U_MINUS, $2);
+                                        }
+            | "!" primary               {
+                                            $$= new Un_op_node(un_op_type::NOT, $2);
                                         }
             | "(" expression ")"        {
                                             std::cout << "primary: ( expression )" << std::endl;
