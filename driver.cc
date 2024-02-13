@@ -3,9 +3,14 @@
 #include <string>
 
 #include "driver.hpp"
+#include "ScopeTree.hpp"
+#include "scanner.cc"
 
-// here we can return non-zero if lexing is not done inspite of EOF detected
 int yyFlexLexer::yywrap() { return 1; }
+
+std::shared_ptr<ScopeNode>& globalScope;
+
+std::shared_ptr<ScopeNode>& currentScope = globalScope;
 
 int main(int argc, char *argv[]) { 
   if(argc != 2) {
@@ -18,11 +23,17 @@ int main(int argc, char *argv[]) {
       return 1;
   }
   else { std::cout << "The file was opened successfully" << std::endl; }
-  
+
   FlexLexer *lexer = new yyFlexLexer;
-  yy::Driver driver(lexer);
+  lexer->switch_streams(&file, nullptr);
+
+  yy::Driver driver(lexer, currentScope);
+  driver.create_scope();
+
   std::cout << "Start parsing" << std::endl;
+
   driver.parse();
   file.close();
+
   delete lexer;
 }

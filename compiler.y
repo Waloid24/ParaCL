@@ -20,6 +20,7 @@
 %code
 {
     #include "driver.hpp"
+    #include "INode.hpp"
 
     namespace yy {
         parser::token_type yylex(parser::semantic_type* yyval,
@@ -81,11 +82,20 @@
 
 %%
 
-program: stmt_list { std::cout << "Parsing complete!" << std::endl; } 
+program: stmt_list                          { current_scope->calculate(); } 
 ;
 
-stmt_list: stmt 
-| stmt_list stmt   // { $$ = new block($1, $2); }
+scope: open_sc stmt_list close_sc           { $$ = $3; }
+;
+
+open_sc: '{'                                { current_scope = create_scope(); }
+;
+
+clode_sc: '}'                               { current_scope = current_scope->}
+;
+
+stmt_list: stmt                             { }
+| stmt_list stmt                            { $$ = new block($1, $2); }
 ;
 
 stmt_1: '{' stmt_list '}'                 //  { $$ = $2; }

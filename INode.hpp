@@ -8,17 +8,6 @@ class INode {
     virtual ~INode() {};
 };
 
-class IScope: public INode {
-    public:
-    virtual INode* set_scope() = 0;
-    virtual INode* destroy_scope() = 0;
-    virtual void add_to_scope(IScope* stmt) = 0;
-    virtual INode* lookup() = 0;
-    virtual bool check_visibility() = 0;
-
-    virtual ~IScope() {};
-};
-
 enum class Operations {
     Assign, 
     Minus,

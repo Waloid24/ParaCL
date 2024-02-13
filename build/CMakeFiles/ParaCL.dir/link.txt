@@ -1,1 +1,1 @@
-/usr/bin/g++     CMakeFiles/ParaCL.dir/driver.cc.o CMakeFiles/ParaCL.dir/parser.cc.o CMakeFiles/ParaCL.dir/scanner.cc.o  -o ParaCL 
+/usr/bin/clang++  -g   CMakeFiles/ParaCL.dir/driver.cc.o CMakeFiles/ParaCL.dir/parser.cc.o CMakeFiles/ParaCL.dir/scanner.cc.o  -o ParaCL 

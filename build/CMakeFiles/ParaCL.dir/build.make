@@ -71,42 +71,42 @@ scanner.cc: ../scanner.l
 CMakeFiles/ParaCL.dir/driver.cc.o: CMakeFiles/ParaCL.dir/flags.make
 CMakeFiles/ParaCL.dir/driver.cc.o: ../driver.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ParaCL.dir/driver.cc.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/driver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/driver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc
 
 CMakeFiles/ParaCL.dir/driver.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/driver.cc.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc > CMakeFiles/ParaCL.dir/driver.cc.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc > CMakeFiles/ParaCL.dir/driver.cc.i
 
 CMakeFiles/ParaCL.dir/driver.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/driver.cc.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc -o CMakeFiles/ParaCL.dir/driver.cc.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc -o CMakeFiles/ParaCL.dir/driver.cc.s
 
 CMakeFiles/ParaCL.dir/parser.cc.o: CMakeFiles/ParaCL.dir/flags.make
 CMakeFiles/ParaCL.dir/parser.cc.o: parser.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/ParaCL.dir/parser.cc.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/parser.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/parser.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc
 
 CMakeFiles/ParaCL.dir/parser.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/parser.cc.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc > CMakeFiles/ParaCL.dir/parser.cc.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc > CMakeFiles/ParaCL.dir/parser.cc.i
 
 CMakeFiles/ParaCL.dir/parser.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/parser.cc.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc -o CMakeFiles/ParaCL.dir/parser.cc.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc -o CMakeFiles/ParaCL.dir/parser.cc.s
 
 CMakeFiles/ParaCL.dir/scanner.cc.o: CMakeFiles/ParaCL.dir/flags.make
 CMakeFiles/ParaCL.dir/scanner.cc.o: scanner.cc
 CMakeFiles/ParaCL.dir/scanner.cc.o: parser.hh
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/ParaCL.dir/scanner.cc.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/scanner.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc
+	/usr/bin/clang++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/scanner.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc
 
 CMakeFiles/ParaCL.dir/scanner.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/scanner.cc.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc > CMakeFiles/ParaCL.dir/scanner.cc.i
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc > CMakeFiles/ParaCL.dir/scanner.cc.i
 
 CMakeFiles/ParaCL.dir/scanner.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/scanner.cc.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc -o CMakeFiles/ParaCL.dir/scanner.cc.s
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc -o CMakeFiles/ParaCL.dir/scanner.cc.s
 
 # Object files for target ParaCL
 ParaCL_OBJECTS = \

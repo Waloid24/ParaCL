@@ -1,31 +1,16 @@
 #pragma once
 
 #include "INode.hpp"
+#include "Symtab.hpp"
 
 #include <vector>
+#include <unordered_map>
+#include <functional>
+//---------------------------------------------------------
 
-class ScopeNode: public IScope {
-    public:
-    ScopeNode() {};
 
-    private:
-    std::vector<IScope*> statements;
-
-    public:
-    void add_to_scope(IScope* stmt) override;
-
-    
-    INode* set_scope() override;
-    INode* destroy_scope() override;
-    
-    INode* lookup() override;
-    bool check_visibility() override;
-
-    int calculate() override;
-    void print_info() override;
-};
-
-class ValueNode: public INode {
+//---------------------------------------------------------
+class ValueNode final: public INode {
     private:
     int value;
 
@@ -35,12 +20,15 @@ class ValueNode: public INode {
     int calculate() override;
     void print_info() override;
 };
-
-class OperatorNode: public INode {
+//---------------------------------------------------------
+class OperatorNode final: public INode {
     private:
     Operations Op;
     INode* l;
     INode* r;
+
+    static const std::map<Operations, std::string> OpStrings;
+    static std::unordered_map<Operations, std::function<int(int, int)>> OperationMap;
 
     int calculate() override;
     void print_info() override;
@@ -48,8 +36,8 @@ class OperatorNode: public INode {
     public:
     OperatorNode(INode* l, Operations Op, INode* r): l(l), Op(Op), r(r) {};
 };
-
-class IfNode: public INode {
+//---------------------------------------------------------
+class IfNode final: public INode {
     INode* l;
     INode* r;
 
@@ -59,8 +47,8 @@ class IfNode: public INode {
     public:
     IfNode(INode* l, INode* r): l(l), r(r) {};
 };
-
-class WhileNode: public INode {
+//---------------------------------------------------------
+class WhileNode final: public INode {
     INode* condition;
     INode* block;
 
@@ -70,4 +58,4 @@ class WhileNode: public INode {
     public:
     WhileNode(INode* condition, INode* block): condition(condition), block(block) {};
 };
-
+//---------------------------------------------------------
