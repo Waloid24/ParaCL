@@ -1,7 +1,8 @@
 # ParaCL
 ## Description
 Hello everyone! Here you will find my implementation of the lexer and parser of the ParaCL (Para = "Paralympics", C = "C", L = "Language") programming language, which is currently C-like.
-The project is written in C++ using the following generators: Flex for the lexer, Bison for the parser, which is different from my first fully handwritten Scielang language.
+
+The project is written in **C++** using the following generators: **Flex** for the lexer, **Bison** for the parser, which is different from my first fully handwritten Scielang language.
 ## Opportunities
 The language supports 
 * standard arithmetic and logical operations;
@@ -24,7 +25,7 @@ c = (a == 1 || b == 4);
 
 c = -(a+10);
 ```
-*  if/else expressions;
+*  `if/else` expressions;
 ```
 a = 1;
 b = -4;
@@ -41,7 +42,7 @@ while (a != 0)
     a = a - 1;
 }
 ```
-* input and output functions
+* *input* and *output* functions
 ```
 a = ?;
 print a;
@@ -52,4 +53,4 @@ Added the ability to handle syntactic (and a few semantic) errors.
 ![Syntax error](/images/syntax_err.jpg)
 
 ## Future updates
-Support for functions
+Support for *functions*.
