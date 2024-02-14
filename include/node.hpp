@@ -81,7 +81,7 @@ class Id_node final: public Base_node {
         Id_node(std::string &name, Var* var) : Base_node{node_type::ID}, name_{name}, var_{var} {}
         ~Id_node(){}
         int process_node() override { return var_->value_; }
-        void assign_value(int value);
+        void assign_value(int value) { var_->change_value(value); }
 };
 
 class Scope_node final : public Base_node {

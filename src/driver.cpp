@@ -44,7 +44,6 @@ void Driver::add_branch(nodes::Base_node* scope)
 
 int Driver::process() const 
 {
-    std::cout << "Into driver->process()!" << std::endl;
     return cur_scope_->process_node();
 }
 
@@ -58,7 +57,7 @@ void Driver::report_syntax_error(parser::context const& ctx) const
     yy::parser::symbol_kind_type expected[TOKENMAX];
     int num = ctx.expected_tokens (expected, TOKENMAX);
 
-    std::cerr << Ascii_console::bold() <<  file_name_ << ":" << lineno << ":" << end_column << ": error: exprected \"" << yy::parser::symbol_name(expected[0]) << "\" \n";
+    std::cerr << Ascii_console::bold() <<  file_name_ << ":" << lineno << ":" << end_column << ":" << Ascii_console::red() << " error: " << Ascii_console::def() << "exprected \"" << yy::parser::symbol_name(expected[0]) << "\" \n";
 
     for (int i = 1; i < num; ++i)
     {
@@ -73,7 +72,7 @@ void Driver::report_name_error(yy::parser::location_type &loc, std::string &name
     size_t lineno = plex_->get_current_line();
     size_t begin_column = loc.begin.column;
 
-    std::cerr << file_name_ << ":" << lineno << ":" << begin_column << ": error: \'" << name << "\' was not declared in this scope" << std::endl;
+    std::cerr << Ascii_console::bold() << file_name_ << ":" << lineno << ":" << begin_column << ":" << Ascii_console::red() << " error: " << Ascii_console::def() << "\'" << Ascii_console::bold() << name << Ascii_console::def() << "\' was not declared in this scope" << std::endl;
     throw std::runtime_error("Undeclared variable!");
 }
 
@@ -85,8 +84,6 @@ const char* Ascii_console::get_color(color_type mod)
             return "\033[31m";
         case color_type::GREEN:
             return "\033[32m";
-        case color_type::DEFAULT:
-            return "\033[0m";
         default:
             return nullptr;
     }
@@ -100,8 +97,6 @@ const char* Ascii_console::get_mod(mod_type mod)
             return "\033[1m";
         case mod_type::ITALIC:
             return "\033[3m";
-        case mod_type::DEFAULT:
-            return "\033[0m";
         default:
             return nullptr;
     }
@@ -109,12 +104,12 @@ const char* Ascii_console::get_mod(mod_type mod)
 
 const char* Ascii_console::red()
 {
-    return get_mod(color_type::RED);
+    return get_color(color_type::RED);
 }
 
 const char* Ascii_console::green()
 {
-    return get_mod(color_type::GREEN);
+    return get_color(color_type::GREEN);
 }
 
 const char* Ascii_console::bold()
@@ -127,8 +122,8 @@ const char* Ascii_console::italic()
     return get_mod(mod_type::BOLD);
 }
 
-const char* Ascii_console::default()
+const char* Ascii_console::def()
 {
-    return get_deafult(mod_type::DEFAULT);
+    return "\033[0m";
 }
 }

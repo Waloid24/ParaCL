@@ -1,3 +1,0 @@
-# Hashes of file build rules.
-21c1d7a43b4e575323bb0ace818d431b lexer.cc
-8d725766223c4b28323e764b3ac9665a parser.cc

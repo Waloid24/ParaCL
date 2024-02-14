@@ -3,8 +3,6 @@
 namespace nodes
 {
 
-// Not an anonymous namespace, because we don't want to inflate the code
-
 static Base_node* get_left_node(Base_node* node)
 {
     node_type type = node->get_type();
@@ -59,10 +57,7 @@ static void delete_tree(Base_node* node)
     }
 }
 
-void Id_node::assign_value(int value)
-{
-    var_->change_value(value);
-}
+//-------------------------------------Bin_op_node------------------------------------------
 
 int Bin_op_node::process_node() 
 {
@@ -99,7 +94,6 @@ int Bin_op_node::process_node()
         case bin_op_type::AND:
             return (first_->process_node() && second_->process_node());
         case bin_op_type::ASSIGN:
-            std::cout << "Into bin_op_type::ASSIGN" << std::endl;
             lval = static_cast<Id_node*>(first_);
             value = second_->process_node();
             lval->assign_value(value);
@@ -108,6 +102,7 @@ int Bin_op_node::process_node()
             throw std::runtime_error("Unexpected error of the binary operator!");
     }
 }
+//-----------------------------------------------------------------------------------------
 
 //-------------------------------------Un_op_node------------------------------------------
 int Un_op_node::process_node()
@@ -127,14 +122,12 @@ int Un_op_node::process_node()
 //-----------------------------------If node-----------------------------------------------
 int If_node::process_node()
 {
-    std::cout << "Into If_node::process_node()" << std::endl;
     if (condition_ == nullptr || then_expr_ == nullptr)
         throw std::runtime_error("Unexpected absence of condition!");
     int res = 0;
 
     if (condition_->process_node())
     {
-        std::cout << "Into If_node::process_node() into if()" << std::endl;
         res = then_expr_->process_node();
     }
         
@@ -219,13 +212,11 @@ int Func_node::process_node()
     switch (f_type_)
     {
         case func_type::INPUT:
-            std::cout << "Func_node::process_node INPUT" << std::endl;
             std::cin >> expr;
             return expr;
         
         case func_type::OUTPUT:
             expr = expr_->process_node();
-            std::cout << expr << std::endl;;
             return expr;
 
         default:
@@ -237,6 +228,7 @@ Func_node::~Func_node()
 {
     delete_tree(expr_);
 }
+//-----------------------------------------------------------------------------------------
 
 }
 

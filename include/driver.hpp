@@ -54,13 +54,14 @@ enum class mod_type {
 };
 
 class Ascii_console {
-    const char* get_color(color_type color);
-    const char* get_mod(mod_type mod);
+    static const char* get_color(color_type color);
+    static const char* get_mod(mod_type mod);
     public:
-        const char* red();
-        const char* green();
-        const char* bold();
-        const char* italic();
+        static const char* red();
+        static const char* green();
+        static const char* bold();
+        static const char* italic();
+        static const char* def();
 };
 
 } 
