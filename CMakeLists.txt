@@ -4,7 +4,7 @@ project(ParaCL LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(BISON REQUIRED)
+find_package(BISON 3.7.6)
 find_package(FLEX REQUIRED)
 
 if (NOT DEFINED GRAMMAR)
@@ -21,8 +21,8 @@ set(GENERATORS generators)
 set(PARSER ${GENERATORS}/parser.y)
 set(LEXER ${GENERATORS}/lexer.l)
 
-set(SOURCES ${SOURCE_DIR}/driver.cpp ${SOURCE_DIR}/node.cpp ${SOURCE_DIR}/symtab.cpp)
-set(HEADERS ${INCLUDE_DIR}/driver.hpp ${INCLUDE_DIR}/node.hpp ${INCLUDE_DIR}/symtab.hpp)
+set(SOURCES ${SOURCE_DIR}/main.cpp ${SOURCE_DIR}/driver.cpp ${SOURCE_DIR}/node.cpp ${SOURCE_DIR}/symtab.cpp ${SOURCE_DIR}/lexer.cpp)
+set(HEADERS ${INCLUDE_DIR}/driver.hpp ${INCLUDE_DIR}/node.hpp ${INCLUDE_DIR}/symtab.hpp ${INCLUDE_DIR}/lexer.hpp)
 
 flex_target(scanner
   ${LEXER}
@@ -35,6 +35,8 @@ bison_target(parser
   COMPILE_FLAGS "--defines=${CMAKE_CURRENT_BINARY_DIR}/grammar.tab.hh")
 
 add_flex_bison_dependency(scanner parser)
+
+include_directories(${PROJECT_NAME} PUBLIC ${INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
 
 add_executable(${PROJECT_NAME}
   ${HEADERS}

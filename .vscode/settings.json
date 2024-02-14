@@ -65,6 +65,9 @@
         "streambuf": "cpp",
         "thread": "cpp",
         "cfenv": "cpp",
-        "cinttypes": "cpp"
+        "cinttypes": "cpp",
+        "any": "cpp",
+        "regex": "cpp",
+        "shared_mutex": "cpp"
     }
 }

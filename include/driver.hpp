@@ -1,15 +1,21 @@
 #pragma once
 #include <memory>
-#include <FlexLexer.h>
 #include <fstream>
+#include <string>
+#include <FlexLexer.h>
+
+#include "lexer.hpp"
+#include "node.hpp"
 #include "grammar.tab.hh"
+
+#include <memory>
 
 namespace yy {
 
 class Driver {
 
     const char* file_name_;
-    FlexLexer* plex_;
+    Lexer* plex_;
     std::ifstream input_file_;
 
 public:
@@ -17,64 +23,44 @@ public:
 
     Driver(const char* file_name)
     : file_name_{file_name}
-    , plex_{new yyFlexLexer}
+    , plex_{new Lexer}
     , cur_scope_{new nodes::Scope_node(nullptr)}
     {
         input_file_.open(file_name_);
         plex_->switch_streams(input_file_, std::cout);
     }
-    ~Driver()
-    {
-        input_file_.close();
-        
-        delete cur_scope_;
-        delete plex_;
-    }
+    ~Driver();
 
-    parser::token_type yylex(parser::semantic_type* yylval) 
-    {
-        parser::token_type tt = static_cast<parser::token_type>(plex_->yylex());
+    parser::token_type yylex(parser::semantic_type* yylval, parser::location_type* yyloc);
+    bool parse();
+    Var* lookup(const std::string& name) { return (cur_scope_->lookup(name)); }
+    void emplace(const std::string& name, Var* var) { cur_scope_->emplace(name, var); }
+    void add_branch(nodes::Base_node* scope);
+    int process() const;
+    void report_syntax_error(parser::context const& ctx) const;
+    void report_name_error(yy::parser::location_type &loc, std::string &name) const;
+};
 
-        if (tt == yy::parser::token_type::INTEGER)
-            yylval->as<int>() = std::stoi(plex_->YYText());
-        if (tt == yy::parser::token_type::ID)
-        {
-            std::string name(plex_->YYText());
-            parser::semantic_type tmp;
-            tmp.as<std::string>() = name;
-            yylval->swap<std::string>(tmp);
-        }
-        return tt;
-    }
+enum class color_type {
+    RED,
+    GREEN,
+    DEFAULT
+};
 
-    bool parse() 
-    {
-        parser parser{this};
-        bool res = parser.parse();
-        return !res;
-    }
+enum class mod_type {
+    BOLD,
+    ITALIC,
+    DEFAULT
+};
 
-    Var* lookup(const std::string& name)
-    {
-        return (cur_scope_->lookup(name));
-    }
-
-    void emplace(const std::string& name, Var* var)
-    {
-        cur_scope_->emplace(name, var);
-    }
-
-    void add_branch(nodes::Base_node* scope)
-    {
-        if(scope != nullptr)
-            cur_scope_->add_branch(scope);
-    }
-
-    int process() const 
-    {
-        std::cout << "Into driver->process()!" << std::endl;
-        return cur_scope_->process_node();
-    }
+class Ascii_console {
+    const char* get_color(color_type color);
+    const char* get_mod(mod_type mod);
+    public:
+        const char* red();
+        const char* green();
+        const char* bold();
+        const char* italic();
 };
 
 } 

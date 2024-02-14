@@ -1,5 +1,5 @@
 #include <string>
-#include "../include/symtab.hpp"
+#include "symtab.hpp"
 
 Var* Symtab::lookup(const std::string &name) const
 {
