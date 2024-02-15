@@ -22,6 +22,8 @@ class Symtab {
 
         Symtab(){}
         ~Symtab();
+
+        //search for a name in the syms_
         Var* lookup(const std::string &name) const;
 
         void emplace(const std::string &name, Var* var)

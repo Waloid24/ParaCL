@@ -34,7 +34,7 @@ if (a == 0)
 else
     a = b;
 ```
-* while loops;
+* `while` loops;
 ```
 a = 4;
 while (a != 0)

@@ -2,8 +2,6 @@
 #include <memory>
 #include "driver.hpp"
 
-// int yyFlexLexer::yywrap() { return 1; }
-
 int main(int argc, char* argv[]) {
 
     if (argc != 2)

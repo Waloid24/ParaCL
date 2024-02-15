@@ -1,7 +1,7 @@
 %option c++
 %option yylineno
 size_t line = lineno();
-%option noyywrap nounput noinput batch debug
+%option noyywrap
 
 %option yyclass="yy::Lexer"
 
@@ -11,6 +11,7 @@ size_t line = lineno();
 #include "../include/lexer.hpp"
 
 #define YY_USER_ACTION update_location();
+
 %}
 
 WS      [ \t\n\v]+
