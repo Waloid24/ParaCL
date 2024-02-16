@@ -3,6 +3,7 @@
 #include "compiler.tab.hh"
 #include <FlexLexer.h>
 #include "INode.hpp"
+#include "ScopeTree.hpp"
 
 namespace yy {
 
@@ -28,9 +29,23 @@ public:
     return !res;
   }
 
-  void create_scope() {
-    ScopeNode::create_scope(currentScope);
-  }
+  // void create_scope() {
+  //   if(currentScope != nullptr) {
+  //     currentScope->create_scope(currentScope);
+  //   }
+  // }
+
+  // void exit_scope() {
+  //   if(currentScope != nullptr) {
+  //     currentScope->exit_scope(currentScope);
+  //   }
+  // }
+
+  // // Вызывает подсчет для всех типов узлов
+  // void calculate() { 
+  //   return currentScope->calculate();
+  // }
+
 
 
 

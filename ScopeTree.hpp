@@ -6,11 +6,14 @@
 #include <ctime> 
 #include <cstdlib>
 
-struct Variable {
+class Variable {
+    public:
     std::string name;
     int value;
     int key; // unique int
     // line? 
+
+    Variable(const std::string& n, int v1, int v2) : name(n), value(v1), key(v2) {}
 };
 
 class ScopeNode final {
@@ -26,7 +29,7 @@ class ScopeNode final {
         predessorPtr = std::weak_ptr<ScopeNode>();
     }
     
-    static void create_scope(std::shared_ptr<ScopeNode>& currentScopePtr) {
+    void add_branch(std::shared_ptr<ScopeNode>& currentScopePtr) {
         auto newScope = std::shared_ptr<ScopeNode>(new ScopeNode());
         currentScopePtr->successorsVector.push_back(newScope);
         currentScopePtr = newScope;
@@ -82,5 +85,7 @@ class ScopeNode final {
         }
         return false;
     }
+
+
 
 };

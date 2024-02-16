@@ -446,10 +446,7 @@ namespace yy {
         PRINT = 280,
         ERR = 281,
         NUM = 282,
-        ID = 283,
-        NOT_EQUAL = 284,
-        LESS_EQUAL = 285,
-        GREATER_EQUAL = 286
+        ID = 283
       };
     };
 
@@ -536,16 +533,16 @@ switch (yytype)
     {
       case 27: // NUM
       case 28: // ID
-      case 42: // stmt_list
-      case 43: // stmt
-      case 44: // assign_stmt
-      case 45: // expr
-      case 46: // stmt_1
-      case 47: // stmt_2
-      case 48: // bool_expr
-      case 49: // arith_expr
-      case 50: // term
-      case 51: // primary_expr
+      case 35: // stmt_list
+      case 36: // stmt
+      case 37: // assign_stmt
+      case 38: // expr
+      case 39: // stmt_1
+      case 40: // stmt_2
+      case 41: // bool_expr
+      case 42: // arith_expr
+      case 43: // term
+      case 44: // primary_expr
         value.template destroy< int > ();
         break;
 
@@ -622,13 +619,13 @@ switch (yytype)
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == token::NOT_EQUAL || tok == token::LESS_EQUAL || tok == token::GREATER_EQUAL || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41 || tok == 61 || tok == 62 || tok == 60 || tok == 33);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41);
       }
 #else
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == token::NOT_EQUAL || tok == token::LESS_EQUAL || tok == token::GREATER_EQUAL || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41 || tok == 61 || tok == 62 || tok == 60 || tok == 33);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1070,51 +1067,6 @@ switch (yytype)
         return symbol_type (token::ID, v);
       }
 #endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_NOT_EQUAL ()
-      {
-        return symbol_type (token::NOT_EQUAL);
-      }
-#else
-      static
-      symbol_type
-      make_NOT_EQUAL ()
-      {
-        return symbol_type (token::NOT_EQUAL);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_LESS_EQUAL ()
-      {
-        return symbol_type (token::LESS_EQUAL);
-      }
-#else
-      static
-      symbol_type
-      make_LESS_EQUAL ()
-      {
-        return symbol_type (token::LESS_EQUAL);
-      }
-#endif
-#if 201103L <= YY_CPLUSPLUS
-      static
-      symbol_type
-      make_GREATER_EQUAL ()
-      {
-        return symbol_type (token::GREATER_EQUAL);
-      }
-#else
-      static
-      symbol_type
-      make_GREATER_EQUAL ()
-      {
-        return symbol_type (token::GREATER_EQUAL);
-      }
-#endif
 
 
   private:
@@ -1418,10 +1370,10 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 79,     ///< Last index in yytable_.
+      yylast_ = 84,     ///< Last index in yytable_.
       yynnts_ = 12,  ///< Number of nonterminal symbols.
-      yyfinal_ = 41, ///< Termination state number.
-      yyntokens_ = 41  ///< Number of tokens.
+      yyfinal_ = 43, ///< Termination state number.
+      yyntokens_ = 34  ///< Number of tokens.
     };
 
 
@@ -1431,7 +1383,7 @@ switch (yytype)
 
 
 } // yy
-#line 1435 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 1387 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 

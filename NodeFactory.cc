@@ -31,7 +31,7 @@ int OperatorNode::calculate() {
     }
 }
 
-const std::map<Operations, std::string> OperatorNode::OpStrings = {
+const std::unordered_map<Operations, std::string> OperatorNode::OpStrings = {
     {Operations::Minus, "-"},
     {Operations::Plus, "+"},
     {Operations::And, "&&"},
@@ -64,21 +64,3 @@ int WhileNode::calculate() {}
 void WhileNode::print_info() {}
 
 //---------------------------------------------------------
-// fabric ctors implementation
-
-INode* make_value(int val) { 
-    return new ValueNode{val}; 
-}
-
-INode* make_operator(INode* l, Operations Op, INode* r) {
-    return new OperatorNode{l, Op, r};
-}
-
-INode* make_if(INode* condition, INode* block) {
-    return new IfNode{condition, block};
-}
-
-INode* make_while(INode* condition, INode* block) {
-    return new WhileNode{condition, block};
-}
-
