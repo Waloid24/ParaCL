@@ -217,6 +217,7 @@ int Func_node::process_node()
         
         case func_type::OUTPUT:
             expr = expr_->process_node();
+            std::cout << expr << std::endl;
             return expr;
 
         default:
