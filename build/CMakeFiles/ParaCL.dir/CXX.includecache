@@ -6,9 +6,29 @@
 
 #IncludeRegexTransform: 
 
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/INode.hpp
+../INode.hpp
+memory
+-
 
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ScopeTree.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.cc
+Node.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.hpp
+iostream
+-
+map
+-
+memory
+-
+
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.hpp
+INode.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/INode.hpp
+unordered_map
+-
+
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ScopeNode.hpp
+INode.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/INode.hpp
 vector
 -
 memory
@@ -19,6 +39,8 @@ ctime
 -
 cstdlib
 -
+iostream
+-
 
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
 iostream
@@ -26,6 +48,10 @@ iostream
 string
 -
 unordered_map
+-
+INode.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/INode.hpp
+memory
 -
 cstdlib
 -
@@ -69,18 +95,16 @@ string
 -
 driver.hpp
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.hpp
-ScopeTree.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ScopeTree.hpp
+Node.cc
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.cc
 
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.hpp
 compiler.tab.hh
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/compiler.tab.hh
+ScopeNode.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ScopeNode.hpp
 FlexLexer.h
 -
-INode.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/INode.hpp
-ScopeTree.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ScopeTree.hpp
 
 compiler.tab.hh
 iostream
@@ -88,6 +112,10 @@ iostream
 string
 -
 unordered_map
+-
+INode.hpp
+INode.hpp
+memory
 -
 cstdlib
 -

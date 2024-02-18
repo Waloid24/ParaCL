@@ -1,38 +1,53 @@
 #pragma once
 
+#include "INode.hpp"
+
 #include <vector>
 #include <memory>
 #include <algorithm>
 #include <ctime> 
 #include <cstdlib>
+#include <iostream>
 
 class Variable {
     public:
     std::string name;
     int value;
-    int key; // unique int
-    // line? 
+    int key; 
 
     Variable(const std::string& n, int v1, int v2) : name(n), value(v1), key(v2) {}
 };
 
-class ScopeNode final {
+class ScopeNode final: public IScope {
     private:
     std::vector<std::shared_ptr<Variable>> variableTable;
-    std::vector<std::shared_ptr<ScopeNode>> successorsVector;
+    std::vector<std::shared_ptr<INode>> successorsVector;
     std::weak_ptr<ScopeNode> predessorPtr;
 
     public:
     ScopeNode() {
         variableTable = std::vector<std::shared_ptr<Variable>>();
-        successorsVector = std::vector<std::shared_ptr<ScopeNode>>();
+        successorsVector = std::vector<std::shared_ptr<INode>>();
         predessorPtr = std::weak_ptr<ScopeNode>();
     }
+
+    int calculate() {
+        for(auto successor: successorsVector) {
+            return successor->calculate();
+        }
+        return 0;
+    }
     
-    void add_branch(std::shared_ptr<ScopeNode>& currentScopePtr) {
-        auto newScope = std::shared_ptr<ScopeNode>(new ScopeNode());
-        currentScopePtr->successorsVector.push_back(newScope);
-        currentScopePtr = newScope;
+    void dump_ast() {
+        std::cout << "In ScopeNode" << std::endl;
+    }
+
+    // std::shared_ptr<IScope> create_scope() {
+    //     return std::shared_ptr<IScope>(new IScope());
+    // }
+
+    void add_branch(std::shared_ptr<INode> node) {
+        successorsVector.push_back(node);
     }
 
     void exit_scope(std::shared_ptr<ScopeNode>& currentScopePtr) {

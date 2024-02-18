@@ -1,18 +1,19 @@
 #pragma once
 
 #include "compiler.tab.hh"
+// #include "INode.hpp"
+#include "ScopeNode.hpp"
+
 #include <FlexLexer.h>
-#include "INode.hpp"
-#include "ScopeTree.hpp"
 
 namespace yy {
 
 class Driver {
   FlexLexer *plex_;
-  std::shared_ptr<ScopeNode>& currentScope;
+  ScopeNode* currentScope;
 
 public:
-  Driver(FlexLexer *plex, std::shared_ptr<ScopeNode>& currentScope) : plex_(plex), currentScope(currentScope) {}
+  Driver(FlexLexer *plex, ScopeNode* currentScope) : plex_(plex), currentScope(currentScope) {}
 
   parser::token_type yylex(parser::semantic_type *yylval) {
     parser::token_type tt = static_cast<parser::token_type>(plex_->yylex());

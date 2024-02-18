@@ -1,12 +1,16 @@
-// #pragma once
+#pragma once
+#include <string>
+
+#include "INode.hpp"
+#include "ScopeNode.hpp"
 
 
-// #include "INode.hpp" 
-// #include "driver.hpp"
 
+struct yyRet {
+    std::string name;
+    int value;
+    INode* node;
+    ScopeNode* sc;
+};
 
-// %code requires {
-//   void setScopeNode(IScope* scopeNode) {
-    
-//   }
-// }
+#define YYSTYPE yyRet

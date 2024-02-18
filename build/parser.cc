@@ -41,19 +41,14 @@
 
 
 // Unqualified %code blocks.
-#line 21 "compiler.y"
+#line 23 "compiler.y"
 
     #include "driver.hpp"
-    #include "INode.hpp"
-    #include "Node.hpp"
+    extern ScopeNode* currentScope;
 
-    namespace yy {
-        parser::token_type yylex(parser::semantic_type* yyval,
-                                 Driver* driver);
-    }
- 
+    namespace yy { parser::token_type yylex(parser::semantic_type* yyval, Driver* driver); }
 
-#line 57 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 52 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
 
 #ifndef YY_
@@ -125,7 +120,7 @@
 #define YYRECOVERING()  (!!yyerrstatus_)
 
 namespace yy {
-#line 129 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 124 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
 
   /// Build a parser object.
@@ -159,7 +154,9 @@ namespace yy {
     switch (this->type_get ())
     {
       case 27: // NUM
-      case 28: // ID
+        value.move< int > (std::move (that.value));
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -170,7 +167,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.move< int > (std::move (that.value));
+        value.move< std::shared_ptr<INode> > (std::move (that.value));
+        break;
+
+      case 28: // ID
+        value.move< std::string > (std::move (that.value));
         break;
 
       default:
@@ -188,7 +189,9 @@ namespace yy {
     switch (this->type_get ())
     {
       case 27: // NUM
-      case 28: // ID
+        value.copy< int > (YY_MOVE (that.value));
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -199,7 +202,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.copy< int > (YY_MOVE (that.value));
+        value.copy< std::shared_ptr<INode> > (YY_MOVE (that.value));
+        break;
+
+      case 28: // ID
+        value.copy< std::string > (YY_MOVE (that.value));
         break;
 
       default:
@@ -225,7 +232,9 @@ namespace yy {
     switch (this->type_get ())
     {
       case 27: // NUM
-      case 28: // ID
+        value.move< int > (YY_MOVE (s.value));
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -236,7 +245,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.move< int > (YY_MOVE (s.value));
+        value.move< std::shared_ptr<INode> > (YY_MOVE (s.value));
+        break;
+
+      case 28: // ID
+        value.move< std::string > (YY_MOVE (s.value));
         break;
 
       default:
@@ -330,7 +343,9 @@ namespace yy {
     switch (that.type_get ())
     {
       case 27: // NUM
-      case 28: // ID
+        value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -341,7 +356,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.YY_MOVE_OR_COPY< int > (YY_MOVE (that.value));
+        value.YY_MOVE_OR_COPY< std::shared_ptr<INode> > (YY_MOVE (that.value));
+        break;
+
+      case 28: // ID
+        value.YY_MOVE_OR_COPY< std::string > (YY_MOVE (that.value));
         break;
 
       default:
@@ -360,7 +379,9 @@ namespace yy {
     switch (that.type_get ())
     {
       case 27: // NUM
-      case 28: // ID
+        value.move< int > (YY_MOVE (that.value));
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -371,7 +392,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.move< int > (YY_MOVE (that.value));
+        value.move< std::shared_ptr<INode> > (YY_MOVE (that.value));
+        break;
+
+      case 28: // ID
+        value.move< std::string > (YY_MOVE (that.value));
         break;
 
       default:
@@ -390,7 +415,9 @@ namespace yy {
     switch (that.type_get ())
     {
       case 27: // NUM
-      case 28: // ID
+        value.copy< int > (that.value);
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -401,7 +428,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.copy< int > (that.value);
+        value.copy< std::shared_ptr<INode> > (that.value);
+        break;
+
+      case 28: // ID
+        value.copy< std::string > (that.value);
         break;
 
       default:
@@ -418,7 +449,9 @@ namespace yy {
     switch (that.type_get ())
     {
       case 27: // NUM
-      case 28: // ID
+        value.move< int > (that.value);
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -429,7 +462,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.move< int > (that.value);
+        value.move< std::shared_ptr<INode> > (that.value);
+        break;
+
+      case 28: // ID
+        value.move< std::string > (that.value);
         break;
 
       default:
@@ -677,7 +714,9 @@ namespace yy {
       switch (yyr1_[yyn])
     {
       case 27: // NUM
-      case 28: // ID
+        yylhs.value.emplace< int > ();
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -688,7 +727,11 @@ namespace yy {
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        yylhs.value.emplace< int > ();
+        yylhs.value.emplace< std::shared_ptr<INode> > ();
+        break;
+
+      case 28: // ID
+        yylhs.value.emplace< std::string > ();
         break;
 
       default:
@@ -706,211 +749,199 @@ namespace yy {
           switch (yyn)
             {
   case 2:
-#line 90 "compiler.y"
-                                            { current_scope->calculate(); }
-#line 712 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 87 "compiler.y"
+                                            { currentScope->calculate(); }
+#line 755 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 3:
-#line 102 "compiler.y"
-                                            { yylhs.value.as < int > () = driver->create_scope(yystack_[0].value.as < int > ()); }
-#line 718 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 94 "compiler.y"
+                                            {  }
+#line 761 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 4:
-#line 103 "compiler.y"
-                                            { yylhs.value.as < int > () = driver->create_scope(yystack_[0].value.as < int > ()); }
-#line 724 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 95 "compiler.y"
+                                            {  }
+#line 767 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 5:
-#line 106 "compiler.y"
-                                            { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
-#line 730 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 98 "compiler.y"
+                                            { currentScope->add_branch(yystack_[1].value.as < std::shared_ptr<INode> > ()); }
+#line 773 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 6:
-#line 108 "compiler.y"
-                                            { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
-#line 736 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 100 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[1].value.as < std::shared_ptr<INode> > (); }
+#line 779 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 7:
-#line 110 "compiler.y"
-                                            { yylhs.value.as < int > () = new IfNode(yystack_[4].value.as < int > (), yystack_[2].value.as < int > (), yystack_[0].value.as < int > ()); }
-#line 742 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 102 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_if(yystack_[4].value.as < std::shared_ptr<INode> > (), yystack_[2].value.as < std::shared_ptr<INode> > (), yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 785 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 8:
-#line 112 "compiler.y"
-                                            { yylhs.value.as < int > () = new WhileNode(yystack_[2].value.as < int > (), yystack_[0].value.as < int > ()); }
-#line 748 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 104 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_while(yystack_[2].value.as < std::shared_ptr<INode> > (), yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 791 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 9:
-#line 114 "compiler.y"
-  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 754 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 106 "compiler.y"
+  { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[0].value.as < std::shared_ptr<INode> > (); }
+#line 797 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 10:
-#line 117 "compiler.y"
-                                            { yylhs.value.as < int > () = NodeFactory::make_if(yystack_[2].value.as < int > (), yystack_[0].value.as < int > (), create_scope()); }
-#line 760 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 115 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_if(yystack_[2].value.as < std::shared_ptr<INode> > (), yystack_[0].value.as < std::shared_ptr<INode> > (), 0); }
+#line 803 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 11:
-#line 119 "compiler.y"
-                                            { yylhs.value.as < int > () = NodeFactory::make_if(yystack_[4].value.as < int > (), yystack_[2].value.as < int > (), yystack_[0].value.as < int > ());}
-#line 766 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 117 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_if(yystack_[4].value.as < std::shared_ptr<INode> > (), yystack_[2].value.as < std::shared_ptr<INode> > (), yystack_[0].value.as < std::shared_ptr<INode> > ());}
+#line 809 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 12:
-#line 121 "compiler.y"
-                                            { yylhs.value.as < int > () = NodeFactory::make_while(yystack_[2].value.as < int > (), yystack_[0].value.as < int > ()); }
-#line 772 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 119 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_while(yystack_[2].value.as < std::shared_ptr<INode> > (), yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 815 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 13:
-#line 124 "compiler.y"
-      { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 778 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 122 "compiler.y"
+      { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[0].value.as < std::shared_ptr<INode> > (); }
+#line 821 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 14:
-#line 124 "compiler.y"
-               { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 784 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 15:
-#line 127 "compiler.y"
-                                               { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[3].value.as < int > (), Operations::Assign, yystack_[1].value.as < int > ()); }
-#line 790 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 122 "compiler.y"
+               { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[0].value.as < std::shared_ptr<INode> > (); }
+#line 827 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 16:
-#line 130 "compiler.y"
-                                            { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::And, yystack_[0].value.as < int > ()); }
-#line 796 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 128 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::And, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 833 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 17:
-#line 132 "compiler.y"
-                                            { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Or, yystack_[0].value.as < int > ()); }
-#line 802 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 130 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Or, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 839 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 18:
-#line 134 "compiler.y"
-                                            { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 808 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 132 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[0].value.as < std::shared_ptr<INode> > (); }
+#line 845 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 19:
-#line 137 "compiler.y"
-                                                 { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::GreaterEq, yystack_[0].value.as < int > ()); }
-#line 814 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 135 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::GreaterEq, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 851 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 20:
-#line 139 "compiler.y"
-                                              { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::LessEq, yystack_[0].value.as < int > ()); }
-#line 820 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 137 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::LessEq, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 857 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 21:
-#line 141 "compiler.y"
-                                             { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Less, yystack_[0].value.as < int > ()); }
-#line 826 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 139 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Less, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 863 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 22:
-#line 143 "compiler.y"
-                                                { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Greater, yystack_[0].value.as < int > ()); }
-#line 832 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 141 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Greater, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 869 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 23:
-#line 145 "compiler.y"
-                                             { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Equal, yystack_[0].value.as < int > ()); }
-#line 838 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 143 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Equal, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 875 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 24:
-#line 147 "compiler.y"
-                                                { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::NonEqual, yystack_[0].value.as < int > ()); }
-#line 844 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 145 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::NonEqual, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 881 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 25:
-#line 149 "compiler.y"
-                                            { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 850 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 147 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[0].value.as < std::shared_ptr<INode> > (); }
+#line 887 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 26:
-#line 152 "compiler.y"
-                                            { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Plus, yystack_[0].value.as < int > ()); }
-#line 856 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 150 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Plus, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 893 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 27:
-#line 154 "compiler.y"
-                                             { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Minus, yystack_[0].value.as < int > ()); }
-#line 862 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 152 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Minus, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 899 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 28:
-#line 156 "compiler.y"
-                                           { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 868 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 154 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[0].value.as < std::shared_ptr<INode> > (); }
+#line 905 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 29:
-#line 160 "compiler.y"
-                                                { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Multiply, yystack_[0].value.as < int > ()); }
-#line 874 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 158 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Multiply, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 911 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 30:
-#line 162 "compiler.y"
-                                              { yylhs.value.as < int > () = NodeFactory::make_operator(yystack_[2].value.as < int > (), Operations::Divide, yystack_[0].value.as < int > ()); }
-#line 880 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 160 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(yystack_[2].value.as < std::shared_ptr<INode> > (), Operations::Divide, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 917 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 31:
-#line 164 "compiler.y"
-                                           { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 886 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 162 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[0].value.as < std::shared_ptr<INode> > (); }
+#line 923 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 32:
-#line 167 "compiler.y"
-                                             { yylhs.value.as < int > () = NodeFactory::make_operator(0, Operations::UnaryMinus, yystack_[0].value.as < int > ()); }
-#line 892 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 165 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_operator(0, Operations::UnaryMinus, yystack_[0].value.as < std::shared_ptr<INode> > ()); }
+#line 929 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 34:
-#line 171 "compiler.y"
-                                           { yylhs.value.as < int > () = yystack_[1].value.as < int > (); }
-#line 898 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 169 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = yystack_[1].value.as < std::shared_ptr<INode> > (); }
+#line 935 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 35:
-#line 174 "compiler.y"
-                                           { yylhs.value.as < int > () = NodeFactory::make_value(yystack_[0].value.as < int > ()); }
-#line 904 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 36:
-#line 176 "compiler.y"
-  { yylhs.value.as < int > () = yystack_[0].value.as < int > (); }
-#line 910 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 172 "compiler.y"
+                                            { yylhs.value.as < std::shared_ptr<INode> > () = make_value(yystack_[0].value.as < int > ()); }
+#line 941 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
 
-#line 914 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 945 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
             default:
               break;
@@ -1210,10 +1241,10 @@ namespace yy {
   const unsigned char
   parser::yyrline_[] =
   {
-       0,    90,    90,   102,   103,   106,   108,   110,   112,   114,
-     117,   119,   121,   124,   124,   127,   130,   132,   134,   137,
-     139,   141,   143,   145,   147,   149,   152,   154,   156,   160,
-     162,   164,   167,   169,   171,   174,   176,   178
+       0,    87,    87,    94,    95,    98,   100,   102,   104,   106,
+     115,   117,   119,   122,   122,   125,   128,   130,   132,   135,
+     137,   139,   141,   143,   145,   147,   150,   152,   154,   158,
+     160,   162,   165,   167,   169,   172,   174,   176
   };
 
   // Print the state stack on the debug stream.
@@ -1295,9 +1326,9 @@ namespace yy {
   }
 
 } // yy
-#line 1299 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1330 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
-#line 182 "compiler.y"
+#line 180 "compiler.y"
 
 
 

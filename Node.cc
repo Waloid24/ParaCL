@@ -1,16 +1,9 @@
 #include "Node.hpp"
-#include "ScopeTree.hpp"
 
 #include <iostream>
 #include <map>
 #include <memory>
 
-// ValueNode implementation
-int ValueNode::calculate() { return value; }
-
-void ValueNode::print_info() {                                                                                                        
-    std::cout << "Current Value Node: " << value << std::endl;
-}
 //---------------------------------------------------------
 // OperatorNode implementation
 std::unordered_map<Operations, std::function<int(int, int)>> OperatorNode::OperationMap = {
@@ -49,18 +42,17 @@ const std::unordered_map<Operations, std::string> OperatorNode::OpStrings = {
 };
 
 
-void OperatorNode::print_info() {
+void OperatorNode::dump_ast() {
     std::cout << "An operation is in progress: " << OpStrings.at(Op) << std::endl;
 }
 
 //---------------------------------------------------------
 // IfNode implementation
-int IfNode::calculate() {}
-void IfNode::print_info() {}
+int IfNode::calculate() {return 0;}
+void IfNode::dump_ast() {}
 
 //---------------------------------------------------------
 // WhileNode implementation
-int WhileNode::calculate() {}
-void WhileNode::print_info() {}
+int WhileNode::calculate() {return 0;}
+void WhileNode::dump_ast() {}
 
-//---------------------------------------------------------

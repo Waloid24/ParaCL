@@ -50,11 +50,13 @@
     #include <iostream>
     #include <string>
     #include <unordered_map>
-
+    #include "INode.hpp"
+    #include <memory>
+    
     namespace yy { class Driver; }
  
 
-#line 58 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 60 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 # include <cstdlib> // std::abort
@@ -188,7 +190,7 @@
 #endif
 
 namespace yy {
-#line 192 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 194 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 
@@ -371,7 +373,8 @@ namespace yy {
     union union_type
     {
       // NUM
-      // ID
+      char dummy1[sizeof (int)];
+
       // stmt_list
       // stmt
       // assign_stmt
@@ -382,7 +385,10 @@ namespace yy {
       // arith_expr
       // term
       // primary_expr
-      char dummy1[sizeof (int)];
+      char dummy2[sizeof (std::shared_ptr<INode>)];
+
+      // ID
+      char dummy3[sizeof (std::string)];
     };
 
     /// The size of the largest semantic type.
@@ -508,6 +514,28 @@ namespace yy {
         , value (v)
       {}
 #endif
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::shared_ptr<INode>&& v)
+        : Base (t)
+        , value (std::move (v))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::shared_ptr<INode>& v)
+        : Base (t)
+        , value (v)
+      {}
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      basic_symbol (typename Base::kind_type t, std::string&& v)
+        : Base (t)
+        , value (std::move (v))
+      {}
+#else
+      basic_symbol (typename Base::kind_type t, const std::string& v)
+        : Base (t)
+        , value (v)
+      {}
+#endif
 
       /// Destroy the symbol.
       ~basic_symbol ()
@@ -532,7 +560,9 @@ namespace yy {
 switch (yytype)
     {
       case 27: // NUM
-      case 28: // ID
+        value.template destroy< int > ();
+        break;
+
       case 35: // stmt_list
       case 36: // stmt
       case 37: // assign_stmt
@@ -543,7 +573,11 @@ switch (yytype)
       case 42: // arith_expr
       case 43: // term
       case 44: // primary_expr
-        value.template destroy< int > ();
+        value.template destroy< std::shared_ptr<INode> > ();
+        break;
+
+      case 28: // ID
+        value.template destroy< std::string > ();
         break;
 
       default:
@@ -632,13 +666,26 @@ switch (yytype)
       symbol_type (int tok, int v)
         : super_type(token_type (tok), std::move (v))
       {
-        YY_ASSERT (tok == token::NUM || tok == token::ID);
+        YY_ASSERT (tok == token::NUM);
       }
 #else
       symbol_type (int tok, const int& v)
         : super_type(token_type (tok), v)
       {
-        YY_ASSERT (tok == token::NUM || tok == token::ID);
+        YY_ASSERT (tok == token::NUM);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      symbol_type (int tok, std::string v)
+        : super_type(token_type (tok), std::move (v))
+      {
+        YY_ASSERT (tok == token::ID);
+      }
+#else
+      symbol_type (int tok, const std::string& v)
+        : super_type(token_type (tok), v)
+      {
+        YY_ASSERT (tok == token::ID);
       }
 #endif
     };
@@ -1055,14 +1102,14 @@ switch (yytype)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ID (int v)
+      make_ID (std::string v)
       {
         return symbol_type (token::ID, std::move (v));
       }
 #else
       static
       symbol_type
-      make_ID (const int& v)
+      make_ID (const std::string& v)
       {
         return symbol_type (token::ID, v);
       }
@@ -1383,7 +1430,7 @@ switch (yytype)
 
 
 } // yy
-#line 1387 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 1434 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 

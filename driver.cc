@@ -3,14 +3,14 @@
 #include <string>
 
 #include "driver.hpp"
-#include "ScopeTree.hpp"
+#include "Node.cc"
 // #include "scanner.cc"
 
 int yyFlexLexer::yywrap() { return 1; }
 
-std::shared_ptr<ScopeNode> globalScope = std::make_shared<ScopeNode>();
+ScopeNode* globalScope;
 
-std::shared_ptr<ScopeNode>& currentScope = globalScope;
+ScopeNode* currentScope = globalScope;
 
 int main(int argc, char *argv[]) { 
   if(argc != 2) {
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
   lexer->switch_streams(&file, nullptr);
 
   yy::Driver driver(lexer, currentScope);
-  currentScope->add_branch(currentScope);
+  // currentScope->create_scope();
 
   std::cout << "Start parsing" << std::endl;
 
