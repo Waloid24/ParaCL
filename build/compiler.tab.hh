@@ -51,12 +51,14 @@
     #include <string>
     #include <unordered_map>
     #include "INode.hpp"
+    #include "Symtab.hpp"
+
     #include <memory>
     
     namespace yy { class Driver; }
  
 
-#line 60 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 62 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 # include <cstdlib> // std::abort
@@ -190,7 +192,7 @@
 #endif
 
 namespace yy {
-#line 194 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 196 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 
@@ -1430,7 +1432,7 @@ switch (yytype)
 
 
 } // yy
-#line 1434 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 1436 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 

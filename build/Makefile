@@ -123,33 +123,6 @@ ParaCL/fast:
 	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/build
 .PHONY : ParaCL/fast
 
-driver.o: driver.cc.o
-
-.PHONY : driver.o
-
-# target to build an object file
-driver.cc.o:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/driver.cc.o
-.PHONY : driver.cc.o
-
-driver.i: driver.cc.i
-
-.PHONY : driver.i
-
-# target to preprocess a source file
-driver.cc.i:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/driver.cc.i
-.PHONY : driver.cc.i
-
-driver.s: driver.cc.s
-
-.PHONY : driver.s
-
-# target to generate assembly for a file
-driver.cc.s:
-	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/driver.cc.s
-.PHONY : driver.cc.s
-
 parser.o: parser.cc.o
 
 .PHONY : parser.o
@@ -204,6 +177,33 @@ scanner.cc.s:
 	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/scanner.cc.s
 .PHONY : scanner.cc.s
 
+src/driver.o: src/driver.cc.o
+
+.PHONY : src/driver.o
+
+# target to build an object file
+src/driver.cc.o:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/src/driver.cc.o
+.PHONY : src/driver.cc.o
+
+src/driver.i: src/driver.cc.i
+
+.PHONY : src/driver.i
+
+# target to preprocess a source file
+src/driver.cc.i:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/src/driver.cc.i
+.PHONY : src/driver.cc.i
+
+src/driver.s: src/driver.cc.s
+
+.PHONY : src/driver.s
+
+# target to generate assembly for a file
+src/driver.cc.s:
+	$(MAKE) -f CMakeFiles/ParaCL.dir/build.make CMakeFiles/ParaCL.dir/src/driver.cc.s
+.PHONY : src/driver.cc.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -213,15 +213,15 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... ParaCL"
-	@echo "... driver.o"
-	@echo "... driver.i"
-	@echo "... driver.s"
 	@echo "... parser.o"
 	@echo "... parser.i"
 	@echo "... parser.s"
 	@echo "... scanner.o"
 	@echo "... scanner.i"
 	@echo "... scanner.s"
+	@echo "... src/driver.o"
+	@echo "... src/driver.i"
+	@echo "... src/driver.s"
 .PHONY : help
 
 

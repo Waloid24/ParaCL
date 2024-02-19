@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/ParaCL.dir/driver.cc.o"
   "CMakeFiles/ParaCL.dir/parser.cc.o"
   "CMakeFiles/ParaCL.dir/scanner.cc.o"
+  "CMakeFiles/ParaCL.dir/src/driver.cc.o"
   "ParaCL"
   "ParaCL.pdb"
   "parser.cc"

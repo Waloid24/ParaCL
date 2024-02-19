@@ -6,5 +6,5 @@ CXX_FLAGS = -O3 -DNDEBUG   -std=gnu++2a
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL 
+CXX_INCLUDES = -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/include -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL 
 

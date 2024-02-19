@@ -6,29 +6,25 @@
 
 #IncludeRegexTransform: 
 
-../INode.hpp
+../include/INode.hpp
 memory
 -
+fstream
+-
 
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.cc
-Node.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.hpp
+../include/Node.hpp
+INode.hpp
+../include/INode.hpp
 iostream
 -
-map
--
-memory
--
-
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.hpp
-INode.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/INode.hpp
 unordered_map
 -
+functional
+-
 
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ScopeNode.hpp
+../include/ScopeNode.hpp
 INode.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/INode.hpp
+../include/INode.hpp
 vector
 -
 memory
@@ -41,6 +37,20 @@ cstdlib
 -
 iostream
 -
+Symtab.hpp
+../include/Symtab.hpp
+
+../include/Symtab.hpp
+string
+-
+
+../include/driver.hpp
+compiler.tab.hh
+../include/compiler.tab.hh
+ScopeNode.hpp
+../include/ScopeNode.hpp
+FlexLexer.h
+-
 
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
 iostream
@@ -51,6 +61,8 @@ unordered_map
 -
 INode.hpp
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/INode.hpp
+Symtab.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/Symtab.hpp
 memory
 -
 cstdlib
@@ -86,7 +98,17 @@ compiler.tab.hh
 unistd.h
 -
 
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/Node.cc
+Node.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/Node.hpp
+iostream
+-
+map
+-
+memory
+-
+
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc
 iostream
 -
 fstream
@@ -94,17 +116,9 @@ fstream
 string
 -
 driver.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.hpp
 Node.cc
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/Node.cc
-
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.hpp
-compiler.tab.hh
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/compiler.tab.hh
-ScopeNode.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/ScopeNode.hpp
-FlexLexer.h
--
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/Node.cc
 
 compiler.tab.hh
 iostream
@@ -115,6 +129,8 @@ unordered_map
 -
 INode.hpp
 INode.hpp
+Symtab.hpp
+Symtab.hpp
 memory
 -
 cstdlib

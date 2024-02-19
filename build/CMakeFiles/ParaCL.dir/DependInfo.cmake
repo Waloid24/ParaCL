@@ -4,14 +4,16 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc" "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles/ParaCL.dir/driver.cc.o"
   "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc" "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles/ParaCL.dir/parser.cc.o"
   "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc" "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles/ParaCL.dir/scanner.cc.o"
+  "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc" "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles/ParaCL.dir/src/driver.cc.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../src"
+  "../include"
   "."
   "../"
   )

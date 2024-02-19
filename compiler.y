@@ -13,6 +13,8 @@
     #include <string>
     #include <unordered_map>
     #include "INode.hpp"
+    #include "Symtab.hpp"
+
     #include <memory>
     
     namespace yy { class Driver; }
@@ -22,7 +24,8 @@
 %code
 {
     #include "driver.hpp"
-    extern ScopeNode* currentScope;
+    extern std::shared_ptr<ScopeNode> currentScope;
+    extern char* yytext;
 
     namespace yy { parser::token_type yylex(parser::semantic_type* yyval, Driver* driver); }
 }
@@ -84,7 +87,7 @@
 
 %%
 
-program: stmt_list                          { currentScope->calculate(); } 
+program: stmt_list                          { currentScope->calculate(); currentScope->dump_ast();} 
 ;
 
 //scope: open_sc stmt_list close_sc           { $$ = $2; }
@@ -166,12 +169,25 @@ primary_expr: MINUS primary_expr            { $$ = make_operator(0, Operations::
 
 | QUESTION_MARK                            //{ $$ = new inputop("?"); }
        
-| "{" expr "}"                              { $$ = $2; }
+| "{" expr "}"                              { $$ = $2; std::cout << "Met {expr} " << std::endl; }
 
        
 | NUM                                       { $$ = make_value($1); }
 
-| ID                                        //{ $$ = make_var($1, ScopeNode* currentScope); }
+| ID                                        {
+                                                //поискать в таблице
+                                                //не нашли --> создать структуру, добавить в таблицу в соотв обл вид
+                                                //создать узел 
+                                                //if(currentScope->check_in_table())
+                                                //std::shared_ptr<Variable> Id = Variable($1);
+
+                                                //if(!currentScope->check_visibility(currentScope, Id)) {
+                                                //    currentScope->add_variable();
+
+                                                //}
+
+                                                //$$ = make_var($1, currentScope); 
+                                            }
 
 | PRINT primary_expr                       //{ $$ = new outputop($2); }
 ;

@@ -1,7 +1,6 @@
 #pragma once
 
 #include "compiler.tab.hh"
-// #include "INode.hpp"
 #include "ScopeNode.hpp"
 
 #include <FlexLexer.h>
@@ -24,33 +23,10 @@ public:
 
   bool parse() {
     parser parser(this);
-    // std::cout << "in bool parse()" << std::endl;
     
     bool res = parser.parse();
     return !res;
   }
-
-  // void create_scope() {
-  //   if(currentScope != nullptr) {
-  //     currentScope->create_scope(currentScope);
-  //   }
-  // }
-
-  // void exit_scope() {
-  //   if(currentScope != nullptr) {
-  //     currentScope->exit_scope(currentScope);
-  //   }
-  // }
-
-  // // Вызывает подсчет для всех типов узлов
-  // void calculate() { 
-  //   return currentScope->calculate();
-  // }
-
-
-
-
-
 };
 
 } // namespace yy

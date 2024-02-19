@@ -68,18 +68,18 @@ scanner.cc: ../scanner.l
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "[FLEX][scanner] Building scanner with flex 2.6.4"
 	cd /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL && /usr/bin/flex -o/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc scanner.l
 
-CMakeFiles/ParaCL.dir/driver.cc.o: CMakeFiles/ParaCL.dir/flags.make
-CMakeFiles/ParaCL.dir/driver.cc.o: ../driver.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ParaCL.dir/driver.cc.o"
-	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/driver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc
+CMakeFiles/ParaCL.dir/src/driver.cc.o: CMakeFiles/ParaCL.dir/flags.make
+CMakeFiles/ParaCL.dir/src/driver.cc.o: ../src/driver.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/ParaCL.dir/src/driver.cc.o"
+	/usr/bin/g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/ParaCL.dir/src/driver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc
 
-CMakeFiles/ParaCL.dir/driver.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/driver.cc.i"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc > CMakeFiles/ParaCL.dir/driver.cc.i
+CMakeFiles/ParaCL.dir/src/driver.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/ParaCL.dir/src/driver.cc.i"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc > CMakeFiles/ParaCL.dir/src/driver.cc.i
 
-CMakeFiles/ParaCL.dir/driver.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/driver.cc.s"
-	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/driver.cc -o CMakeFiles/ParaCL.dir/driver.cc.s
+CMakeFiles/ParaCL.dir/src/driver.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/ParaCL.dir/src/driver.cc.s"
+	/usr/bin/g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc -o CMakeFiles/ParaCL.dir/src/driver.cc.s
 
 CMakeFiles/ParaCL.dir/parser.cc.o: CMakeFiles/ParaCL.dir/flags.make
 CMakeFiles/ParaCL.dir/parser.cc.o: parser.cc
@@ -110,14 +110,14 @@ CMakeFiles/ParaCL.dir/scanner.cc.s: cmake_force
 
 # Object files for target ParaCL
 ParaCL_OBJECTS = \
-"CMakeFiles/ParaCL.dir/driver.cc.o" \
+"CMakeFiles/ParaCL.dir/src/driver.cc.o" \
 "CMakeFiles/ParaCL.dir/parser.cc.o" \
 "CMakeFiles/ParaCL.dir/scanner.cc.o"
 
 # External object files for target ParaCL
 ParaCL_EXTERNAL_OBJECTS =
 
-ParaCL: CMakeFiles/ParaCL.dir/driver.cc.o
+ParaCL: CMakeFiles/ParaCL.dir/src/driver.cc.o
 ParaCL: CMakeFiles/ParaCL.dir/parser.cc.o
 ParaCL: CMakeFiles/ParaCL.dir/scanner.cc.o
 ParaCL: CMakeFiles/ParaCL.dir/build.make
