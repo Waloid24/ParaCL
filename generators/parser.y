@@ -167,7 +167,7 @@ closed_statement:     simple_statement  {
                                         }
 ;
 
-simple_statement:     assign            {
+simple_statement:     assign SCOLON     {
                                             $$ = $1;
                                         }
                     | expression SCOLON {
@@ -180,11 +180,11 @@ simple_statement:     assign            {
 ;
 
 assign:   
-        lval ASSIGN INPUT SCOLON        {
+        lval ASSIGN INPUT               {
                                             Func_node* f_node = new Func_node(func_type::INPUT);
                                             $$ = new Bin_op_node(bin_op_type::ASSIGN, $1, f_node);
                                         }   
-        | lval ASSIGN expression SCOLON {
+        | lval ASSIGN expression        {
                                             $$ = new Bin_op_node(bin_op_type::ASSIGN, $1, $3);
                                         }
 ;
@@ -262,6 +262,9 @@ primary:      "-" primary               {
                                         }
             | "!" primary               {
                                             $$= new Un_op_node(un_op_type::NOT, $2);
+                                        }
+            | "(" assign ")"            {
+                                            $$ = $2;
                                         }
             | "(" expression ")"        {
                                             $$ = $2;

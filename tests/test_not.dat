@@ -4,3 +4,4 @@ if (!a)
 {
     print a;
 }
+print(0);

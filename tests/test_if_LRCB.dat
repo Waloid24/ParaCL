@@ -5,3 +5,4 @@ if (n == 1)
 {
     print a;
 }
+print(5);
