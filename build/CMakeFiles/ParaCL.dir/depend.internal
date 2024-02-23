@@ -3,12 +3,14 @@
 
 CMakeFiles/ParaCL.dir/parser.cc.o
 CMakeFiles/ParaCL.dir/scanner.cc.o
- ../include/INode.hpp
+ ../include/ASTNode.hpp
+ ../include/Node.hpp
+ ../include/ScopeNode.hpp
  ../include/Symtab.hpp
  /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
  /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc
 CMakeFiles/ParaCL.dir/src/driver.cc.o
- ../include/INode.hpp
+ ../include/ASTNode.hpp
  ../include/Node.hpp
  ../include/ScopeNode.hpp
  ../include/Symtab.hpp

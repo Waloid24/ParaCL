@@ -50,7 +50,8 @@
     #include <iostream>
     #include <string>
     #include <unordered_map>
-    #include "INode.hpp"
+    #include "ASTNode.hpp"
+    #include "Node.hpp"
     #include "Symtab.hpp"
 
     #include <memory>
@@ -58,7 +59,7 @@
     namespace yy { class Driver; }
  
 
-#line 62 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 63 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 # include <cstdlib> // std::abort
@@ -192,7 +193,7 @@
 #endif
 
 namespace yy {
-#line 196 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 197 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 
@@ -387,9 +388,10 @@ namespace yy {
       // arith_expr
       // term
       // primary_expr
-      char dummy2[sizeof (std::shared_ptr<INode>)];
+      char dummy2[sizeof (std::shared_ptr<ASTNode>)];
 
-      // ID
+      // set_ID
+      // get_ID
       char dummy3[sizeof (std::string)];
     };
 
@@ -454,7 +456,8 @@ namespace yy {
         PRINT = 280,
         ERR = 281,
         NUM = 282,
-        ID = 283
+        set_ID = 283,
+        get_ID = 284
       };
     };
 
@@ -517,12 +520,12 @@ namespace yy {
       {}
 #endif
 #if 201103L <= YY_CPLUSPLUS
-      basic_symbol (typename Base::kind_type t, std::shared_ptr<INode>&& v)
+      basic_symbol (typename Base::kind_type t, std::shared_ptr<ASTNode>&& v)
         : Base (t)
         , value (std::move (v))
       {}
 #else
-      basic_symbol (typename Base::kind_type t, const std::shared_ptr<INode>& v)
+      basic_symbol (typename Base::kind_type t, const std::shared_ptr<ASTNode>& v)
         : Base (t)
         , value (v)
       {}
@@ -565,20 +568,21 @@ switch (yytype)
         value.template destroy< int > ();
         break;
 
-      case 35: // stmt_list
-      case 36: // stmt
-      case 37: // assign_stmt
-      case 38: // expr
-      case 39: // stmt_1
-      case 40: // stmt_2
-      case 41: // bool_expr
-      case 42: // arith_expr
-      case 43: // term
-      case 44: // primary_expr
-        value.template destroy< std::shared_ptr<INode> > ();
+      case 36: // stmt_list
+      case 37: // stmt
+      case 38: // assign_stmt
+      case 39: // expr
+      case 40: // stmt_1
+      case 41: // stmt_2
+      case 42: // bool_expr
+      case 43: // arith_expr
+      case 44: // term
+      case 45: // primary_expr
+        value.template destroy< std::shared_ptr<ASTNode> > ();
         break;
 
-      case 28: // ID
+      case 28: // set_ID
+      case 29: // get_ID
         value.template destroy< std::string > ();
         break;
 
@@ -681,13 +685,13 @@ switch (yytype)
       symbol_type (int tok, std::string v)
         : super_type(token_type (tok), std::move (v))
       {
-        YY_ASSERT (tok == token::ID);
+        YY_ASSERT (tok == token::set_ID || tok == token::get_ID);
       }
 #else
       symbol_type (int tok, const std::string& v)
         : super_type(token_type (tok), v)
       {
-        YY_ASSERT (tok == token::ID);
+        YY_ASSERT (tok == token::set_ID || tok == token::get_ID);
       }
 #endif
     };
@@ -1104,16 +1108,31 @@ switch (yytype)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ID (std::string v)
+      make_set_ID (std::string v)
       {
-        return symbol_type (token::ID, std::move (v));
+        return symbol_type (token::set_ID, std::move (v));
       }
 #else
       static
       symbol_type
-      make_ID (const std::string& v)
+      make_set_ID (const std::string& v)
       {
-        return symbol_type (token::ID, v);
+        return symbol_type (token::set_ID, v);
+      }
+#endif
+#if 201103L <= YY_CPLUSPLUS
+      static
+      symbol_type
+      make_get_ID (std::string v)
+      {
+        return symbol_type (token::get_ID, std::move (v));
+      }
+#else
+      static
+      symbol_type
+      make_get_ID (const std::string& v)
+      {
+        return symbol_type (token::get_ID, v);
       }
 #endif
 
@@ -1419,10 +1438,10 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 84,     ///< Last index in yytable_.
+      yylast_ = 90,     ///< Last index in yytable_.
       yynnts_ = 12,  ///< Number of nonterminal symbols.
-      yyfinal_ = 43, ///< Termination state number.
-      yyntokens_ = 34  ///< Number of tokens.
+      yyfinal_ = 44, ///< Termination state number.
+      yyntokens_ = 35  ///< Number of tokens.
     };
 
 
@@ -1432,7 +1451,7 @@ switch (yytype)
 
 
 } // yy
-#line 1436 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 1455 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 

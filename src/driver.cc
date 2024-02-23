@@ -7,10 +7,6 @@
 
 int yyFlexLexer::yywrap() { return 1; }
 
-ScopeNode* globalScope;
-
-ScopeNode* currentScope = globalScope;
-
 int main(int argc, char *argv[]) { 
   if(argc != 2) {
     std::cout << "Usage: " << argv[0] << " <filename>" << std::endl;
@@ -29,9 +25,7 @@ int main(int argc, char *argv[]) {
   FlexLexer *lexer = new yyFlexLexer;
   lexer->switch_streams(&file, nullptr);
 
-  yy::Driver driver(lexer, currentScope);
-  
-  currentScope->create_scope();
+  yy::Driver driver(lexer);
 
   dump_file << "Start parsing" << std::endl;
 

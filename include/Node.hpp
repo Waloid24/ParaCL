@@ -1,6 +1,6 @@
 #pragma once
 
-#include "INode.hpp"
+#include "ASTNode.hpp"
 
 #include <iostream>
 #include <unordered_map>
@@ -8,12 +8,14 @@
 
 std::ofstream dump_file("output.dat");
 //---------------------------------------------------------
-class NumNode final: public INode {
+class NumNode final: public ASTNode {
     
     int value;
 
     public:
-    NumNode(int value): value(value) { dump_file << "Value node ctor" << std::endl; }; 
+    NumNode(int value, std::shared_ptr<ScopeNode> scope): value(value), ASTNode(scope) { 
+        dump_file << "Value node ctor" << std::endl; 
+    }; 
 
     inline int calculate() { return value; }
     inline void dump_ast() {
@@ -23,90 +25,120 @@ class NumNode final: public INode {
     ~NumNode() {};
 };
 //---------------------------------------------------------
-class IdNode final: public INode {
-    std::shared_ptr<Variable> var;
+class IdNode final: public ASTNode  {
+    int id;
 
     public:
-    IdNode(std::string name) {
-        var->name = name;
-    };
+    IdNode(int id, std::shared_ptr<ScopeNode> scope): ASTNode(scope), id(id) {};
 
-    inline int calculate() {
-        
+    int calculate() { return id; }
+
+    void dump_ast() {
+        dump_file << "Id Node" << std::endl;
     };
-    inline void dump_ast() {};
 
     ~IdNode() {};
 };
 //---------------------------------------------------------
-class OperatorNode final: public INode {
+std::shared_ptr<IdNode> createSetIdNode(std::string name, std::shared_ptr<ScopeNode> scope)
+{
+    int id = scope->getIdFromSetVariable(name);
+    return std::shared_ptr<IdNode>(new IdNode(id, scope));
+};
+//---------------------------------------------------------
+std::shared_ptr<IdNode> createGetIdNode(std::string name, std::shared_ptr<ScopeNode> scope)
+{
+    int id = scope->getIdFromGetVariable(name);
+    if(id == -1) {
+        std::cout << "hfjdkls" << std::endl;
+        return nullptr;
+    }
+    return std::shared_ptr<IdNode>(new IdNode(id, scope));
+};
+
+//---------------------------------------------------------
+class OperatorNode final: public ASTNode {
     private:
-
     Operations Op;
-    std::shared_ptr<INode> l;
-    std::shared_ptr<INode> r;
+    std::shared_ptr<ASTNode> l;
+    std::shared_ptr<ASTNode> r;
 
-    static const std::unordered_map<Operations, std::string> OpStrings;
+    // static const std::unordered_map<Operations, std::string> OpStrings;
     static std::unordered_map<Operations, std::function<int(int, int)>> OperationMap;
 
     int calculate() override;
     void dump_ast() override;
 
     public:
-    OperatorNode(std::shared_ptr<INode> l, Operations Op, std::shared_ptr<INode> r): l(l), Op(Op), r(r) { 
+    OperatorNode(std::shared_ptr<ASTNode> l, Operations Op, std::shared_ptr<ASTNode> r,
+    std::shared_ptr<ScopeNode> scope): l(l), Op(Op), r(r), ASTNode(scope) { 
         dump_file << "Operator node ctor" << std::endl;};
 
     ~OperatorNode() {};
 };
 //---------------------------------------------------------
-class IfNode final: public INode {
-
-    std::shared_ptr<INode> l;
-    std::shared_ptr<INode> r;
-    std::shared_ptr<INode> e;
+class IfNode final: public ASTNode {
+    std::shared_ptr<ASTNode> l;
+    std::shared_ptr<ASTNode> r;
+    std::shared_ptr<ASTNode> e;
 
     int calculate() override;
     void dump_ast() override;
 
     public:
-    IfNode(std::shared_ptr<INode> l, std::shared_ptr<INode> r, std::shared_ptr<INode> e): l(l), r(r), e(e) {
+    IfNode(std::shared_ptr<ASTNode> l, std::shared_ptr<ASTNode> r, std::shared_ptr<ASTNode> e, 
+    std::shared_ptr<ScopeNode> scope): l(l), r(r), e(e), ASTNode(scope) {
         dump_file << "If node ctor" << std::endl;
     };
 
     ~IfNode() {};
 };
 //---------------------------------------------------------
-class WhileNode final: public INode {
-    std::shared_ptr<INode> condition;
-    std::shared_ptr<INode> block;
+class WhileNode final: public ASTNode {
+    std::shared_ptr<ASTNode> condition;
+    std::shared_ptr<ASTNode> block;
 
     int calculate() override;
     void dump_ast() override;
 
     public:
-    WhileNode(std::shared_ptr<INode> condition, std::shared_ptr<INode> block): condition(condition), block(block) {
+    WhileNode(std::shared_ptr<ASTNode> condition, std::shared_ptr<ASTNode> block, 
+    std::shared_ptr<ScopeNode> scope): condition(condition), block(block), ASTNode(scope) {
         dump_file << "While node ctor" << std::endl;
     };
 
     ~WhileNode() {};
 };
-//---------------------------------------------------------
-std::shared_ptr<INode> make_value(int value) {
-    return std::make_shared<NumNode>(value);
-}
 
-std::shared_ptr<INode> make_operator(std::shared_ptr<INode> left, Operations op, std::shared_ptr<INode> right) {
-    return std::make_shared<OperatorNode>(left, op, right);
-}
+class AssignmentNode: public ASTNode {
+    std::string set_ID;
+    // int id;
+    std::shared_ptr<ASTNode> expr;
 
-std::shared_ptr<INode> make_while(std::shared_ptr<INode> condition, std::shared_ptr<INode> statement) {
-    return std::make_shared<WhileNode>(condition, statement);
-}
+    int calculate() override;
+    void dump_ast() override { 
+        dump_file << "{ set_ID: " << set_ID << "\n expr value: " << expr->calculate() << "\n}" << std::endl;
+    }
 
-std::shared_ptr<INode> make_if(std::shared_ptr<INode> condition, std::shared_ptr<INode> statement, std::shared_ptr<INode> else_stmt) {
-    return std::make_shared<IfNode>(condition, statement, else_stmt);
-}
+    public:
+    AssignmentNode(std::string set_ID, std::shared_ptr<ASTNode> expr, 
+    std::shared_ptr<ScopeNode> scope): expr(expr), set_ID(set_ID), ASTNode(scope) {
+        dump_file << "AssignNode ctor" << std::endl;
+    };
 
-std::shared_ptr<INode> make_var(std::string name, std::shared_ptr<INode> curScope) {
-    return 0;// return std::make_shared<IdNode>(name, curScope);
+    ~AssignmentNode() {};
 };
+
+int AssignmentNode::calculate() {
+    // берем правого ребенка, getIdFromSetVar, получили id
+    // левый ребенок: там считается выражение как оператор нода - value node, у себя 
+    // они посчитали calculate вернули int значение
+    // присвоить value это int значение
+
+    auto id = scope->getIdFromSetVariable(set_ID);
+    scope->assign_value(id, expr->calculate());
+    return 0;
+}
+
+// class Binary
+// class Unary

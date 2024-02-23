@@ -6,15 +6,17 @@
 
 #IncludeRegexTransform: 
 
-../include/INode.hpp
+../include/ASTNode.hpp
 memory
 -
 fstream
 -
+ScopeNode.hpp
+../include/ScopeNode.hpp
 
 ../include/Node.hpp
-INode.hpp
-../include/INode.hpp
+ASTNode.hpp
+../include/ASTNode.hpp
 iostream
 -
 unordered_map
@@ -23,8 +25,8 @@ functional
 -
 
 ../include/ScopeNode.hpp
-INode.hpp
-../include/INode.hpp
+ASTNode.hpp
+../include/ASTNode.hpp
 vector
 -
 memory
@@ -59,8 +61,10 @@ string
 -
 unordered_map
 -
-INode.hpp
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/INode.hpp
+ASTNode.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/ASTNode.hpp
+Node.hpp
+/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/Node.hpp
 Symtab.hpp
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/Symtab.hpp
 memory
@@ -127,8 +131,10 @@ string
 -
 unordered_map
 -
-INode.hpp
-INode.hpp
+ASTNode.hpp
+ASTNode.hpp
+Node.hpp
+Node.hpp
 Symtab.hpp
 Symtab.hpp
 memory
