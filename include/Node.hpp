@@ -15,7 +15,7 @@ class NumNode final: public ASTNode {
 
     public:
     NumNode(int value, std::shared_ptr<ScopeNode> scope): value(value), ASTNode(scope) { 
-        std::cout << "Value node ctor" << std::endl; 
+        std::cout << "Num node ctor" << std::endl; 
     }; 
 
     inline int calculate() { return value; }
@@ -44,19 +44,20 @@ class IdNode final: public ASTNode  {
 inline std::shared_ptr<IdNode> createSetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
     int id = scope->getIdFromSetVariable(name);
-    return std::shared_ptr<IdNode>(new IdNode(id, scope));
+    return std::make_shared<IdNode>(id, scope);
 };
 //---------------------------------------------------------
 inline std::shared_ptr<IdNode> createGetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
     std::cout << "get Id Node" << std::endl;
-    
     int id = scope->getIdFromGetVariable(name);
+
     if(id == -1) {
         std::cout << "hfjdkls" << std::endl;
         return nullptr;
     }
-    return std::shared_ptr<IdNode>(new IdNode(id, scope));
+
+    return std::make_shared<IdNode>(id, scope);
 };
 
 //---------------------------------------------------------

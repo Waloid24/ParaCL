@@ -19,13 +19,12 @@ public:
 
 
   Driver(FlexLexer *plex) : plex_(plex) {
+    std::cout << "Driver ctor" << std::endl;
     globalScope = std::shared_ptr<ScopeNode> (new ScopeNode(nullptr));
     currentScope = globalScope;
 
     globalAstNode = std::shared_ptr<ASTNode> (new GlobalAst(currentScope));
     curAstNode = globalAstNode;
-
-    std::cout << "Driver ctor" << std::endl;
   };
 
   parser::token_type yylex(parser::semantic_type *yylval) {

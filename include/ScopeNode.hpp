@@ -6,7 +6,7 @@
 #include "Symtab.hpp"
 
 class ScopeNode final : public std::enable_shared_from_this<ScopeNode> {
-    private:
+    public:
     std::vector<std::shared_ptr<Variable>> variableTable;
     std::vector<std::shared_ptr<ScopeNode>> successorsVector;
     std::weak_ptr<ScopeNode> predessorPtr;
@@ -15,14 +15,14 @@ class ScopeNode final : public std::enable_shared_from_this<ScopeNode> {
 
     public:
     ScopeNode(std::shared_ptr<ScopeNode> curScope) {
+        
         variableTable = std::vector<std::shared_ptr<Variable>>();
         successorsVector = std::vector<std::shared_ptr<ScopeNode>>();
         predessorPtr = curScope;
-        auto pred = predessorPtr.lock();
-        if (pred) {
-            pred->successorsVector.push_back(shared_from_this());
+        
+        if (curScope) {
+            predessorPtr.lock()->successorsVector.push_back(shared_from_this());
         }
-        // predessorPtr.lock()->successorsVector.push_back(shared_from_this());
 
         std::cout << "ScopeNode Ctor" << std::endl;
     };

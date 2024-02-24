@@ -9,7 +9,9 @@
 class ASTNode {  
     public:
     std::shared_ptr<ScopeNode> scope;   
-    ASTNode(std::shared_ptr<ScopeNode> curScope): scope(curScope) {};
+    ASTNode(std::shared_ptr<ScopeNode> curScope): scope(curScope) {
+        std::cout << "AST Node Ctor" << std::endl;
+    };
 
     virtual void dump_ast() = 0;
     virtual int calculate() = 0;
@@ -21,7 +23,9 @@ class GlobalAst : public ASTNode {
     std::vector<ASTNode> childs;
 
     public:
-    GlobalAst(std::shared_ptr<ScopeNode> curScope): ASTNode(curScope) {}
+    GlobalAst(std::shared_ptr<ScopeNode> curScope): ASTNode(curScope) {
+        std::cout << "Global Node" << std::endl;
+    }
     void dump_ast() override {
         std::cout << "Global Node" << std::endl;
     };

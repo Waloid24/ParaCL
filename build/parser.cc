@@ -952,7 +952,7 @@ namespace yy {
 
   case 36:
 #line 185 "compiler.y"
-                                        { yylhs.value.as < std::shared_ptr<ASTNode> > () = createGetIdNode(yystack_[0].value.as < std::string > (), driver->currentScope); }
+                                            { yylhs.value.as < std::shared_ptr<ASTNode> > () = createGetIdNode(yystack_[0].value.as < std::string > (), driver->currentScope); }
 #line 957 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 

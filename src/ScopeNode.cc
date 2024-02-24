@@ -21,7 +21,7 @@ int ScopeNode::getIdFromSetVariable(const std::string name) {
 }
 
 int ScopeNode::getIdFromGetVariable(const std::string name) {
-    auto variable = predessorPtr.lock()->lookup(name);
+    auto variable = lookup(name);
     if(variable != nullptr) {
         return variable->id;
     }
@@ -45,7 +45,7 @@ std::shared_ptr<Variable> ScopeNode::lookup(const std::string name) {
             return var;
         }
     }
-    if (!predessorPtr.expired()) {
+    if (predessorPtr.lock() == nullptr) {
         if (auto predessor = predessorPtr.lock()) {
             return predessor->lookup(name);
         }

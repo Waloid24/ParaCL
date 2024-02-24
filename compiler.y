@@ -182,7 +182,7 @@ primary_expr: MINUS primary_expr            { $$ = std::shared_ptr<ASTNode>(new 
        
 | NUM                                       { $$ = std::shared_ptr<ASTNode>(new NumNode($1, driver->currentScope)); }
 
-| ID                                    { $$ = createGetIdNode($1, driver->currentScope); }
+| ID                                        { $$ = createGetIdNode($1, driver->currentScope); }
 
 | PRINT primary_expr                       //{ $$ = new outputop($2); }
 ;
