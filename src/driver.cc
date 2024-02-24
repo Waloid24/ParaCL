@@ -2,8 +2,9 @@
 #include <fstream>
 #include <string>
 
-#include "driver.hpp"
+#include "../include/driver.hpp"
 #include "Node.cc"
+#include "ScopeNode.cc"
 
 int yyFlexLexer::yywrap() { return 1; }
 
@@ -20,17 +21,17 @@ int main(int argc, char *argv[]) {
       std::cerr << "Error opening file" << std::endl;
       return 1;
   }
-  else { dump_file << "The file was opened successfully" << std::endl; }
+  else { std::cout << "The file was opened successfully" << std::endl; }
 
   FlexLexer *lexer = new yyFlexLexer;
   lexer->switch_streams(&file, nullptr);
-
+  
   yy::Driver driver(lexer);
 
-  dump_file << "Start parsing" << std::endl;
+  std::cout << "Start parsing" << std::endl;
 
   driver.parse();
   file.close();
 
   delete lexer;
-}
+};

@@ -12,9 +12,9 @@
     #include <iostream>
     #include <string>
     #include <unordered_map>
-    #include "ASTNode.hpp"
-    #include "Node.hpp"
-    #include "Symtab.hpp"
+
+    #include "include/Node.hpp"
+    #include "include/ScopeNode.hpp"
 
     #include <memory>
     
@@ -24,7 +24,7 @@
 
 %code
 {
-    #include "driver.hpp"
+    #include "include/driver.hpp"
     extern std::shared_ptr<ScopeNode> currentScope;
     extern char* yytext;
 
@@ -60,8 +60,7 @@
 ;
 
 %token <int> NUM
-%token <std::string> set_ID
-%token <std::string> get_ID
+%token <std::string> ID
 
 %nterm <std::shared_ptr<ASTNode>> stmt_list
 %nterm <std::shared_ptr<ASTNode>> stmt
@@ -182,21 +181,6 @@ primary_expr: MINUS primary_expr            { $$ = std::shared_ptr<ASTNode>(new 
 
        
 | NUM                                       { $$ = std::shared_ptr<ASTNode>(new NumNode($1, driver->currentScope)); }
-
-| set_ID                                    {
-                                                //поискать в таблице
-                                                //не нашли --> создать структуру, добавить в таблицу в соотв обл вид
-                                                //создать узел 
-                                                //if(currentScope->check_in_table())
-                                                //std::shared_ptr<Variable> Id = Variable($1);
-
-                                                //if(!currentScope->check_visibility(currentScope, Id)) {
-                                                //    currentScope->add_variable();
-
-                                                //}
-
-                                                //$$ = make_var($1, currentScope); 
-                                            }
 
 | ID                                    { $$ = createGetIdNode($1, driver->currentScope); }
 

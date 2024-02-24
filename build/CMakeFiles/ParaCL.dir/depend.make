@@ -9,12 +9,15 @@ CMakeFiles/ParaCL.dir/scanner.cc.o: ../include/Symtab.hpp
 CMakeFiles/ParaCL.dir/scanner.cc.o: compiler.tab.hh
 CMakeFiles/ParaCL.dir/scanner.cc.o: scanner.cc
 
+CMakeFiles/ParaCL.dir/src/driver.cc.o: ../include/Node.hpp
+CMakeFiles/ParaCL.dir/src/driver.cc.o: ../include/ScopeNode.hpp
+CMakeFiles/ParaCL.dir/src/driver.cc.o: compiler.tab.hh
 CMakeFiles/ParaCL.dir/src/driver.cc.o: ../include/ASTNode.hpp
 CMakeFiles/ParaCL.dir/src/driver.cc.o: ../include/Node.hpp
 CMakeFiles/ParaCL.dir/src/driver.cc.o: ../include/ScopeNode.hpp
 CMakeFiles/ParaCL.dir/src/driver.cc.o: ../include/Symtab.hpp
 CMakeFiles/ParaCL.dir/src/driver.cc.o: ../include/driver.hpp
 CMakeFiles/ParaCL.dir/src/driver.cc.o: ../src/Node.cc
+CMakeFiles/ParaCL.dir/src/driver.cc.o: ../src/ScopeNode.cc
 CMakeFiles/ParaCL.dir/src/driver.cc.o: ../src/driver.cc
-CMakeFiles/ParaCL.dir/src/driver.cc.o: compiler.tab.hh
 

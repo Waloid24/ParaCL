@@ -1,12 +1,13 @@
 #pragma once
 
 #include "ASTNode.hpp"
+#include "ScopeNode.hpp"
 
 #include <iostream>
 #include <unordered_map>
 #include <functional>
 
-std::ofstream dump_file("output.dat");
+// std::ofstream std::cout("output.dat");
 //---------------------------------------------------------
 class NumNode final: public ASTNode {
     
@@ -14,12 +15,12 @@ class NumNode final: public ASTNode {
 
     public:
     NumNode(int value, std::shared_ptr<ScopeNode> scope): value(value), ASTNode(scope) { 
-        dump_file << "Value node ctor" << std::endl; 
+        std::cout << "Value node ctor" << std::endl; 
     }; 
 
     inline int calculate() { return value; }
     inline void dump_ast() {
-        dump_file << "{ type: value_node \n     { value: " << value << "\n      }\n}" << std::endl; 
+        std::cout << "{ type: value_node \n     { value: " << value << "\n      }\n}" << std::endl; 
     }
 
     ~NumNode() {};
@@ -31,23 +32,25 @@ class IdNode final: public ASTNode  {
     public:
     IdNode(int id, std::shared_ptr<ScopeNode> scope): ASTNode(scope), id(id) {};
 
-    int calculate() { return id; }
+    inline int calculate() { return id; }
 
-    void dump_ast() {
-        dump_file << "Id Node" << std::endl;
+    inline void dump_ast() {
+        std::cout << "Id Node" << std::endl;
     };
 
     ~IdNode() {};
 };
 //---------------------------------------------------------
-std::shared_ptr<IdNode> createSetIdNode(std::string name, std::shared_ptr<ScopeNode> scope)
+inline std::shared_ptr<IdNode> createSetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
     int id = scope->getIdFromSetVariable(name);
     return std::shared_ptr<IdNode>(new IdNode(id, scope));
 };
 //---------------------------------------------------------
-std::shared_ptr<IdNode> createGetIdNode(std::string name, std::shared_ptr<ScopeNode> scope)
+inline std::shared_ptr<IdNode> createGetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
+    std::cout << "get Id Node" << std::endl;
+    
     int id = scope->getIdFromGetVariable(name);
     if(id == -1) {
         std::cout << "hfjdkls" << std::endl;
@@ -67,12 +70,14 @@ class OperatorNode final: public ASTNode {
     static std::unordered_map<Operations, std::function<int(int, int)>> OperationMap;
 
     int calculate() override;
-    void dump_ast() override;
+    inline void dump_ast() override {
+        std::cout << "Operator Node" << std::endl;
+    };
 
     public:
     OperatorNode(std::shared_ptr<ASTNode> l, Operations Op, std::shared_ptr<ASTNode> r,
     std::shared_ptr<ScopeNode> scope): l(l), Op(Op), r(r), ASTNode(scope) { 
-        dump_file << "Operator node ctor" << std::endl;};
+        std::cout << "Operator node ctor" << std::endl;};
 
     ~OperatorNode() {};
 };
@@ -88,7 +93,7 @@ class IfNode final: public ASTNode {
     public:
     IfNode(std::shared_ptr<ASTNode> l, std::shared_ptr<ASTNode> r, std::shared_ptr<ASTNode> e, 
     std::shared_ptr<ScopeNode> scope): l(l), r(r), e(e), ASTNode(scope) {
-        dump_file << "If node ctor" << std::endl;
+        std::cout << "If node ctor" << std::endl;
     };
 
     ~IfNode() {};
@@ -104,41 +109,36 @@ class WhileNode final: public ASTNode {
     public:
     WhileNode(std::shared_ptr<ASTNode> condition, std::shared_ptr<ASTNode> block, 
     std::shared_ptr<ScopeNode> scope): condition(condition), block(block), ASTNode(scope) {
-        dump_file << "While node ctor" << std::endl;
+        std::cout << "While node ctor" << std::endl;
     };
 
     ~WhileNode() {};
 };
-
+//---------------------------------------------------------
 class AssignmentNode: public ASTNode {
-    std::string set_ID;
+    const std::string set_ID;
     // int id;
     std::shared_ptr<ASTNode> expr;
 
-    int calculate() override;
-    void dump_ast() override { 
-        dump_file << "{ set_ID: " << set_ID << "\n expr value: " << expr->calculate() << "\n}" << std::endl;
-    }
+    inline int calculate() override;
+    inline void dump_ast() override { 
+        std::cout << "{ set_ID: " << set_ID << "\n expr value: " << expr->calculate() << "\n}" << std::endl;
+    };
 
     public:
     AssignmentNode(std::string set_ID, std::shared_ptr<ASTNode> expr, 
     std::shared_ptr<ScopeNode> scope): expr(expr), set_ID(set_ID), ASTNode(scope) {
-        dump_file << "AssignNode ctor" << std::endl;
+        std::cout << "AssignNode ctor" << std::endl;
     };
 
     ~AssignmentNode() {};
 };
-
-int AssignmentNode::calculate() {
-    // берем правого ребенка, getIdFromSetVar, получили id
-    // левый ребенок: там считается выражение как оператор нода - value node, у себя 
-    // они посчитали calculate вернули int значение
-    // присвоить value это int значение
-
+//---------------------------------------------------------
+inline int AssignmentNode::calculate() {
     auto id = scope->getIdFromSetVariable(set_ID);
     scope->assign_value(id, expr->calculate());
     return 0;
-}
+};
 
 // class Binary
 // class Unary

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "compiler.tab.hh"
+#include "../build/compiler.tab.hh"
 #include "ScopeNode.hpp"
+#include "Node.hpp"
 
 #include <FlexLexer.h>
 
@@ -23,21 +24,23 @@ public:
 
     globalAstNode = std::shared_ptr<ASTNode> (new GlobalAst(currentScope));
     curAstNode = globalAstNode;
-  }
+
+    std::cout << "Driver ctor" << std::endl;
+  };
 
   parser::token_type yylex(parser::semantic_type *yylval) {
     parser::token_type tt = static_cast<parser::token_type>(plex_->yylex());
     if (tt == yy::parser::token_type::NUM)
       yylval->as<int>() = std::stoi(plex_->YYText());
     return tt;
-  }
+  };
 
   bool parse() {
     parser parser(this);
     
     bool res = parser.parse();
     return !res;
-  }
+  };
 };
 
 } // namespace yy

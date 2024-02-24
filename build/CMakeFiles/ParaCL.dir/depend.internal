@@ -10,11 +10,14 @@ CMakeFiles/ParaCL.dir/scanner.cc.o
  /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
  /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc
 CMakeFiles/ParaCL.dir/src/driver.cc.o
- ../include/ASTNode.hpp
  ../include/Node.hpp
  ../include/ScopeNode.hpp
- ../include/Symtab.hpp
- ../include/driver.hpp
+ /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
+ /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/include/ASTNode.hpp
+ /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/include/Node.hpp
+ /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/include/ScopeNode.hpp
+ /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/include/Symtab.hpp
+ /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/include/driver.hpp
  /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/Node.cc
+ /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/ScopeNode.cc
  /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc
- compiler.tab.hh

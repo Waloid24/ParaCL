@@ -1,6 +1,8 @@
 #pragma once
+
 #include <memory> 
 #include <fstream>
+#include <iostream>
 
 #include "ScopeNode.hpp" 
 
@@ -20,8 +22,15 @@ class GlobalAst : public ASTNode {
 
     public:
     GlobalAst(std::shared_ptr<ScopeNode> curScope): ASTNode(curScope) {}
-    void dump_ast() override;
-    int calculate() override;
+    void dump_ast() override {
+        std::cout << "Global Node" << std::endl;
+    };
+    int calculate() override {
+        for(auto && child: childs) {
+            child.calculate();
+        }
+        return 0;
+    };
 };
 
 enum class Operations {
