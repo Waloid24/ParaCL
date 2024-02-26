@@ -37,6 +37,7 @@ void ScopeNode::assign_value(int id, int value) {
             var->value = value;
         }
     }
+    std::cout << "Assign value" << std::endl;
 }
 
 std::shared_ptr<Variable> ScopeNode::lookup(const std::string name) {

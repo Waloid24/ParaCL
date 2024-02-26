@@ -1,1 +1,1 @@
-/usr/bin/g++   -g -fsanitize=address -O3 -DNDEBUG   CMakeFiles/ParaCL.dir/src/driver.cc.o CMakeFiles/ParaCL.dir/parser.cc.o CMakeFiles/ParaCL.dir/scanner.cc.o  -o ParaCL 
+/usr/bin/clang++   -g -fsanitize=address   CMakeFiles/ParaCL.dir/src/driver.cc.o CMakeFiles/ParaCL.dir/parser.cc.o CMakeFiles/ParaCL.dir/scanner.cc.o  -o ParaCL 

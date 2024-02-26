@@ -48,7 +48,7 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : " -g -fsanitize=address -O3 -DNDEBUG  "
+					"fragment" : " -g -fsanitize=address  "
 				},
 				{
 					"fragment" : "-std=gnu++2a"
@@ -80,7 +80,7 @@
 		"commandFragments" : 
 		[
 			{
-				"fragment" : "-g -fsanitize=address -O3 -DNDEBUG",
+				"fragment" : "-g -fsanitize=address",
 				"role" : "flags"
 			},
 			{

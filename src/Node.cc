@@ -6,15 +6,22 @@
 
 //---------------------------------------------------------
 // OperatorNode implementation
-std::unordered_map<Operations, std::function<int(int, int)>> OperatorNode::OperationMap = {
-    {Operations::Plus, [](int a, int b) { return a + b; }},
-    {Operations::Minus, [](int a, int b) { return a - b; }},
-    {Operations::Multiply, [](int a, int b) { return a * b;}},
-    {Operations::Divide, [](int a, int b) { return a / b;}},
-    // дописать операции
+std::unordered_map<BinaryOp, std::function<int(int, int)>> BinaryNode::OperationMap = {
+    {BinaryOp::Plus, [](int a, int b) { return a + b; }},
+    {BinaryOp::Minus, [](int a, int b) { return a - b; }},
+    {BinaryOp::Multiply, [](int a, int b) { return a * b; }},
+    {BinaryOp::Divide, [](int a, int b) { return a / b; }},
+    {BinaryOp::Less, [](int a, int b) { return (a < b); }},
+    {BinaryOp::Greater, [](int a, int b) { return (a > b); }},
+    {BinaryOp::LessEq, [](int a, int b) { return (a <= b); }},
+    {BinaryOp::GreaterEq, [](int a, int b) { return (a >= b); }},
+    {BinaryOp::Equal, [](int a, int b) { return (a == b); }},
+    {BinaryOp::NonEqual, [](int a, int b) { return (a != b); }},
+    {BinaryOp::And, [](int a, int b) { return (a && b); }},
+    {BinaryOp::Or, [](int a, int b) { return (a || b); }},
 };
 
-int OperatorNode::calculate() {
+int BinaryNode::calculate() {
     if (OperationMap.find(Op) != OperationMap.end()) {
         return OperationMap[Op](l->calculate(), r->calculate());
     } else {
@@ -22,14 +29,37 @@ int OperatorNode::calculate() {
         return 0;
     }
 }
+//---------------------------------------------------------
+// UnaryNode implementation
+int UnaryNode::calculate() {
+    int operandValue = operand->calculate();
 
+    switch (Op) {
+        case UnaryOp::Minus:
+            return -operandValue;
+        case UnaryOp::Increment:
+            return operandValue + 1;
+        case UnaryOp::Decrement:
+            return operandValue - 1;
+        // case UnaryOp::Negate:
+        //     return !operandValue;
+        default:
+            throw std::runtime_error("Unknown UnaryOpType");
+    }
+}
 //---------------------------------------------------------
 // IfNode implementation
-int IfNode::calculate() {return 0;}
+int IfNode::calculate() {
+    return 0;
+}
+
 void IfNode::dump_ast() {}
 
 //---------------------------------------------------------
 // WhileNode implementation
-int WhileNode::calculate() {return 0;}
+int WhileNode::calculate() {
+    return 0;
+}
+
 void WhileNode::dump_ast() {}
 

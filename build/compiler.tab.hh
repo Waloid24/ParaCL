@@ -378,6 +378,8 @@ namespace yy {
       // NUM
       char dummy1[sizeof (int)];
 
+      // GetId
+      // SetId
       // stmt_list
       // stmt
       // assign_stmt
@@ -390,7 +392,7 @@ namespace yy {
       // primary_expr
       char dummy2[sizeof (std::shared_ptr<ASTNode>)];
 
-      // ID
+      // ID_string
       char dummy3[sizeof (std::string)];
     };
 
@@ -455,7 +457,7 @@ namespace yy {
         PRINT = 280,
         ERR = 281,
         NUM = 282,
-        ID = 283
+        ID_string = 283
       };
     };
 
@@ -566,20 +568,22 @@ switch (yytype)
         value.template destroy< int > ();
         break;
 
-      case 35: // stmt_list
-      case 36: // stmt
-      case 37: // assign_stmt
-      case 38: // expr
-      case 39: // stmt_1
-      case 40: // stmt_2
-      case 41: // bool_expr
-      case 42: // arith_expr
-      case 43: // term
-      case 44: // primary_expr
+      case 35: // GetId
+      case 36: // SetId
+      case 37: // stmt_list
+      case 38: // stmt
+      case 39: // assign_stmt
+      case 40: // expr
+      case 41: // stmt_1
+      case 42: // stmt_2
+      case 43: // bool_expr
+      case 44: // arith_expr
+      case 45: // term
+      case 46: // primary_expr
         value.template destroy< std::shared_ptr<ASTNode> > ();
         break;
 
-      case 28: // ID
+      case 28: // ID_string
         value.template destroy< std::string > ();
         break;
 
@@ -682,13 +686,13 @@ switch (yytype)
       symbol_type (int tok, std::string v)
         : super_type(token_type (tok), std::move (v))
       {
-        YY_ASSERT (tok == token::ID);
+        YY_ASSERT (tok == token::ID_string);
       }
 #else
       symbol_type (int tok, const std::string& v)
         : super_type(token_type (tok), v)
       {
-        YY_ASSERT (tok == token::ID);
+        YY_ASSERT (tok == token::ID_string);
       }
 #endif
     };
@@ -1105,16 +1109,16 @@ switch (yytype)
 #if 201103L <= YY_CPLUSPLUS
       static
       symbol_type
-      make_ID (std::string v)
+      make_ID_string (std::string v)
       {
-        return symbol_type (token::ID, std::move (v));
+        return symbol_type (token::ID_string, std::move (v));
       }
 #else
       static
       symbol_type
-      make_ID (const std::string& v)
+      make_ID_string (const std::string& v)
       {
-        return symbol_type (token::ID, v);
+        return symbol_type (token::ID_string, v);
       }
 #endif
 
@@ -1193,7 +1197,7 @@ switch (yytype)
     static const char* const yytname_[];
 
     // YYRLINE[YYN] -- Source line where rule number YYN was defined.
-    static const unsigned char yyrline_[];
+    static const short yyrline_[];
     /// Report on the debug stream that the rule \a r is going to be reduced.
     virtual void yy_reduce_print_ (int r);
     /// Print the state stack on the debug stream.
@@ -1421,8 +1425,8 @@ switch (yytype)
     {
       yyeof_ = 0,
       yylast_ = 84,     ///< Last index in yytable_.
-      yynnts_ = 12,  ///< Number of nonterminal symbols.
-      yyfinal_ = 43, ///< Termination state number.
+      yynnts_ = 14,  ///< Number of nonterminal symbols.
+      yyfinal_ = 45, ///< Termination state number.
       yyntokens_ = 34  ///< Number of tokens.
     };
 
@@ -1433,7 +1437,7 @@ switch (yytype)
 
 
 } // yy
-#line 1437 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 1441 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 

@@ -9,7 +9,9 @@
 class ASTNode {  
     public:
     std::shared_ptr<ScopeNode> scope;   
+
     ASTNode(std::shared_ptr<ScopeNode> curScope): scope(curScope) {
+
         std::cout << "AST Node Ctor" << std::endl;
     };
 
@@ -20,24 +22,30 @@ class ASTNode {
 };
 
 class GlobalAst : public ASTNode {
-    std::vector<ASTNode> childs;
-
     public:
+    std::vector<std::shared_ptr<ASTNode>> childs;
+    std::shared_ptr<ASTNode> child; 
+
     GlobalAst(std::shared_ptr<ScopeNode> curScope): ASTNode(curScope) {
         std::cout << "Global Node" << std::endl;
     }
     void dump_ast() override {
         std::cout << "Global Node" << std::endl;
     };
+
     int calculate() override {
-        for(auto && child: childs) {
-            child.calculate();
+        for(auto && child_: childs) {
+            child_->calculate();
         }
         return 0;
     };
+
+    void create_child(std::shared_ptr<ASTNode> child) {
+        childs.push_back(child);
+    };
 };
 
-enum class Operations {
+enum class BinaryOp {
     Minus,
     Plus,
     Multiply,
@@ -50,9 +58,13 @@ enum class Operations {
     NonEqual,
     And, 
     Or,
-    Input,
-    Output, 
-    UnaryMinus
+};
+
+enum class UnaryOp {
+    Minus,
+    Increment,
+    Decrement,
+    Negate, 
 };
 
 //---------------------------------------------------------

@@ -47,7 +47,7 @@ print               return yy::parser::token_type::PRINT;
 "&&"                return yy::parser::token_type::AND;
 
 {TYPE_NUM}          return yy::parser::token_type::NUM;
-{TYPE_ID}           return yy::parser::token_type::ID;
+{TYPE_ID}           return yy::parser::token_type::ID_string;
             
 .                   return yy::parser::token_type::ERR;
 

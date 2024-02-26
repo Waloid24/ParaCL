@@ -7,7 +7,7 @@
 #include <unordered_map>
 #include <functional>
 
-// std::ofstream std::cout("output.dat");
+// std::ofstream dump_file("output.dat");
 //---------------------------------------------------------
 class NumNode final: public ASTNode {
     
@@ -53,7 +53,6 @@ inline std::shared_ptr<IdNode> createGetIdNode(const std::string name, std::shar
     int id = scope->getIdFromGetVariable(name);
 
     if(id == -1) {
-        std::cout << "hfjdkls" << std::endl;
         return nullptr;
     }
 
@@ -61,14 +60,14 @@ inline std::shared_ptr<IdNode> createGetIdNode(const std::string name, std::shar
 };
 
 //---------------------------------------------------------
-class OperatorNode final: public ASTNode {
+class BinaryNode final: public ASTNode {
     private:
-    Operations Op;
+    BinaryOp Op;
     std::shared_ptr<ASTNode> l;
     std::shared_ptr<ASTNode> r;
 
     // static const std::unordered_map<Operations, std::string> OpStrings;
-    static std::unordered_map<Operations, std::function<int(int, int)>> OperationMap;
+    static std::unordered_map<BinaryOp, std::function<int(int, int)>> OperationMap;
 
     int calculate() override;
     inline void dump_ast() override {
@@ -76,11 +75,11 @@ class OperatorNode final: public ASTNode {
     };
 
     public:
-    OperatorNode(std::shared_ptr<ASTNode> l, Operations Op, std::shared_ptr<ASTNode> r,
+    BinaryNode(std::shared_ptr<ASTNode> l, BinaryOp Op, std::shared_ptr<ASTNode> r,
     std::shared_ptr<ScopeNode> scope): l(l), Op(Op), r(r), ASTNode(scope) { 
         std::cout << "Operator node ctor" << std::endl;};
 
-    ~OperatorNode() {};
+    ~BinaryNode() {};
 };
 //---------------------------------------------------------
 class IfNode final: public ASTNode {
@@ -117,18 +116,18 @@ class WhileNode final: public ASTNode {
 };
 //---------------------------------------------------------
 class AssignmentNode: public ASTNode {
-    const std::string set_ID;
-    // int id;
-    std::shared_ptr<ASTNode> expr;
+    std::shared_ptr<ASTNode> left;
+    std::shared_ptr<ASTNode> right;
 
     inline int calculate() override;
     inline void dump_ast() override { 
-        std::cout << "{ set_ID: " << set_ID << "\n expr value: " << expr->calculate() << "\n}" << std::endl;
+        std::cout << "{ set_ID: " << left << "\n expr value: " << right->calculate() << "\n}" << std::endl;
     };
 
     public:
-    AssignmentNode(std::string set_ID, std::shared_ptr<ASTNode> expr, 
-    std::shared_ptr<ScopeNode> scope): expr(expr), set_ID(set_ID), ASTNode(scope) {
+    AssignmentNode(std::shared_ptr<ASTNode> IDNode, std::shared_ptr<ASTNode> exprNode, 
+    std::shared_ptr<ScopeNode> scope): right(exprNode), left(IDNode), 
+    ASTNode(scope) {
         std::cout << "AssignNode ctor" << std::endl;
     };
 
@@ -136,10 +135,61 @@ class AssignmentNode: public ASTNode {
 };
 //---------------------------------------------------------
 inline int AssignmentNode::calculate() {
-    auto id = scope->getIdFromSetVariable(set_ID);
-    scope->assign_value(id, expr->calculate());
+    scope->assign_value(left->calculate(), right->calculate());
     return 0;
 };
+//---------------------------------------------------------
+class UnaryNode: public ASTNode {
+    private:
+    UnaryOp Op;
+    std::shared_ptr<ASTNode> operand;
 
-// class Binary
-// class Unary
+    public:
+    UnaryNode(UnaryOp Op, std::shared_ptr<ASTNode> operand, std::shared_ptr<ScopeNode> scope): Op(Op), 
+    operand(operand), ASTNode(scope) {};
+
+    int calculate() override;
+
+    void dump_ast() override {
+
+    };
+};
+//---------------------------------------------------------
+class InputNode: public ASTNode {
+    private:
+    int value;
+
+    public:
+    InputNode(std::shared_ptr<ScopeNode> scope): ASTNode(scope) {};
+
+    int calculate() override {
+        std::cin >> value;
+        return value;
+    };
+
+    void dump_ast() override {
+
+    };
+
+};
+//---------------------------------------------------------
+class OutputNode: public ASTNode {
+    std::shared_ptr<ASTNode> child;
+    
+    public:
+    OutputNode(std::shared_ptr<ASTNode> child, std::shared_ptr<ScopeNode> scope): child(child), ASTNode(scope) {
+    };
+
+    int calculate() override {
+        std::cout << child->calculate();
+        return 0;
+    };
+
+    void dump_ast() override {
+        std::cout << "Output Node" << std::endl;
+    };
+
+};
+//---------------------------------------------------------
+//print
+//cout << child->calculate()

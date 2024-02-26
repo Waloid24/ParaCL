@@ -757,7 +757,7 @@ return yy::parser::token_type::NUM;
 case 27:
 YY_RULE_SETUP
 #line 50 "scanner.l"
-return yy::parser::token_type::ID;
+return yy::parser::token_type::ID_string;
 	YY_BREAK
 case 28:
 YY_RULE_SETUP

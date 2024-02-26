@@ -14,7 +14,7 @@ public:
   std::shared_ptr<ScopeNode> currentScope;
   std::shared_ptr<ScopeNode> globalScope;
   
-  std::shared_ptr<ASTNode> globalAstNode;
+  std::shared_ptr<GlobalAst> globalAstNode;
   std::shared_ptr<ASTNode> curAstNode;
 
 
@@ -23,7 +23,7 @@ public:
     globalScope = std::shared_ptr<ScopeNode> (new ScopeNode(nullptr));
     currentScope = globalScope;
 
-    globalAstNode = std::shared_ptr<ASTNode> (new GlobalAst(currentScope));
+    globalAstNode = std::shared_ptr<GlobalAst> (new GlobalAst(currentScope));
     curAstNode = globalAstNode;
   };
 

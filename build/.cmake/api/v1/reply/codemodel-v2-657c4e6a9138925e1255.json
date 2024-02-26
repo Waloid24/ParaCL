@@ -18,7 +18,7 @@
 					]
 				}
 			],
-			"name" : "Release",
+			"name" : "",
 			"projects" : 
 			[
 				{
@@ -38,7 +38,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "ParaCL::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-ParaCL-Release-4bc2f5ce299e11382fba.json",
+					"jsonFile" : "target-ParaCL-82932a67be08c1029198.json",
 					"name" : "ParaCL",
 					"projectIndex" : 0
 				}
