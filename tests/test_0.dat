@@ -1,6 +1,6 @@
 //a = 1 + 2;
-a = a - 4; //set = get - num
-//b = ?;
+//a = a - 4; //set = get - num
+b = ?;
 //print (a);
 
 

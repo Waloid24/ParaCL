@@ -153,13 +153,13 @@ stmt: stmt_1 | stmt_2
 assign_stmt: SetId ASSIGN expr SCOLON          
 { 
     //$$ = std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)); 
-    std::cout << "Assign";       
+    // std::cout << "Assign";       
     driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
 }
-| SetId ASSIGN QUESTION_MARK ';'
+| SetId ASSIGN QUESTION_MARK SCOLON
 {
-    // $$ = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
-    // driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
+    auto Input = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
+    driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, Input, driver->currentScope)));
 }
 ;
 

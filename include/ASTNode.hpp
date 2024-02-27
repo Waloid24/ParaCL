@@ -40,6 +40,7 @@ class GlobalAst : public ASTNode {
     };
 
     void create_child(std::shared_ptr<ASTNode> child) {
+        std::cout << "create child" << std::endl;
         childs.push_back(child);
     };
 };

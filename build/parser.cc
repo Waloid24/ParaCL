@@ -895,7 +895,7 @@ namespace yy {
 #line 154 "compiler.y"
 { 
     //$$ = std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)); 
-    std::cout << "Assign";       
+    // std::cout << "Assign";       
     driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode(yystack_[3].value.as < std::shared_ptr<ASTNode> > (), yystack_[1].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)));                                    
 }
 #line 902 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
@@ -904,8 +904,8 @@ namespace yy {
   case 19:
 #line 160 "compiler.y"
 {
-    // $$ = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
-    // driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
+    auto Input = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
+    driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode(yystack_[3].value.as < std::shared_ptr<ASTNode> > (), Input, driver->currentScope)));
 }
 #line 911 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
@@ -1272,7 +1272,7 @@ namespace yy {
       13,   -55,   -55,    43,   -55,   -55,    62,    60,    44,   -55,
       13,   -55,    16,   -55,   -55,    47,    46,    46,   -55,    33,
      -55,    46,    46,   -55,    46,    46,    46,    46,    46,    46,
-      46,    46,    46,    46,    -2,   -55,   -55,   -16,   -13,     4,
+      46,    46,    46,    46,    -2,   -55,   -55,   -16,   -13,    27,
        8,    62,    62,    60,    60,    60,    60,    60,    60,    44,
       44,   -55,   -55,   -55,   -55,    13,    13,   -55,   -55,   -55,
       24,   -55,   -55,    13,   -55,   -55
@@ -1326,7 +1326,7 @@ namespace yy {
       10,     1,     4,    19,    20,     5,    19,    20,    30,    11,
       30,    65,    66,     3,     6,    31,     0,     4,    31,    73,
       22,    23,     2,    25,    11,    27,    28,    19,    20,     3,
-      32,    33,    66,    29,    44,    22,    23,     4,    25,    73,
+      32,    33,    66,     6,    44,    22,    23,     4,    25,    73,
       27,    28,    42,    43,    11,    32,    26,    27,    24,    29,
        4,     7,     8,    -1,    21,    65,    20,    11,    25,    12,
       27,    28,    19,    20,     4,     5,    19,    20,    31,    32,
@@ -1344,7 +1344,7 @@ namespace yy {
       37,    19,    20,    29,    13,    14,    15,    16,    17,    18,
        4,     5,     7,     8,    36,     0,    12,    39,    39,    21,
       39,    42,    42,    43,    43,    43,    43,    43,    43,    44,
-      44,    45,    45,    33,    47,    31,    31,    29,     6,    37,
+      44,    45,    45,    33,    47,    31,    31,     6,     6,    37,
       40,    40,    41,    24,    40,    41
   };
 

@@ -130,7 +130,7 @@ class AssignmentNode: public ASTNode {
     std::shared_ptr<ScopeNode> scope): right(exprNode), left(left), 
     ASTNode(scope) {
         // createGetIdNode(left, scope);
-        std::cout << "AssignNode ctor" << std::endl;
+        // std::cout << "AssignNode ctor" << std::endl;
     };
 
     ~AssignmentNode() {};
