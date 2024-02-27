@@ -11,8 +11,7 @@ class ASTNode {
     std::shared_ptr<ScopeNode> scope;   
 
     ASTNode(std::shared_ptr<ScopeNode> curScope): scope(curScope) {
-
-        std::cout << "AST Node Ctor" << std::endl;
+        // std::cout << "AST Node Ctor" << std::endl;
     };
 
     virtual void dump_ast() = 0;

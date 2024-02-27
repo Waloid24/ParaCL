@@ -15,7 +15,7 @@ class NumNode final: public ASTNode {
 
     public:
     NumNode(int value, std::shared_ptr<ScopeNode> scope): value(value), ASTNode(scope) { 
-        std::cout << "Num node ctor" << std::endl; 
+        // std::cout << "Num node ctor" << std::endl; 
     }; 
 
     inline int calculate() { return value; }
@@ -49,12 +49,10 @@ inline std::shared_ptr<IdNode> createSetIdNode(const std::string name, std::shar
 //---------------------------------------------------------
 inline std::shared_ptr<IdNode> createGetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
-    std::cout << "get Id Node" << std::endl;
+    // std::cout << "get Id Node" << std::endl;
     int id = scope->getIdFromGetVariable(name);
 
-    if(id == -1) {
-        return nullptr;
-    }
+    if(id == -1) { return nullptr; }
 
     return std::make_shared<IdNode>(id, scope);
 };
@@ -77,7 +75,8 @@ class BinaryNode final: public ASTNode {
     public:
     BinaryNode(std::shared_ptr<ASTNode> l, BinaryOp Op, std::shared_ptr<ASTNode> r,
     std::shared_ptr<ScopeNode> scope): l(l), Op(Op), r(r), ASTNode(scope) { 
-        std::cout << "Operator node ctor" << std::endl;};
+        std::cout << "Binary ctor" << std::endl;
+    };
 
     ~BinaryNode() {};
 };
@@ -121,7 +120,7 @@ class AssignmentNode: public ASTNode {
 
     inline int calculate() override;
     inline void dump_ast() override { 
-        std::cout << "{ set_ID: " << left << "\n expr value: " << right->calculate() << "\n}" << std::endl;
+        
     };
 
     public:

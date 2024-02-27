@@ -9,7 +9,7 @@ std::shared_ptr<ScopeNode> ScopeNode::exit_scope() {
 }
 
 int ScopeNode::getIdFromSetVariable(const std::string name) {
-    auto variable = predessorPtr.lock()->lookup(name);
+    auto variable = lookup(name);
     if(variable != nullptr) {
         return variable->id;
     }

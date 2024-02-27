@@ -21,14 +21,14 @@ int main(int argc, char *argv[]) {
       std::cerr << "Error opening file" << std::endl;
       return 1;
   }
-  else { std::cout << "The file was opened successfully" << std::endl; }
+  else { /*std::cout << "The file was opened successfully" << std::endl;*/ }
 
   FlexLexer *lexer = new yyFlexLexer;
   lexer->switch_streams(&file, nullptr);
   
   yy::Driver driver(lexer);
 
-  std::cout << "Start parsing" << std::endl;
+  /*std::cout << "Start parsing" << std::endl;*/
 
   driver.parse();
   file.close();

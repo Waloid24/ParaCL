@@ -378,11 +378,8 @@ namespace yy {
       // NUM
       char dummy1[sizeof (int)];
 
-      // GetId
-      // SetId
       // stmt_list
       // stmt
-      // assign_stmt
       // expr
       // stmt_1
       // stmt_2
@@ -568,18 +565,15 @@ switch (yytype)
         value.template destroy< int > ();
         break;
 
-      case 35: // GetId
-      case 36: // SetId
-      case 37: // stmt_list
-      case 38: // stmt
-      case 39: // assign_stmt
-      case 40: // expr
-      case 41: // stmt_1
-      case 42: // stmt_2
-      case 43: // bool_expr
-      case 44: // arith_expr
-      case 45: // term
-      case 46: // primary_expr
+      case 35: // stmt_list
+      case 36: // stmt
+      case 37: // expr
+      case 38: // stmt_1
+      case 39: // stmt_2
+      case 40: // bool_expr
+      case 41: // arith_expr
+      case 42: // term
+      case 43: // primary_expr
         value.template destroy< std::shared_ptr<ASTNode> > ();
         break;
 
@@ -1424,9 +1418,9 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 84,     ///< Last index in yytable_.
-      yynnts_ = 14,  ///< Number of nonterminal symbols.
-      yyfinal_ = 45, ///< Termination state number.
+      yylast_ = 82,     ///< Last index in yytable_.
+      yynnts_ = 11,  ///< Number of nonterminal symbols.
+      yyfinal_ = 40, ///< Termination state number.
       yyntokens_ = 34  ///< Number of tokens.
     };
 
@@ -1437,7 +1431,7 @@ switch (yytype)
 
 
 } // yy
-#line 1441 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 1435 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 

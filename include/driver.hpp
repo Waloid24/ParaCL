@@ -19,7 +19,7 @@ public:
 
 
   Driver(FlexLexer *plex) : plex_(plex) {
-    std::cout << "Driver ctor" << std::endl;
+    // std::cout << "Driver ctor" << std::endl;
     globalScope = std::shared_ptr<ScopeNode> (new ScopeNode(nullptr));
     currentScope = globalScope;
 

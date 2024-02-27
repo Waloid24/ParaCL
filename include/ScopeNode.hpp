@@ -24,7 +24,7 @@ class ScopeNode final : public std::enable_shared_from_this<ScopeNode> {
             predessorPtr.lock()->successorsVector.push_back(shared_from_this());
         }
 
-        std::cout << "ScopeNode Ctor" << std::endl;
+        // std::cout << "ScopeNode Ctor" << std::endl;
     };
 
     std::shared_ptr<ScopeNode> exit_scope();

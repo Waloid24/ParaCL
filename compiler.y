@@ -149,20 +149,23 @@ stmt: stmt_1 | stmt_2
 
 assign_stmt: SetId ASSIGN expr ';'          
 { 
-    //$$ = std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope));        
+    //$$ = std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)); 
+    std::cout << "Assign";       
     driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
 }
 ;
 
 SetId: ID_string                            
 {
+    std::cout << "2\n";
     $$ = createSetIdNode($1, driver->currentScope); 
 }
 ;
 
 GetId: ID_string                            
 {
-    $$ = createGetIdNode($1, driver->currentScope); 
+   std::cout << "1\n";
+   $$ = createGetIdNode($1, driver->currentScope); 
 }
 ;
 
@@ -247,11 +250,13 @@ primary_expr: MINUS primary_expr
 | QUESTION_MARK  
 {
     $$ = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
+    // std::cout << "аап";
 } 
        
 | "{" expr "}"                              
 { 
-    $$ = $2; std::cout << "Met {expr} " << std::endl; 
+    $$ = $2; 
+    std::cout << "Met {expr} " << std::endl; 
 }
 
        
@@ -260,15 +265,14 @@ primary_expr: MINUS primary_expr
     $$ = std::shared_ptr<ASTNode>(new NumNode($1, driver->currentScope)); 
 }
 
-| GetId                                    
+| ID_string {std::cout << "3\n";}
 
 | PRINT primary_expr                       
 {
-    $$ = std::shared_ptr<ASTNode>(new OutputNode($2, driver->currentScope));
+    std::cout << "print";    
+    driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new OutputNode($2, driver->currentScope)));
 }
      
-
-
 ;
 
 
