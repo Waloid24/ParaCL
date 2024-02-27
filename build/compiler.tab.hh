@@ -378,8 +378,10 @@ namespace yy {
       // NUM
       char dummy1[sizeof (int)];
 
+      // SetId
       // stmt_list
       // stmt
+      // assign_stmt
       // expr
       // stmt_1
       // stmt_2
@@ -387,6 +389,9 @@ namespace yy {
       // arith_expr
       // term
       // primary_expr
+      // open_sc
+      // close_sc
+      // scope
       char dummy2[sizeof (std::shared_ptr<ASTNode>)];
 
       // ID_string
@@ -565,15 +570,20 @@ switch (yytype)
         value.template destroy< int > ();
         break;
 
-      case 35: // stmt_list
-      case 36: // stmt
-      case 37: // expr
-      case 38: // stmt_1
-      case 39: // stmt_2
-      case 40: // bool_expr
-      case 41: // arith_expr
-      case 42: // term
-      case 43: // primary_expr
+      case 35: // SetId
+      case 36: // stmt_list
+      case 37: // stmt
+      case 38: // assign_stmt
+      case 39: // expr
+      case 40: // stmt_1
+      case 41: // stmt_2
+      case 42: // bool_expr
+      case 43: // arith_expr
+      case 44: // term
+      case 45: // primary_expr
+      case 46: // open_sc
+      case 47: // close_sc
+      case 48: // scope
         value.template destroy< std::shared_ptr<ASTNode> > ();
         break;
 
@@ -654,13 +664,13 @@ switch (yytype)
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 59 || tok == 40 || tok == 41 || tok == 123 || tok == 125);
       }
 #else
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 123 || tok == 125 || tok == 59 || tok == 40 || tok == 41);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 59 || tok == 40 || tok == 41 || tok == 123 || tok == 125);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1418,9 +1428,9 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 82,     ///< Last index in yytable_.
-      yynnts_ = 11,  ///< Number of nonterminal symbols.
-      yyfinal_ = 40, ///< Termination state number.
+      yylast_ = 90,     ///< Last index in yytable_.
+      yynnts_ = 16,  ///< Number of nonterminal symbols.
+      yyfinal_ = 45, ///< Termination state number.
       yyntokens_ = 34  ///< Number of tokens.
     };
 
@@ -1431,7 +1441,7 @@ switch (yytype)
 
 
 } // yy
-#line 1435 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
+#line 1445 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh"
 
 
 

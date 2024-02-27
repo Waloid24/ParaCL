@@ -43,6 +43,7 @@ class IdNode final: public ASTNode  {
 //---------------------------------------------------------
 inline std::shared_ptr<IdNode> createSetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
+    // std::cout << "set Id Node" << std::endl;
     int id = scope->getIdFromSetVariable(name);
     return std::make_shared<IdNode>(id, scope);
 };
@@ -115,6 +116,7 @@ class WhileNode final: public ASTNode {
 };
 //---------------------------------------------------------
 class AssignmentNode: public ASTNode {
+    // std::string left;
     std::shared_ptr<ASTNode> left;
     std::shared_ptr<ASTNode> right;
 
@@ -124,9 +126,10 @@ class AssignmentNode: public ASTNode {
     };
 
     public:
-    AssignmentNode(std::shared_ptr<ASTNode> IDNode, std::shared_ptr<ASTNode> exprNode, 
-    std::shared_ptr<ScopeNode> scope): right(exprNode), left(IDNode), 
+    AssignmentNode(std::shared_ptr<ASTNode>  left, std::shared_ptr<ASTNode> exprNode, 
+    std::shared_ptr<ScopeNode> scope): right(exprNode), left(left), 
     ASTNode(scope) {
+        // createGetIdNode(left, scope);
         std::cout << "AssignNode ctor" << std::endl;
     };
 

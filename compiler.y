@@ -62,7 +62,7 @@
 %token <int> NUM
 %token <std::string> ID_string
 
-%nterm <std::shared_ptr<ASTNode>> GetId
+//%nterm <std::shared_ptr<ASTNode>> GetId
 %nterm <std::shared_ptr<ASTNode>> SetId
 %nterm <std::shared_ptr<ASTNode>> stmt_list
 %nterm <std::shared_ptr<ASTNode>> stmt
@@ -94,20 +94,23 @@ program: stmt_list
 { 
     driver->globalAstNode->calculate(); 
     driver->globalAstNode->dump_ast();
+    std::cout << "program" << std::endl;
 } 
 ;
 
-//scope: open_sc stmt_list close_sc           { $$ = $2; }
-//;
-
-
-stmt_list: stmt                             
-| stmt_list stmt                            
+stmt_list: stmt                 {std::cout << "stmt" << std::endl;  }          
+| stmt_list stmt                {std::cout << "stmt stmt list" << std::endl;  }           
 ;
 
-stmt_1: '{' stmt_list '}'                   
+scope: open_sc stmt_list close_sc      
+{
+    $$ = $3;
+}
+;
 
-| expr ';'                                   
+stmt_1: scope     {std::cout << "hrbenjfk";}             
+
+| expr ';'                                   {std::cout << "expr" << std::endl;  } 
 
 | IF '(' expr ')' stmt_1 ELSE stmt_1    
 { 
@@ -119,18 +122,18 @@ stmt_1: '{' stmt_list '}'
     $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); 
 }
 
-| assign_stmt                               
+| assign_stmt   {std::cout << "assign stmt" << std::endl;}                            
 ;
 
 open_sc: '{'    
 {
-    driver.currentScope = std::shared_ptr<ScopeNode> (new ScopeNode(driver->currentScope)); 
+    driver->currentScope = std::shared_ptr<ScopeNode> (new ScopeNode(driver->currentScope)); 
 }
 ;
 
 close_sc: '}'   
 {
-    driver.currentScope = driver.currentScope->exit_scope(); 
+    driver->currentScope = driver->currentScope->exit_scope(); 
 }
 ;
 
@@ -144,30 +147,35 @@ stmt_2: IF '(' expr ')' stmt
 { $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); }
 ;
 
-stmt: stmt_1 | stmt_2
+stmt: stmt_1 | stmt_2               
 ;
 
-assign_stmt: SetId ASSIGN expr ';'          
+assign_stmt: SetId ASSIGN expr SCOLON          
 { 
     //$$ = std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)); 
     std::cout << "Assign";       
     driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
 }
+| SetId ASSIGN QUESTION_MARK ';'
+{
+    // $$ = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
+    // driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
+}
 ;
 
 SetId: ID_string                            
 {
-    std::cout << "2\n";
+    std::cout << "set id\n";
     $$ = createSetIdNode($1, driver->currentScope); 
 }
 ;
 
-GetId: ID_string                            
-{
-   std::cout << "1\n";
-   $$ = createGetIdNode($1, driver->currentScope); 
-}
-;
+// GetId: ID_string                            
+// {
+//    std::cout << "1\n";
+//    $$ = createGetIdNode($1, driver->currentScope); 
+// }
+// ;
 
 expr: expr AND bool_expr                    
 { 
@@ -247,11 +255,11 @@ primary_expr: MINUS primary_expr
     $$ = std::shared_ptr<ASTNode>(new UnaryNode(UnaryOp::Minus, $2, driver->currentScope)); 
 }
 
-| QUESTION_MARK  
-{
-    $$ = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
-    // std::cout << "аап";
-} 
+// | QUESTION_MARK  
+// {
+//     $$ = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
+//     // std::cout << "аап";
+// } 
        
 | "{" expr "}"                              
 { 
@@ -263,9 +271,14 @@ primary_expr: MINUS primary_expr
 | NUM                                       
 { 
     $$ = std::shared_ptr<ASTNode>(new NumNode($1, driver->currentScope)); 
+    std::cout << "num" << std::endl;  
 }
 
-| ID_string {std::cout << "3\n";}
+| ID_string 
+{
+    $$ = createGetIdNode($1, driver->currentScope);
+    std::cout << "get id" << std::endl;
+}
 
 | PRINT primary_expr                       
 {

@@ -6,16 +6,6 @@
 
 #IncludeRegexTransform: 
 
-../include/ASTNode.hpp
-memory
--
-fstream
--
-iostream
--
-ScopeNode.hpp
-../include/ScopeNode.hpp
-
 ../include/Node.hpp
 ASTNode.hpp
 ../include/ASTNode.hpp
@@ -35,10 +25,6 @@ memory
 -
 Symtab.hpp
 ../include/Symtab.hpp
-
-../include/Symtab.hpp
-string
--
 
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
 iostream
@@ -64,26 +50,6 @@ string
 vector
 -
 cassert
--
-
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc
-inttypes.h
--
-iostream
--
-errno.h
--
-cstdlib
--
-cstdio
--
-cstring
--
-FlexLexer.h
--
-compiler.tab.hh
-/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/compiler.tab.hh
-unistd.h
 -
 
 /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/include/ASTNode.hpp
