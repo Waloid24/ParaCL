@@ -21,7 +21,7 @@ bison_target(parser
 
 add_flex_bison_dependency(scanner parser)
 
-set(MYCOMPILE_FLAGS "-g -fsanitize=address")
+SET(MYCOMPILE_FLAGS "-g -fsanitize=address -O0")
 SET(CMAKE_C_FLAGS    "${CMAKE_C_FLAGS} ${MYCOMPILE_FLAGS}")
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${MYCOMPILE_FLAGS}")
 
@@ -29,8 +29,9 @@ add_executable(${PROJECT_NAME}
   src/driver.cc  
   ${BISON_parser_OUTPUTS}
   ${FLEX_scanner_OUTPUTS}
-
 )
+
+# cmake (-DCMAKE_CXX_FLAGS_DEBUG="-g -O0")
 # file(GLOB SRC "src/*")
 # file(GLOB INCLUDE "include/*")
 # include_directories(src)

@@ -1,17 +1,17 @@
 [
 {
   "directory": "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build",
-  "command": "/usr/bin/clang++   -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL   -g -fsanitize=address -g   -std=gnu++2a -o CMakeFiles/ParaCL.dir/src/driver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc",
+  "command": "/usr/bin/clang++   -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL   -g -fsanitize=address -O0 -g   -std=gnu++2a -o CMakeFiles/ParaCL.dir/src/driver.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc",
   "file": "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/src/driver.cc"
 },
 {
   "directory": "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build",
-  "command": "/usr/bin/clang++   -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL   -g -fsanitize=address -g   -std=gnu++2a -o CMakeFiles/ParaCL.dir/parser.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc",
+  "command": "/usr/bin/clang++   -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL   -g -fsanitize=address -O0 -g   -std=gnu++2a -o CMakeFiles/ParaCL.dir/parser.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc",
   "file": "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 },
 {
   "directory": "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build",
-  "command": "/usr/bin/clang++   -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL   -g -fsanitize=address -g   -std=gnu++2a -o CMakeFiles/ParaCL.dir/scanner.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc",
+  "command": "/usr/bin/clang++   -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build -I/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL   -g -fsanitize=address -O0 -g   -std=gnu++2a -o CMakeFiles/ParaCL.dir/scanner.cc.o -c /home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc",
   "file": "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/scanner.cc"
 }
 ]

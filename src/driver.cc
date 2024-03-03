@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
   }
   else { /*std::cout << "The file was opened successfully" << std::endl;*/ }
 
-  FlexLexer *lexer = new yyFlexLexer;
+  FlexLexer* lexer = new yyFlexLexer;
   lexer->switch_streams(&file, nullptr);
   
   yy::Driver driver(lexer);
@@ -32,6 +32,5 @@ int main(int argc, char *argv[]) {
 
   driver.parse();
   file.close();
-
   delete lexer;
 };

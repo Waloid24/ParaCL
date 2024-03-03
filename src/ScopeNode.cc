@@ -2,22 +2,24 @@
 
 #include "../include/ScopeNode.hpp"
 
-int ScopeNode::variableId = 0;
+int variableId = 0;
 //---------------------------------------------------------
 std::shared_ptr<ScopeNode> ScopeNode::exit_scope() {
     return predessorPtr.lock();
 }
 
 int ScopeNode::getIdFromSetVariable(const std::string name) {
+    std::cout << "var start name: " << name << std::endl;
     auto variable = lookup(name);
-    if(variable != nullptr) {
-        return variable->id;
-    }
-    else {        
-        std::shared_ptr<Variable> variable = std::make_shared<Variable>(name, 0, ScopeNode::variableId++);
+    if(variable == nullptr)
+    { 
+        std::cout << " new variable" << variableId << std::endl;
+        variableId = variableId + 1;
+        variable = std::make_shared<Variable>(name, 0, variableId);
         variableTable.push_back(variable);
-        return 0;
     }
+    std::cout <<"var name:" <<variable->name << std::endl;
+    return variable->id;
 }
 
 int ScopeNode::getIdFromGetVariable(const std::string name) {

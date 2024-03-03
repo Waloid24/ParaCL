@@ -30,7 +30,7 @@ class IdNode final: public ASTNode  {
     int id;
 
     public:
-    IdNode(int id, std::shared_ptr<ScopeNode> scope): ASTNode(scope), id(id) {};
+    IdNode(int id, std::shared_ptr<ScopeNode> scope): ASTNode(scope), id(id) {std::cout << "ID!!!" << std::endl;};
 
     inline int calculate() { return id; }
 
@@ -41,21 +41,22 @@ class IdNode final: public ASTNode  {
     ~IdNode() {};
 };
 //---------------------------------------------------------
-inline std::shared_ptr<IdNode> createSetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
+inline std::shared_ptr<ASTNode> createSetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
-    // std::cout << "set Id Node" << std::endl;
+    // std::cout << "jfkd";
     int id = scope->getIdFromSetVariable(name);
-    return std::make_shared<IdNode>(id, scope);
+    std::cout << "thrfjdek"<< std::endl;
+    return std::shared_ptr<ASTNode>(new IdNode(id, scope));
 };
 //---------------------------------------------------------
-inline std::shared_ptr<IdNode> createGetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
+inline std::shared_ptr<ASTNode> createGetIdNode(const std::string name, std::shared_ptr<ScopeNode> scope)
 {
-    // std::cout << "get Id Node" << std::endl;
+    // std::cout << "thrfjdek";
     int id = scope->getIdFromGetVariable(name);
-
-    if(id == -1) { return nullptr; }
-
-    return std::make_shared<IdNode>(id, scope);
+    std::cout << "AAAAAAAAAAAAAAA" << std::endl;
+    if(id == -1) { std::cout << "FGHJKGHJ"<< std::endl; return std::shared_ptr<IdNode>(new IdNode(id, scope)); }
+    std::cout << "thrfjdek" << std::endl;
+    return std::shared_ptr<ASTNode>(new IdNode(id, scope));
 };
 
 //---------------------------------------------------------

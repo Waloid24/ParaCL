@@ -9,7 +9,7 @@
 namespace yy {
 
 class Driver {
-  FlexLexer *plex_;
+  FlexLexer* plex_;
 public:
   std::shared_ptr<ScopeNode> currentScope;
   std::shared_ptr<ScopeNode> globalScope;
@@ -18,12 +18,11 @@ public:
   std::shared_ptr<ASTNode> curAstNode;
 
 
-  Driver(FlexLexer *plex) : plex_(plex) {
-    // std::cout << "Driver ctor" << std::endl;
-    globalScope = std::shared_ptr<ScopeNode> (new ScopeNode(nullptr));
+  Driver(FlexLexer* plex) : plex_(plex) {
+    globalScope = std::make_shared<ScopeNode>(nullptr);
     currentScope = globalScope;
 
-    globalAstNode = std::shared_ptr<GlobalAst> (new GlobalAst(currentScope));
+    globalAstNode = std::make_shared<GlobalAst>(currentScope);
     curAstNode = globalAstNode;
   };
 
@@ -31,6 +30,13 @@ public:
     parser::token_type tt = static_cast<parser::token_type>(plex_->yylex());
     if (tt == yy::parser::token_type::NUM)
       yylval->as<int>() = std::stoi(plex_->YYText());
+    
+    if(tt == yy::parser::token_type::ID_string)
+    {
+      std::cout << "yytext: " << plex_->YYText() << std::endl;; 
+      yylval->build<std::string>();
+      yylval->as<std::string>() = std::string(plex_->YYText());
+    }
     return tt;
   };
 

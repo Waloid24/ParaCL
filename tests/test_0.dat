@@ -1,5 +1,10 @@
-//a = 1 + 2;
-//a = a - 4; //set = get - num
+a = 1 + 2;
+123;
+a = 3;
+b = a + 3;
+
+1 + 4;
+a = a - 4; //set = get - num
 b = ?;
 //print (a);
 

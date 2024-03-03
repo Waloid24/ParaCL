@@ -11,7 +11,7 @@ class ScopeNode final : public std::enable_shared_from_this<ScopeNode> {
     std::vector<std::shared_ptr<ScopeNode>> successorsVector;
     std::weak_ptr<ScopeNode> predessorPtr;
 
-    static int variableId;
+    // static int variableId;
 
     public:
     ScopeNode(std::shared_ptr<ScopeNode> curScope) {
