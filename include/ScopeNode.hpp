@@ -11,8 +11,6 @@ class ScopeNode final : public std::enable_shared_from_this<ScopeNode> {
     std::vector<std::shared_ptr<ScopeNode>> successorsVector;
     std::weak_ptr<ScopeNode> predessorPtr;
 
-    // static int variableId;
-
     public:
     ScopeNode(std::shared_ptr<ScopeNode> curScope) {
         
@@ -23,14 +21,12 @@ class ScopeNode final : public std::enable_shared_from_this<ScopeNode> {
         if (curScope) {
             predessorPtr.lock()->successorsVector.push_back(shared_from_this());
         }
-
-        // std::cout << "ScopeNode Ctor" << std::endl;
     };
 
     std::shared_ptr<ScopeNode> exit_scope();
     int getIdFromSetVariable(const std::string name);
     int getIdFromGetVariable(const std::string name);
     std::shared_ptr<Variable> lookup(const std::string name); 
-    void assign_value(int id, int value);
+    std::shared_ptr<Variable> lookup(int id);
 };
 

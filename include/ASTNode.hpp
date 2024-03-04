@@ -6,14 +6,29 @@
 
 #include "ScopeNode.hpp" 
 
+enum class NodeType {
+    None,
+    Num,
+    Id, 
+    Assign, 
+    Operation, 
+    If, 
+    While,
+    Input,
+    Output,
+};
+
 class ASTNode {  
+    protected:
+    NodeType type;
+
     public:
     std::shared_ptr<ScopeNode> scope;   
 
-    ASTNode(std::shared_ptr<ScopeNode> curScope): scope(curScope) {
+    ASTNode(std::shared_ptr<ScopeNode> curScope, NodeType type): scope(curScope), type(type) {
         // std::cout << "AST Node Ctor" << std::endl;
     };
-
+    NodeType get_type() { return type; };
     virtual void dump_ast() = 0;
     virtual int calculate() = 0;
 
@@ -25,8 +40,7 @@ class GlobalAst : public ASTNode {
     std::vector<std::shared_ptr<ASTNode>> childs;
     std::shared_ptr<ASTNode> child; 
 
-    GlobalAst(std::shared_ptr<ScopeNode> curScope): ASTNode(curScope) {
-        std::cout << "Global Node" << std::endl;
+    GlobalAst(std::shared_ptr<ScopeNode> curScope): ASTNode(curScope, NodeType::None) {
     }
     void dump_ast() override {
         std::cout << "Global Node" << std::endl;
@@ -40,7 +54,6 @@ class GlobalAst : public ASTNode {
     };
 
     void create_child(std::shared_ptr<ASTNode> child) {
-        std::cout << "create child" << std::endl;
         childs.push_back(child);
     };
 };

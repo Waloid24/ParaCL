@@ -23,7 +23,9 @@ std::unordered_map<BinaryOp, std::function<int(int, int)>> BinaryNode::Operation
 
 int BinaryNode::calculate() {
     if (OperationMap.find(Op) != OperationMap.end()) {
-        return OperationMap[Op](l->calculate(), r->calculate());
+        return OperationMap[Op]((l->get_type() == NodeType::Id) ? scope->lookup(l->calculate())->value :
+        l->calculate(), (r->get_type() == NodeType::Id) ? scope->lookup(r->calculate())->value : r->calculate());
+
     } else {
         std::cerr << "Unsupported operation" << std::endl;
         return 0;
@@ -47,19 +49,4 @@ int UnaryNode::calculate() {
             throw std::runtime_error("Unknown UnaryOpType");
     }
 }
-//---------------------------------------------------------
-// IfNode implementation
-int IfNode::calculate() {
-    return 0;
-}
-
-void IfNode::dump_ast() {}
-
-//---------------------------------------------------------
-// WhileNode implementation
-int WhileNode::calculate() {
-    return 0;
-}
-
-void WhileNode::dump_ast() {}
 

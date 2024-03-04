@@ -28,12 +28,13 @@ public:
 
   parser::token_type yylex(parser::semantic_type *yylval) {
     parser::token_type tt = static_cast<parser::token_type>(plex_->yylex());
-    if (tt == yy::parser::token_type::NUM)
+    if (tt == yy::parser::token_type::NUM) {
       yylval->as<int>() = std::stoi(plex_->YYText());
+    }
     
     if(tt == yy::parser::token_type::ID_string)
     {
-      std::cout << "yytext: " << plex_->YYText() << std::endl;; 
+      // std::cout << "yytext: " << plex_->YYText() << std::endl;; 
       yylval->build<std::string>();
       yylval->as<std::string>() = std::string(plex_->YYText());
     }

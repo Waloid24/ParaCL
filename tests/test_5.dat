@@ -1,8 +1,8 @@
 a = 7;
 if (a == 0) {
-    print (a);
+    print a;
 }
 else {
     a = 100;
-    print (a);
+    print a;
 }
