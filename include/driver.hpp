@@ -14,16 +14,20 @@ public:
   std::shared_ptr<ScopeNode> currentScope;
   std::shared_ptr<ScopeNode> globalScope;
   
-  std::shared_ptr<GlobalAst> globalAstNode;
+  std::shared_ptr<ASTNode> globalAstNode;
   std::shared_ptr<ASTNode> curAstNode;
+
+  std::ofstream dump_file;
 
 
   Driver(FlexLexer* plex) : plex_(plex) {
     globalScope = std::make_shared<ScopeNode>(nullptr);
     currentScope = globalScope;
 
-    globalAstNode = std::make_shared<GlobalAst>(currentScope);
+    globalAstNode = std::shared_ptr<ASTNode>(new GlobalAst(currentScope, nullptr));
     curAstNode = globalAstNode;
+
+    dump_file = std::ofstream("dump_file.json");
   };
 
   parser::token_type yylex(parser::semantic_type *yylval) {
@@ -34,7 +38,6 @@ public:
     
     if(tt == yy::parser::token_type::ID_string)
     {
-      // std::cout << "yytext: " << plex_->YYText() << std::endl;; 
       yylval->build<std::string>();
       yylval->as<std::string>() = std::string(plex_->YYText());
     }

@@ -1,9 +1,10 @@
 a = 1;
-b = 0;
+b = 5;
+max = 0;
 
 if (a > b) {
     max = b;
 }
 else { max = a; }
 
-print (max);
+print max;

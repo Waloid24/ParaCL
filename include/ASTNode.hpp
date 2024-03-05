@@ -25,11 +25,9 @@ class ASTNode {
     public:
     std::shared_ptr<ScopeNode> scope;   
 
-    ASTNode(std::shared_ptr<ScopeNode> curScope, NodeType type): scope(curScope), type(type) {
-        // std::cout << "AST Node Ctor" << std::endl;
-    };
+    ASTNode(std::shared_ptr<ScopeNode> curScope, NodeType type): scope(curScope), type(type) {};
     NodeType get_type() { return type; };
-    virtual void dump_ast() = 0;
+    virtual void dump_ast(std::ofstream& dump_file) = 0;
     virtual int calculate() = 0;
 
     virtual ~ASTNode() {};
@@ -39,11 +37,16 @@ class GlobalAst : public ASTNode {
     public:
     std::vector<std::shared_ptr<ASTNode>> childs;
     std::shared_ptr<ASTNode> child; 
+    std::weak_ptr<ASTNode> predessor;
 
-    GlobalAst(std::shared_ptr<ScopeNode> curScope): ASTNode(curScope, NodeType::None) {
-    }
-    void dump_ast() override {
-        std::cout << "Global Node" << std::endl;
+    GlobalAst(std::shared_ptr<ScopeNode> curScope, std::shared_ptr<ASTNode> predessor): 
+    ASTNode(curScope, NodeType::None), predessor(predessor) {}
+
+    void dump_ast(std::ofstream& dump_file) override {
+        dump_file << "Global Node" << std::endl;
+        for(auto && child_: childs) {
+            child_->dump_ast(dump_file);
+        }
     };
 
     int calculate() override {

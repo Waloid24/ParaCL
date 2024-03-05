@@ -27,7 +27,6 @@ int main(int argc, char *argv[]) {
   lexer->switch_streams(&file, nullptr);
   
   yy::Driver driver(lexer);
-
   /*std::cout << "Start parsing" << std::endl;*/
 
   driver.parse();

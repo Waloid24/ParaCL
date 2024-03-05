@@ -9,15 +9,14 @@
 
 //---------------------------------------------------------
 class NumNode final: public ASTNode {
-    // NodeType type = NodeType::Num;
     int value;
 
     public:
-    NumNode(int value, std::shared_ptr<ScopeNode> scope): value(value), ASTNode(scope, NodeType::Num) {}; 
+    NumNode(int value, std::shared_ptr<ScopeNode> scope): value(value), ASTNode(scope, NodeType::Num) { }; 
 
     inline int calculate() { return value; }
-    inline void dump_ast() {
-        std::cout << "{ type: value_node \n     { value: " << value << "\n      }\n}" << std::endl; 
+    inline void dump_ast(std::ofstream& dump_file) {
+        dump_file << "Num Node \n{ type: value_node \n    { value: " << value << "\n    }\n}" << std::endl; 
     }
 
     ~NumNode() {};
@@ -32,8 +31,8 @@ class IdNode final: public ASTNode  {
     inline int calculate() { return id; }
     
     
-    inline void dump_ast() {
-        std::cout << "Id Node" << std::endl;
+    inline void dump_ast(std::ofstream& dump_file) {
+        dump_file << "Id Node \n{" << "\n   ID: " << id << "\n}"<< std::endl;
     };
 
     ~IdNode() {};
@@ -59,8 +58,11 @@ class BinaryNode final: public ASTNode {
     static std::unordered_map<BinaryOp, std::function<int(int, int)>> OperationMap;
 
     int calculate() override;
-    inline void dump_ast() override {
-        std::cout << "Operator Node" << std::endl;
+    inline void dump_ast(std::ofstream& dump_file) override {
+        dump_file << "Operator Node \n{ " << std::endl;
+        l->dump_ast(dump_file);
+        r->dump_ast(dump_file);
+        dump_file << " \n}" << std::endl;
     };
 
     public:
@@ -80,11 +82,10 @@ class IfNode final: public ASTNode {
     public:
     IfNode(std::shared_ptr<ASTNode> condition, std::shared_ptr<ASTNode> body, std::shared_ptr<ASTNode> else_block, 
     std::shared_ptr<ScopeNode> scope): condition(condition), body(body), else_block(else_block), 
-    ASTNode(scope, NodeType::If) {
-        std::cout << "If node ctor" << std::endl;
-    };
+    ASTNode(scope, NodeType::If) {};
 
     int calculate() override {
+
         if(condition->calculate()) {
             return body->calculate();
         }
@@ -92,24 +93,25 @@ class IfNode final: public ASTNode {
             return else_block->calculate();
         }
     }
-    void dump_ast() override {
-        std::cout << "If Node" << std::endl;
+    void dump_ast(std::ofstream& dump_file) override {
+        dump_file << "If Node \n{ " << std::endl;
+        condition->dump_ast(dump_file);
+        body->dump_ast(dump_file);
+        else_block->dump_ast(dump_file);
+        dump_file << " \n}" << std::endl;
     }
 
     ~IfNode() {};
 };
 //---------------------------------------------------------
 class WhileNode final: public ASTNode {
-    // NodeType type = NodeType::While;
-
     std::shared_ptr<ASTNode> condition;
     std::shared_ptr<ASTNode> block;
 
     public:
     WhileNode(std::shared_ptr<ASTNode> condition, std::shared_ptr<ASTNode> block, 
-    std::shared_ptr<ScopeNode> scope): condition(condition), block(block), ASTNode(scope, NodeType::While) {
-        std::cout << "While node ctor" << std::endl;
-    };
+    std::shared_ptr<ScopeNode> scope): condition(condition), block(block), 
+    ASTNode(scope, NodeType::While) {};
 
     int calculate() override {
         while(condition->calculate()) {
@@ -117,41 +119,53 @@ class WhileNode final: public ASTNode {
         }
         return 0;
     }
-    void dump_ast() override {
-        std::cout << "While Node" << std::endl;
+    void dump_ast(std::ofstream& dump_file) override {
+        dump_file << "While Node \n{" << std::endl;
+        condition->dump_ast(dump_file);
+        block->dump_ast(dump_file);
+        dump_file << " \n}" << std::endl;
     }
 
     ~WhileNode() {};
 };
 //---------------------------------------------------------
 class AssignmentNode: public ASTNode {
-    // NodeType type = NodeType::Assign;
-
     std::shared_ptr<ASTNode> lval;
     std::shared_ptr<ASTNode> right;
 
     inline int calculate() override;
-    inline void dump_ast() override { 
-        
+    inline void dump_ast(std::ofstream& dump_file) override { 
+        dump_file << "{ Assignment Node \n{ " << std::endl;
+        lval->dump_ast(dump_file);
+        right->dump_ast(dump_file);
+        dump_file << " \n}\n}" << std::endl;
     };
 
     public:
     AssignmentNode(std::shared_ptr<ASTNode>  lval, std::shared_ptr<ASTNode> exprNode, 
     std::shared_ptr<ScopeNode> scope): right(exprNode), lval(lval), 
-    ASTNode(scope, NodeType::Assign) { };
+    ASTNode(scope, NodeType::Assign) {};
 
     ~AssignmentNode() {};
 };
 //---------------------------------------------------------
 inline int AssignmentNode::calculate() {
-    // scope->assign_value(lval->calculate(), right->calculate());
-    scope->lookup(lval->calculate())->value = (right->get_type() == NodeType::Id) ? 
-    scope->lookup(right->calculate())->value : right->calculate();
+    // dump_file << "right->calculate(): " << right->calculate() << std::endl;
+    // dump_file << "lval->calculate(): " << lval->calculate() << std::endl;
+    // dump_file << "right->get_type() == NodeType::Id: " << int(right->get_type()) << std::endl;
+
+    // // dump_file << "scope->lookup(right->calculate())->value: " 
+    // // << scope->lookup(right->calculate())->value << std::endl;
+
+    // // dump_file << "scope->lookup(lval->calculate())->value: " 
+    // // << scope->lookup(lval->calculate())->value << std::endl;
+
+    scope->lookup(lval->calculate())->value = ((right->get_type() == NodeType::Id) ? 
+    scope->lookup(right->calculate())->value : right->calculate());
     return 0;
 };
 //---------------------------------------------------------
 class UnaryNode: public ASTNode {
-    // NodeType type = NodeType::Operation;
     UnaryOp Op;
     std::shared_ptr<ASTNode> operand;
 
@@ -161,13 +175,12 @@ class UnaryNode: public ASTNode {
 
     int calculate() override;
 
-    void dump_ast() override {
+    void dump_ast(std::ofstream& dump_file) override {
 
     };
 };
 //---------------------------------------------------------
 class InputNode: public ASTNode {
-    // NodeType type = NodeType::Input;
     int value;
 
     public:
@@ -178,8 +191,8 @@ class InputNode: public ASTNode {
         return value;
     };
 
-    void dump_ast() override {
-
+    void dump_ast(std::ofstream& dump_file) override {
+        dump_file << "Input Node" << std::endl;
     };
 
 };
@@ -197,8 +210,8 @@ class OutputNode: public ASTNode {
         return 0;
     };
 
-    void dump_ast() override {
-        std::cout << "Output Node" << std::endl;
+    void dump_ast(std::ofstream& dump_file) override {
+        dump_file << "Output Node" << std::endl;
     };
 
 };

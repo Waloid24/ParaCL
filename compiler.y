@@ -93,84 +93,88 @@
 program: stmt_list  
 { 
     driver->globalAstNode->calculate(); 
-    driver->globalAstNode->dump_ast();
-    std::cout << "program" << std::endl;
+    driver->globalAstNode->dump_ast(driver->dump_file);
 } 
 ;
 
-stmt_list: stmt                  
-| stmt_list stmt                           
+stmt_list: stmt | stmt_list stmt                           
+;
+
+
+scope: open_sc stmt_list close_sc      
+{
+    $$ = $1;
+}
+;
+
+open_sc: "{"    
+{
+    auto new_scope = std::make_shared<ScopeNode>(driver->currentScope); 
+    driver->currentScope->pushToSuccessors(new_scope);
+    driver->currentScope = new_scope;
+
+    driver->globalAstNode = std::shared_ptr<ASTNode>(new GlobalAst(driver->currentScope, driver->globalAstNode));
+    $$ = driver->globalAstNode;
+}
+;
+
+close_sc: "}"   
+{
+    driver->currentScope = driver->currentScope->exit_scope(); 
+    driver->globalAstNode = std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->predessor.lock();
+}
 ;
 
 stmt: stmt_1 | stmt_2               
 ;
 
-scope: open_sc stmt_list close_sc      
-{
-    $$ = $3;
-}
-;
-
-stmt_1: scope                
-
-| expr SCOLON     
-
-| IF LPAREN expr RPAREN stmt_1 ELSE stmt_1    
-{ 
-    std::cout << "FFFF" << std::endl;
-    $$ = std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope)); 
-}
-
-| WHILE '(' expr ')' stmt_1 
-{ 
-    $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); 
-}
-
-| assign_stmt   
+stmt_1:   assign_stmt   
 
 | PRINT primary_expr                       
 {    
-    driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new OutputNode($2, driver->currentScope)));
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new OutputNode($2, driver->currentScope)));
 }
-;
 
-open_sc: '{'    
-{
-    std::cout << "New scope was made" << std::endl;
-    driver->currentScope = std::shared_ptr<ScopeNode> (new ScopeNode(driver->currentScope)); 
-}
-;
+| scope
 
-close_sc: '}'   
-{
-    driver->currentScope = driver->currentScope->exit_scope(); 
-}
-;
+| expr ";" 
 
-stmt_2: IF LPAREN expr RPAREN stmt         
+| IF "(" expr ")" stmt_1 ELSE stmt_1    
 { 
-    std::cout << "ghbrefnjdkm" << std::endl;
+
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope)));
+}
+
+| WHILE "(" expr ")" stmt_1 
+{ 
+    $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); 
+}
+;
+
+stmt_2: IF "(" expr ")" stmt         
+{ 
     $$ = std::shared_ptr<ASTNode> (new IfNode($3, $5, 0, driver->currentScope)); 
 }
 
-| IF LPAREN expr RPAREN stmt_1 ELSE stmt_2        
+| IF "(" expr ")" stmt_1 ELSE stmt_2        
 { 
-    std::cout << "rnfemdw" << std::endl;
     $$ = std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope)); 
 }
 
-| WHILE '(' expr ')' stmt_2                 
-{ $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); }
+| WHILE "(" expr ")" stmt_2                 
+{ 
+    $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); 
+}
 ;
 
-assign_stmt: SetId ASSIGN expr SCOLON          
+assign_stmt: SetId "=" expr ";"          
 {    
-    driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
 }
-| SetId ASSIGN QUESTION_MARK SCOLON
+| SetId "=" QUESTION_MARK ";"
 {
     auto Input = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
-    driver->globalAstNode->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, Input, driver->currentScope)));
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, Input, driver->currentScope)));
 }
 ;
 
@@ -258,7 +262,7 @@ primary_expr: MINUS primary_expr
     $$ = std::shared_ptr<ASTNode>(new UnaryNode(UnaryOp::Minus, $2, driver->currentScope)); 
 }
        
-| "{" expr "}"                              
+| "(" expr ")"                              
 { 
     $$ = $2; 
 }

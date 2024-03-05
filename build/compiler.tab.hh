@@ -571,21 +571,21 @@ switch (yytype)
         value.template destroy< int > ();
         break;
 
-      case 34: // GetId
-      case 35: // SetId
-      case 36: // stmt_list
-      case 37: // stmt
-      case 38: // assign_stmt
-      case 39: // expr
-      case 40: // stmt_1
-      case 41: // stmt_2
-      case 42: // bool_expr
-      case 43: // arith_expr
-      case 44: // term
-      case 45: // primary_expr
-      case 46: // open_sc
-      case 47: // close_sc
-      case 48: // scope
+      case 30: // GetId
+      case 31: // SetId
+      case 32: // stmt_list
+      case 33: // stmt
+      case 34: // assign_stmt
+      case 35: // expr
+      case 36: // stmt_1
+      case 37: // stmt_2
+      case 38: // bool_expr
+      case 39: // arith_expr
+      case 40: // term
+      case 41: // primary_expr
+      case 42: // open_sc
+      case 43: // close_sc
+      case 44: // scope
         value.template destroy< std::shared_ptr<ASTNode> > ();
         break;
 
@@ -666,13 +666,13 @@ switch (yytype)
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 40 || tok == 41 || tok == 123 || tok == 125);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR);
       }
 #else
       symbol_type (int tok)
         : super_type(token_type (tok))
       {
-        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR || tok == 40 || tok == 41 || tok == 123 || tok == 125);
+        YY_ASSERT (tok == 0 || tok == token::ASSIGN || tok == token::MINUS || tok == token::PLUS || tok == token::SCOLON || tok == token::MULTIPLY || tok == token::DIVIDE || tok == token::LPAREN || tok == token::RPAREN || tok == token::LBRACE || tok == token::RBRACE || tok == token::LESS || tok == token::GREATER || tok == token::GREATEREQ || tok == token::LESSEQ || tok == token::NONEQUAL || tok == token::EQUAL || tok == token::AND || tok == token::OR || tok == token::QUESTION_MARK || tok == token::IF || tok == token::WHILE || tok == token::ELSE || tok == token::PRINT || tok == token::ERR);
       }
 #endif
 #if 201103L <= YY_CPLUSPLUS
@@ -1430,10 +1430,10 @@ switch (yytype)
     enum
     {
       yyeof_ = 0,
-      yylast_ = 86,     ///< Last index in yytable_.
+      yylast_ = 84,     ///< Last index in yytable_.
       yynnts_ = 17,  ///< Number of nonterminal symbols.
       yyfinal_ = 46, ///< Termination state number.
-      yyntokens_ = 33  ///< Number of tokens.
+      yyntokens_ = 29  ///< Number of tokens.
     };
 
 

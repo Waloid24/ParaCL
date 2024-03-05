@@ -36,8 +36,9 @@ std::shared_ptr<Variable> ScopeNode::lookup(const std::string name) {
             return var;
         }
     }
-    if (predessorPtr.lock() == nullptr) {
+    if (predessorPtr.lock() != nullptr) {
         if (auto predessor = predessorPtr.lock()) {
+            // std::cout << "!" << std::endl;
             return predessor->lookup(name);
         }
     }
@@ -46,12 +47,14 @@ std::shared_ptr<Variable> ScopeNode::lookup(const std::string name) {
 
 std::shared_ptr<Variable> ScopeNode::lookup(int id) {
     for(auto && var: variableTable) {
+        // std::cout << "hrgjefk" << std::endl;
         if(var->id == id) {
             return var;
         }
     }
-    if (predessorPtr.lock() == nullptr) {
+    if (predessorPtr.lock() != nullptr) {
         if (auto predessor = predessorPtr.lock()) {
+            // std::cout << "!!!!" << std::endl;
             return predessor->lookup(id);
         }
     }
