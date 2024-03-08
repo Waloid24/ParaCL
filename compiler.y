@@ -130,9 +130,10 @@ stmt: stmt_1 | stmt_2
 
 stmt_1:   assign_stmt   
 
-| PRINT primary_expr                       
-{    
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new OutputNode($2, driver->currentScope)));
+| PRINT expr ";"                      
+{
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode>(new OutputNode($2, driver->currentScope)));
 }
 
 | scope
@@ -142,39 +143,46 @@ stmt_1:   assign_stmt
 | IF "(" expr ")" stmt_1 ELSE stmt_1    
 { 
 
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope)));
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope)));
 }
 
 | WHILE "(" expr ")" stmt_1 
 { 
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope))); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope))); 
 }
 ;
 
 stmt_2: IF "(" expr ")" stmt         
 { 
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode> (new IfNode($3, $5, 0, driver->currentScope))); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode> (new IfNode($3, $5, 0, driver->currentScope))); 
 }
 
 | IF "(" expr ")" stmt_1 ELSE stmt_2        
 { 
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope))); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope))); 
 }
 
 | WHILE "(" expr ")" stmt_2                 
 { 
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope))); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope))); 
 }
 ;
 
 assign_stmt: SetId "=" expr ";"          
 {    
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
 }
 | SetId "=" QUESTION_MARK ";"
 {
     auto Input = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, Input, driver->currentScope)));
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+    create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, Input, driver->currentScope)));
 }
 ;
 

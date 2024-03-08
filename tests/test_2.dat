@@ -4,7 +4,8 @@ snd = 1;
 iter = 2;
 while (iter > 0) {
     iter = iter - 1;
+    print 35;
 }
 
 print snd; 
-print a;
+//print a;
