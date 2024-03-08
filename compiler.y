@@ -92,8 +92,8 @@
 
 program: stmt_list  
 { 
-    driver->globalAstNode->calculate(); 
     driver->globalAstNode->dump_ast(driver->dump_file);
+    driver->globalAstNode->calculate(); 
 } 
 ;
 
@@ -147,23 +147,23 @@ stmt_1:   assign_stmt
 
 | WHILE "(" expr ")" stmt_1 
 { 
-    $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope))); 
 }
 ;
 
 stmt_2: IF "(" expr ")" stmt         
 { 
-    $$ = std::shared_ptr<ASTNode> (new IfNode($3, $5, 0, driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode> (new IfNode($3, $5, 0, driver->currentScope))); 
 }
 
 | IF "(" expr ")" stmt_1 ELSE stmt_2        
 { 
-    $$ = std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new IfNode($3, $5, $7, driver->currentScope))); 
 }
 
 | WHILE "(" expr ")" stmt_2                 
 { 
-    $$ = std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new WhileNode($3, $5, driver->currentScope))); 
 }
 ;
 
@@ -285,8 +285,6 @@ GetId: ID_string
 
 
 %%
- 
-
 
 namespace yy {
     parser::token_type yylex(parser::semantic_type* yyval,

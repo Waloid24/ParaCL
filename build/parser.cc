@@ -792,8 +792,8 @@ namespace yy {
   case 2:
 #line 94 "compiler.y"
 { 
-    driver->globalAstNode->calculate(); 
     driver->globalAstNode->dump_ast(driver->dump_file);
+    driver->globalAstNode->calculate(); 
 }
 #line 799 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
@@ -890,7 +890,7 @@ namespace yy {
   case 15:
 #line 149 "compiler.y"
 { 
-    yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new WhileNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new WhileNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope))); 
 }
 #line 896 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
@@ -898,7 +898,7 @@ namespace yy {
   case 16:
 #line 155 "compiler.y"
 { 
-    yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode> (new IfNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), 0, driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode> (new IfNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), 0, driver->currentScope))); 
 }
 #line 904 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
@@ -906,7 +906,7 @@ namespace yy {
   case 17:
 #line 160 "compiler.y"
 { 
-    yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new IfNode(yystack_[4].value.as < std::shared_ptr<ASTNode> > (), yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new IfNode(yystack_[4].value.as < std::shared_ptr<ASTNode> > (), yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope))); 
 }
 #line 912 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
@@ -914,7 +914,7 @@ namespace yy {
   case 18:
 #line 165 "compiler.y"
 { 
-    yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new WhileNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
+    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->create_child(std::shared_ptr<ASTNode>(new WhileNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope))); 
 }
 #line 920 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
@@ -1494,8 +1494,6 @@ namespace yy {
 #line 1495 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
 #line 287 "compiler.y"
-
- 
 
 
 namespace yy {

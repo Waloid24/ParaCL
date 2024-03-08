@@ -87,12 +87,14 @@ class IfNode final: public ASTNode {
     int calculate() override {
 
         if(condition->calculate()) {
+            
             return body->calculate();
         }
         else {
             return else_block->calculate();
         }
     }
+
     void dump_ast(std::ofstream& dump_file) override {
         dump_file << "If Node \n{ " << std::endl;
         condition->dump_ast(dump_file);
@@ -115,7 +117,7 @@ class WhileNode final: public ASTNode {
 
     int calculate() override {
         while(condition->calculate()) {
-            return block->calculate();
+            block->calculate();
         }
         return 0;
     }
@@ -150,16 +152,6 @@ class AssignmentNode: public ASTNode {
 };
 //---------------------------------------------------------
 inline int AssignmentNode::calculate() {
-    // dump_file << "right->calculate(): " << right->calculate() << std::endl;
-    // dump_file << "lval->calculate(): " << lval->calculate() << std::endl;
-    // dump_file << "right->get_type() == NodeType::Id: " << int(right->get_type()) << std::endl;
-
-    // // dump_file << "scope->lookup(right->calculate())->value: " 
-    // // << scope->lookup(right->calculate())->value << std::endl;
-
-    // // dump_file << "scope->lookup(lval->calculate())->value: " 
-    // // << scope->lookup(lval->calculate())->value << std::endl;
-
     scope->lookup(lval->calculate())->value = ((right->get_type() == NodeType::Id) ? 
     scope->lookup(right->calculate())->value : right->calculate());
     return 0;
@@ -205,8 +197,9 @@ class OutputNode: public ASTNode {
     child(child), ASTNode(scope, NodeType::Output) {};
 
     int calculate() override {
-        
-        std::cout << scope->lookup(child->calculate())->value << std::endl;
+        auto result = (child->get_type() == NodeType::Id) ? scope->lookup(child->calculate())->value :
+        child->calculate();
+        std::cout << result << std::endl;
         return 0;
     };
 

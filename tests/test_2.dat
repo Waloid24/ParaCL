@@ -1,17 +1,10 @@
-fst = 0; // все типы int
+fst = 2;
 snd = 1;
-iters = ?;
-
+//iters = ?;
+iter = 2;
 while (iter > 0) {
-    tmp = fst;
-    fst = snd;
-    snd = snd + tmp;
-    iters = iters - 1;
-    a = 9;
+    iter = iter - 1;
 }
 
 print snd; 
 print a;
-
-
-// проблема с областью видимости : то что в цикле все считается за 0 даже для глобальных переменных

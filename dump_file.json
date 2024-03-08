@@ -7,7 +7,7 @@ Id Node
 }
 Num Node 
 { type: value_node 
-    { value: 1
+    { value: 2
     }
 }
  
@@ -21,13 +21,29 @@ Id Node
 }
 Num Node 
 { type: value_node 
-    { value: 5
+    { value: 1
     }
 }
  
 }
 }
 { Assignment Node 
+{ 
+Id Node 
+{
+   ID: 3
+}
+Num Node 
+{ type: value_node 
+    { value: 2
+    }
+}
+ 
+}
+}
+While Node 
+{
+Operator Node 
 { 
 Id Node 
 {
@@ -40,45 +56,25 @@ Num Node
 }
  
 }
-}
-If Node 
+Global Node
+{ Assignment Node 
 { 
+Id Node 
+{
+   ID: 3
+}
 Operator Node 
 { 
 Id Node 
 {
-   ID: 1
-}
-Id Node 
-{
-   ID: 2
-}
- 
-}
-Global Node
-{ Assignment Node 
-{ 
-Id Node 
-{
    ID: 3
 }
-Id Node 
-{
-   ID: 2
+Num Node 
+{ type: value_node 
+    { value: 1
+    }
 }
  
-}
-}
-Global Node
-{ Assignment Node 
-{ 
-Id Node 
-{
-   ID: 3
-}
-Id Node 
-{
-   ID: 1
 }
  
 }

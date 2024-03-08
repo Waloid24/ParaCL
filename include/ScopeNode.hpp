@@ -17,15 +17,10 @@ class ScopeNode final : public std::enable_shared_from_this<ScopeNode> {
         successorsVector = std::vector<std::shared_ptr<ScopeNode>>();
         
         predessorPtr = curScope;
-        
-        // if (curScope) {
-        //     predessorPtr.lock()->successorsVector.push_back(shared_from_this());
-        // }
     };
 
     void pushToSuccessors(std::shared_ptr<ScopeNode> childScope)
     {
-        //push to successors vector
         successorsVector.push_back(childScope);
     }
 
