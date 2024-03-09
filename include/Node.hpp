@@ -197,6 +197,7 @@ class OutputNode: public ASTNode {
     child(child), ASTNode(scope, NodeType::Output) {};
 
     int calculate() override {
+        if(child->calculate() == -1) { return 0;}
         auto result = (child->get_type() == NodeType::Id) ? scope->lookup(child->calculate())->value :
         child->calculate();
         std::cout << result << std::endl;
