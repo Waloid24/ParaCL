@@ -99,7 +99,9 @@ class IfNode final: public ASTNode {
         dump_file << "If Node \n{ " << std::endl;
         condition->dump_ast(dump_file);
         body->dump_ast(dump_file);
-        else_block->dump_ast(dump_file);
+
+        if(else_block != 0) { else_block->dump_ast(dump_file); }
+        
         dump_file << " \n}" << std::endl;
     }
 

@@ -1,17 +1,30 @@
 Global Node
-{ Assignment Node 
+If Node 
 { 
-Id Node 
-{
-   ID: 2
+Operator Node 
+{ 
+Operator Node 
+{ 
+Num Node 
+{ type: value_node 
+    { value: 11
+    }
 }
 Num Node 
 { type: value_node 
-    { value: 6
+    { value: 9
     }
 }
  
 }
+Num Node 
+{ type: value_node 
+    { value: 20
+    }
 }
+ 
+}
+Global Node
 Output Node
-Output Node
+ 
+}
