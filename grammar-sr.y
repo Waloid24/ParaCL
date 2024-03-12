@@ -1,3 +1,4 @@
+
 %language "c++"
 
 %skeleton "lalr1.cc"
@@ -10,7 +11,7 @@
 #include <iostream>
 #include <string>
 
-// forward decl of argument to parser
+// forward decl of a<trgument to parser
 namespace yy { class NumDriver; }
 }
 
@@ -34,33 +35,34 @@ parser::token_type yylex(parser::semantic_type* yylval,
 ;
 
 %token <int> NUMBER
-%nterm <int> equals
 %nterm <int> expr
 
 %left '+' '-'
 
-%start program
-
 %%
 
-program: eqlist
+program: statement_list
+
+statement_list: statement
+              | statement_list statement
+
+statement: expr SCOLON
+
+state: expr SCOLON state
+      {
+        std::cout << ";" << std::endl;
+      }
 ;
 
-eqlist: equals SCOLON eqlist
-      | %empty
-;
-
-equals: expr EQUAL expr       { 
-                                $$ = ($1 == $3); 
-                                std::cout << "Checking: " << $1 << " vs " << $3 
-                                          << "; Result: " << $$
-                                          << std::endl; 
+expr: expr PLUS expr          { 
+                                $$ = $1 + $3; 
+                                std::cout << $$ << std::endl;
                               }
-;
-
-expr: expr PLUS expr          { $$ = $1 + $3; }
-    | expr MINUS expr         { $$ = $1 - $3; }
-    | NUMBER                  { $$ = $1; }
+    | expr MINUS expr         { 
+                                $$ = $1 - $3; 
+                                std::cout << $$ << std::endl;
+                              }
+    | NUMBER                  { $$ = $1;}
 ;
 
 %%
