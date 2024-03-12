@@ -10,7 +10,7 @@
 {
 #include <iostream>
 #include <string>
-
+#include <ast.hpp>
 // forward decl of a<trgument to parser
 namespace yy { class NumDriver; }
 }
@@ -51,16 +51,20 @@ statement: expr SCOLON
 state: expr SCOLON state
       {
         std::cout << ";" << std::endl;
+        head->dump();
       }
 ;
 
 expr: expr PLUS expr          { 
-                                $$ = $1 + $3; 
-                                std::cout << $$ << std::endl;
+                                node* head = new node(nodeType::op);
+                                head->left_ = new node(nodeType::number);
+                                head->right_ = new node(nodeType::number);
+                                head->dump();
                               }
     | expr MINUS expr         { 
-                                $$ = $1 - $3; 
-                                std::cout << $$ << std::endl;
+                                node* head = new node(nodeType::op);
+                                head->left_ = new node(nodeType::number);
+                                head->right_ = new node(nodeType::number);
                               }
     | NUMBER                  { $$ = $1;}
 ;
