@@ -52,7 +52,7 @@ statement_list: statement
 
 statement: expr SCOLON
       {
-        head->dump();      
+        eval(head);     
       }
 ;
 

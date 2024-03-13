@@ -1,3 +1,4 @@
+#pragma once
 #include <iostream>
 #include <cmath>
 #include <memory>
@@ -29,7 +30,6 @@ public:
 
         eval(node->left_);
         node->dump();
-        // std::cout << static_cast<int>(node->type_) << ' ';
         eval(node->right_);
     }
 };
@@ -69,11 +69,10 @@ public:
     }
 };
 
-std::shared_ptr<iNode> newOp(op_t type, std::shared_ptr<iNode> left, std::shared_ptr<iNode> right) {
+inline std::shared_ptr<iNode> newOp(op_t type, std::shared_ptr<iNode> left, std::shared_ptr<iNode> right) {
     return std::make_shared<opNode>(type, left, right);
 }
 
-
-std::shared_ptr<iNode> newNumber(int value) {
+inline std::shared_ptr<iNode> newNumber(int value) {
     return std::make_shared<numNode>(value);
 }
