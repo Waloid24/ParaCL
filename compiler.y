@@ -178,12 +178,12 @@ assign_stmt: SetId "=" expr ";"
     std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
     create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, $3, driver->currentScope)));                                    
 }
-| SetId "=" QUESTION_MARK ";"
-{
-    auto Input = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
-    create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, Input, driver->currentScope)));
-}
+// | SetId "=" QUESTION_MARK ";"
+// {
+//     auto Input = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
+//     std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
+//     create_child(std::shared_ptr<ASTNode>(new AssignmentNode($1, Input, driver->currentScope)));
+// }
 ;
 
 SetId: ID_string                            
@@ -279,6 +279,11 @@ primary_expr: MINUS primary_expr
 | NUM                                       
 { 
     $$ = std::shared_ptr<ASTNode>(new NumNode($1, driver->currentScope)); 
+}
+
+| QUESTION_MARK
+{
+    $$ = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
 }
 
 | GetId 

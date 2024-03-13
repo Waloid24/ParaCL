@@ -1,30 +1,85 @@
 Global Node
-If Node 
+{ Assignment Node 
 { 
-Operator Node 
-{ 
-Operator Node 
-{ 
-Num Node 
-{ type: value_node 
-    { value: 11
-    }
+Id Node 
+{
+   ID: 1
 }
 Num Node 
 { type: value_node 
-    { value: 9
+    { value: 2
     }
 }
  
 }
+}
+{ Assignment Node 
+{ 
+Id Node 
+{
+   ID: 2
+}
 Num Node 
 { type: value_node 
-    { value: 20
+    { value: 1
+    }
+}
+ 
+}
+}
+{ Assignment Node 
+{ 
+Id Node 
+{
+   ID: 3
+}
+Num Node 
+{ type: value_node 
+    { value: 2
+    }
+}
+ 
+}
+}
+While Node 
+{
+Operator Node 
+{ 
+Id Node 
+{
+   ID: 3
+}
+Num Node 
+{ type: value_node 
+    { value: 0
     }
 }
  
 }
 Global Node
+{ Assignment Node 
+{ 
+Id Node 
+{
+   ID: 3
+}
+Operator Node 
+{ 
+Id Node 
+{
+   ID: 3
+}
+Num Node 
+{ type: value_node 
+    { value: 1
+    }
+}
+ 
+}
+ 
+}
+}
 Output Node
  
 }
+Output Node

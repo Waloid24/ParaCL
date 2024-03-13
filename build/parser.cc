@@ -935,183 +935,181 @@ namespace yy {
     break;
 
   case 20:
-#line 182 "compiler.y"
-{
-    auto Input = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
-    std::dynamic_pointer_cast<GlobalAst>(driver->globalAstNode)->
-    create_child(std::shared_ptr<ASTNode>(new AssignmentNode(yystack_[3].value.as < std::shared_ptr<ASTNode> > (), Input, driver->currentScope)));
-}
-#line 945 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 21:
 #line 190 "compiler.y"
 {
     yylhs.value.as < std::shared_ptr<ASTNode> > () = createSetIdNode(yystack_[0].value.as < std::string > (), driver->currentScope); 
 }
-#line 953 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 943 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 22:
+  case 21:
 #line 196 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::And, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 961 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 951 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 23:
+  case 22:
 #line 201 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Or, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 969 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 959 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+    break;
+
+  case 23:
+#line 205 "compiler.y"
+  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
+#line 965 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 24:
-#line 205 "compiler.y"
-  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
-#line 975 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 25:
 #line 209 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::GreaterEq, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 983 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 973 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 26:
+  case 25:
 #line 214 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::LessEq, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 991 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 981 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 27:
+  case 26:
 #line 219 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Less, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 999 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 989 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 28:
+  case 27:
 #line 224 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Greater, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 1007 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 997 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 29:
+  case 28:
 #line 229 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Equal, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 1015 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1005 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 30:
+  case 29:
 #line 234 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::NonEqual, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 1023 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1013 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+    break;
+
+  case 30:
+#line 238 "compiler.y"
+  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
+#line 1019 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 31:
-#line 238 "compiler.y"
-  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
-#line 1029 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 32:
 #line 242 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Plus, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope));
 }
-#line 1037 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1027 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 33:
+  case 32:
 #line 247 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Minus, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 1045 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1035 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+    break;
+
+  case 33:
+#line 251 "compiler.y"
+  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
+#line 1041 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 34:
-#line 251 "compiler.y"
-  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
-#line 1051 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 35:
 #line 256 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Multiply, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 1059 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1049 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 36:
+  case 35:
 #line 261 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new BinaryNode(yystack_[2].value.as < std::shared_ptr<ASTNode> > (), BinaryOp::Divide, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 1067 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1057 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+    break;
+
+  case 36:
+#line 265 "compiler.y"
+  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
+#line 1063 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 37:
-#line 265 "compiler.y"
-  { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
-#line 1073 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
-    break;
-
-  case 38:
 #line 269 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new UnaryNode(UnaryOp::Minus, yystack_[0].value.as < std::shared_ptr<ASTNode> > (), driver->currentScope)); 
 }
-#line 1081 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1071 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 39:
+  case 38:
 #line 274 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[1].value.as < std::shared_ptr<ASTNode> > (); 
 }
-#line 1089 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1079 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
-  case 40:
+  case 39:
 #line 280 "compiler.y"
 { 
     yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new NumNode(yystack_[0].value.as < int > (), driver->currentScope)); 
 }
-#line 1097 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1087 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+    break;
+
+  case 40:
+#line 285 "compiler.y"
+{
+    yylhs.value.as < std::shared_ptr<ASTNode> > () = std::shared_ptr<ASTNode>(new InputNode(driver->currentScope));
+}
+#line 1095 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 41:
-#line 284 "compiler.y"
+#line 289 "compiler.y"
   { yylhs.value.as < std::shared_ptr<ASTNode> > () = yystack_[0].value.as < std::shared_ptr<ASTNode> > (); }
-#line 1103 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1101 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
   case 42:
-#line 289 "compiler.y"
+#line 294 "compiler.y"
 {
     yylhs.value.as < std::shared_ptr<ASTNode> > () = createGetIdNode(yystack_[0].value.as < std::string > (), driver->currentScope); 
 }
-#line 1111 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1109 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
     break;
 
 
-#line 1115 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1113 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
             default:
               break;
@@ -1288,89 +1286,89 @@ namespace yy {
   }
 
 
-  const signed char parser::yypact_ninf_ = -63;
+  const signed char parser::yypact_ninf_ = -64;
 
-  const signed char parser::yytable_ninf_ = -22;
+  const signed char parser::yytable_ninf_ = -21;
 
   const signed char
   parser::yypact_[] =
   {
-      36,    42,    42,   -63,    17,    27,    42,   -63,    38,   -63,
-      57,    36,   -63,   -63,    -4,   -63,   -63,    63,     7,    45,
-     -63,    36,   -63,    39,   -63,   -63,    47,    42,    42,    -2,
-      21,   -63,   -63,    42,    42,    42,    42,    42,    42,    42,
-      42,    42,    42,    42,    42,    10,   -63,   -63,    52,    55,
-     -63,    44,     4,    63,    63,     7,     7,     7,     7,     7,
-       7,    45,    45,   -63,   -63,   -63,   -63,    36,    36,   -63,
-     -63,   -63,    49,   -63,   -63,    36,   -63,   -63
+      29,    32,    32,   -64,   -64,     4,    13,    32,   -64,    14,
+     -64,    21,    29,   -64,   -64,     8,   -64,   -64,    62,    38,
+      58,   -64,    29,   -64,    31,   -64,   -64,    -4,    32,    32,
+      42,    32,   -64,   -64,    32,    32,    32,    32,    32,    32,
+      32,    32,    32,    32,    32,    32,    -2,   -64,   -64,    27,
+      54,   -64,    52,    62,    62,    38,    38,    38,    38,    38,
+      38,    58,    58,   -64,   -64,   -64,   -64,    29,    29,   -64,
+     -64,    11,   -64,   -64,    29,   -64,   -64
   };
 
   const signed char
   parser::yydefact_[] =
   {
-       0,     0,     0,     6,     0,     0,     0,    40,    42,    41,
-       0,     2,     3,    10,     0,     8,     9,    24,    31,    34,
-      37,     0,    12,     0,    42,    38,     0,     0,     0,     0,
-       0,     4,    13,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     1,    39,     0,     0,
-      11,     0,     0,    22,    23,    27,    28,    25,    26,    30,
-      29,    33,    32,    35,    36,     7,     5,     0,     0,    20,
-      19,    16,     8,    15,    18,     0,    14,    17
+       0,     0,     0,     6,    40,     0,     0,     0,    39,    42,
+      41,     0,     2,     3,    10,     0,     8,     9,    23,    30,
+      33,    36,     0,    12,     0,    42,    37,     0,     0,     0,
+       0,     0,     4,    13,     0,     0,     0,     0,     0,     0,
+       0,     0,     0,     0,     0,     0,     0,     1,    38,     0,
+       0,    11,     0,    21,    22,    26,    27,    24,    25,    29,
+      28,    32,    31,    34,    35,     7,     5,     0,     0,    19,
+      16,     8,    15,    18,     0,    14,    17
   };
 
   const signed char
   parser::yypgoto_[] =
   {
-     -63,   -63,   -63,    61,   -11,   -63,     1,   -62,   -48,   -25,
-      48,    13,     0,   -63,   -63,   -63,   -63
+     -64,   -64,   -64,    17,   -12,   -64,     1,   -63,   -56,    33,
+      45,    46,     0,   -64,   -64,   -64,   -64
   };
 
   const signed char
   parser::yydefgoto_[] =
   {
-      -1,     9,    10,    11,    12,    13,    14,    15,    16,    17,
-      18,    19,    20,    21,    66,    22,    23
+      -1,    10,    11,    12,    13,    14,    15,    16,    17,    18,
+      19,    20,    21,    22,    66,    23,    24
   };
 
   const signed char
   parser::yytable_[] =
   {
-      31,    25,    32,    26,    50,    72,    73,    29,    53,    54,
-      70,    41,    42,    76,     1,    33,    34,    33,    34,     2,
-      74,     3,    65,    33,    34,     1,    27,    77,    48,    49,
-       2,    52,     4,     5,    31,     6,    28,     7,     8,    46,
-       1,   -21,    51,    63,    64,     2,     1,     3,     7,    24,
-      69,     2,    43,    44,    61,    62,    71,    47,     4,     5,
-      30,     6,    67,     7,     8,    68,    33,    34,     0,     7,
-      24,    33,    34,    75,    33,    34,    35,    36,    37,    38,
-      39,    40,    45,    55,    56,    57,    58,    59,    60
+      32,    26,     1,    27,    71,    72,    48,     2,    30,     3,
+      65,    75,    73,    28,    33,    34,    35,   -20,    76,     4,
+       5,     6,    29,     7,    31,     8,     9,    34,    35,    49,
+      50,    47,    52,     1,    32,    74,     1,    67,     2,    46,
+       3,     2,    42,    43,    63,    64,    34,    35,    51,     0,
+       4,     5,     6,     4,     7,    70,     8,     9,    69,     8,
+      25,    34,    35,     0,    68,    44,    45,    53,    54,     0,
+       0,    34,    35,    34,    35,    36,    37,    38,    39,    40,
+      41,    55,    56,    57,    58,    59,    60,     0,    61,    62
   };
 
   const signed char
   parser::yycheck_[] =
   {
-      11,     1,     6,     2,     6,    67,    68,     6,    33,    34,
-       6,     4,     5,    75,     4,    19,    20,    19,    20,     9,
-      68,    11,    12,    19,    20,     4,     9,    75,    27,    28,
-       9,    30,    22,    23,    45,    25,     9,    27,    28,     0,
-       4,     3,    21,    43,    44,     9,     4,    11,    27,    28,
-       6,     9,     7,     8,    41,    42,    67,    10,    22,    23,
-       3,    25,    10,    27,    28,    10,    19,    20,    -1,    27,
-      28,    19,    20,    24,    19,    20,    13,    14,    15,    16,
-      17,    18,    21,    35,    36,    37,    38,    39,    40
+      12,     1,     4,     2,    67,    68,    10,     9,     7,    11,
+      12,    74,    68,     9,     6,    19,    20,     3,    74,    21,
+      22,    23,     9,    25,     3,    27,    28,    19,    20,    28,
+      29,     0,    31,     4,    46,    24,     4,    10,     9,    22,
+      11,     9,     4,     5,    44,    45,    19,    20,     6,    -1,
+      21,    22,    23,    21,    25,    67,    27,    28,     6,    27,
+      28,    19,    20,    -1,    10,     7,     8,    34,    35,    -1,
+      -1,    19,    20,    19,    20,    13,    14,    15,    16,    17,
+      18,    36,    37,    38,    39,    40,    41,    -1,    42,    43
   };
 
   const signed char
   parser::yystos_[] =
   {
-       0,     4,     9,    11,    22,    23,    25,    27,    28,    30,
-      31,    32,    33,    34,    35,    36,    37,    38,    39,    40,
-      41,    42,    44,    45,    28,    41,    35,     9,     9,    35,
-       3,    33,     6,    19,    20,    13,    14,    15,    16,    17,
-      18,     4,     5,     7,     8,    32,     0,    10,    35,    35,
-       6,    21,    35,    38,    38,    39,    39,    39,    39,    39,
+       0,     4,     9,    11,    21,    22,    23,    25,    27,    28,
+      30,    31,    32,    33,    34,    35,    36,    37,    38,    39,
+      40,    41,    42,    44,    45,    28,    41,    35,     9,     9,
+      35,     3,    33,     6,    19,    20,    13,    14,    15,    16,
+      17,    18,     4,     5,     7,     8,    32,     0,    10,    35,
+      35,     6,    35,    38,    38,    39,    39,    39,    39,    39,
       39,    40,    40,    41,    41,    12,    43,    10,    10,     6,
-       6,    33,    36,    36,    37,    24,    36,    37
+      33,    36,    36,    37,    24,    36,    37
   };
 
   const signed char
@@ -1378,8 +1376,8 @@ namespace yy {
   {
        0,    29,    45,    32,    32,    44,    42,    43,    33,    33,
       36,    36,    36,    36,    36,    36,    37,    37,    37,    34,
-      34,    31,    35,    35,    35,    38,    38,    38,    38,    38,
-      38,    38,    39,    39,    39,    40,    40,    40,    41,    41,
+      31,    35,    35,    35,    38,    38,    38,    38,    38,    38,
+      38,    39,    39,    39,    40,    40,    40,    41,    41,    41,
       41,    41,    30
   };
 
@@ -1388,8 +1386,8 @@ namespace yy {
   {
        0,     2,     1,     1,     2,     3,     1,     1,     1,     1,
        1,     3,     1,     2,     7,     5,     5,     7,     5,     4,
-       4,     1,     3,     3,     1,     3,     3,     3,     3,     3,
-       3,     1,     3,     3,     1,     3,     3,     1,     2,     3,
+       1,     3,     3,     1,     3,     3,     3,     3,     3,     3,
+       1,     3,     3,     1,     3,     3,     1,     2,     3,     1,
        1,     1,     1
   };
 
@@ -1415,9 +1413,9 @@ namespace yy {
   {
        0,    93,    93,   100,   100,   104,   110,   121,   128,   128,
      131,   133,   139,   141,   143,   150,   157,   163,   169,   176,
-     181,   189,   195,   200,   205,   208,   213,   218,   223,   228,
-     233,   238,   241,   246,   251,   255,   260,   265,   268,   273,
-     279,   284,   288
+     189,   195,   200,   205,   208,   213,   218,   223,   228,   233,
+     238,   241,   246,   251,   255,   260,   265,   268,   273,   279,
+     284,   289,   293
   };
 
   // Print the state stack on the debug stream.
@@ -1499,9 +1497,9 @@ namespace yy {
   }
 
 } // yy
-#line 1503 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
+#line 1501 "/home/masha/code_projects/MIPT_Ilab/ParaCL/ParaCL/build/parser.cc"
 
-#line 295 "compiler.y"
+#line 300 "compiler.y"
 
 
 namespace yy {
