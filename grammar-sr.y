@@ -11,8 +11,10 @@
 #include <iostream>
 #include <string>
 #include <ast.hpp>
-// forward decl of a<trgument to parser
+
 namespace yy { class NumDriver; }
+
+
 }
 
 %code
@@ -24,6 +26,8 @@ namespace yy {
 parser::token_type yylex(parser::semantic_type* yylval,                         
                          NumDriver* driver);
 }
+
+std::shared_ptr<iNode> head;
 }
 
 %token
@@ -41,30 +45,24 @@ parser::token_type yylex(parser::semantic_type* yylval,
 
 %%
 
-program: statement_list
+program: statement_list 
 
 statement_list: statement
               | statement_list statement
 
 statement: expr SCOLON
-
-state: expr SCOLON state
       {
-        std::cout << ";" << std::endl;
-        head->dump();
+        head->dump();      
       }
 ;
 
+state: expr SCOLON state
+
 expr: expr PLUS expr          { 
-                                node* head = new node(nodeType::op);
-                                head->left_ = new node(nodeType::number);
-                                head->right_ = new node(nodeType::number);
-                                head->dump();
+                                head = newOp(op_t::PLUS, newNumber($1), newNumber($3));
                               }
     | expr MINUS expr         { 
-                                node* head = new node(nodeType::op);
-                                head->left_ = new node(nodeType::number);
-                                head->right_ = new node(nodeType::number);
+                                head = newOp(op_t::MINUS, newNumber($1), newNumber($3));
                               }
     | NUMBER                  { $$ = $1;}
 ;
