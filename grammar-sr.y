@@ -52,7 +52,7 @@ statement_list: statement
 
 statement: expr SCOLON
       {
-        eval(head);     
+        std::cout << eval(head) << std::endl;     
       }
 ;
 
