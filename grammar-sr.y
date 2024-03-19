@@ -27,7 +27,6 @@ parser::token_type yylex(parser::semantic_type* yylval,
                          NumDriver* driver);
 }
 
-std::shared_ptr<iNode> head;
 }
 
 %token
@@ -39,32 +38,35 @@ std::shared_ptr<iNode> head;
 ;
 
 %token <int> NUMBER
-%nterm <int> expr
-
+%nterm <std::shared_ptr<iNode>> expressions expr term
 %left '+' '-'
+
+%start expressions
 
 %%
 
-program: statement_list 
+expressions: expr { dumpTree($1, 0); }
+           ;
 
+/*
 statement_list: statement
               | statement_list statement
+*/
 
+/*
 statement: expr SCOLON
       {
-        std::cout << eval(head) << std::endl;     
+        std::cout << dumpTree($1, 0) << std::endl;   
       }
 ;
+*/
 
-state: expr SCOLON state
+expr:      expr PLUS term        { $$ = newOp(op_t::PLUS, $1, $3);}
+        |  expr MINUS term       { $$ = newOp(op_t::MINUS, $1, $3);}   
+        |  term                  { $$ = $1;}   
+;
 
-expr: expr PLUS expr          { 
-                                head = newOp(op_t::PLUS, newNumber($1), newNumber($3));
-                              }
-    | expr MINUS expr         { 
-                                head = newOp(op_t::MINUS, newNumber($1), newNumber($3));
-                              }
-    | NUMBER                  { $$ = $1;}
+term: NUMBER                   { $$ = newNumber($1); }
 ;
 
 %%

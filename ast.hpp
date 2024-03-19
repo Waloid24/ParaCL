@@ -22,16 +22,17 @@ public:
     iNode(std::shared_ptr<iNode> left, std::shared_ptr<iNode> right): 
         left_(left), 
         right_(right) {}
-    virtual void dump() const = 0;
+    virtual void dump(int) const = 0;
     virtual ~iNode(){}
 
     virtual double eval() const = 0;
-    // friend double dump(std::shared_ptr<iNode> node) {
-    //     if (node == nullptr) return 0.0;
-    //     eval(node->left_);
-    //     node->dump();
-    //     eval(node->left_);         
-    // }
+
+    friend void dumpTree(std::shared_ptr<iNode> node, int indent) {
+        if (node == nullptr) return;   
+        dumpTree(node->left_, indent + 4);
+        node->dump(indent);
+        dumpTree(node->right_, indent + 4);
+    }
 };
 
 class opNode: public iNode { 
@@ -57,20 +58,19 @@ public:
             break;
         }
     }
-    void dump() const override {
-        std::string name;
+    void dump(int indent) const override {
+        std::cout << std::string(indent, ' ') << "OP: ";
         switch (op_)
         {
             case op_t::PLUS:
-                name = "PLUS";
+                std::cout << "+" << std::endl;
                 break;
             case op_t::MINUS:
-                name = "MINUS";
+                std::cout << "-" << std::endl;
             break;
             default:
                 break;
         }
-        std::cout << "OP: " << name << std::endl;
     }
 };
 
@@ -83,8 +83,8 @@ public:
     double eval() const override {
         return static_cast<double>(value_); 
     }
-    void dump() const override {
-        std::cout << "Number: " << value_ << std::endl;
+    void dump(int indent) const override {
+        std::cout << std::string(indent, ' ') << "Number: " << value_ << std::endl;
     }
 };
 
@@ -95,9 +95,12 @@ inline double eval(std::shared_ptr<iNode> node) {
 }
 
 inline std::shared_ptr<iNode> newOp(op_t type, std::shared_ptr<iNode> left, std::shared_ptr<iNode> right) {
+    // std::cout << "newOp: " << static_cast<int>(type) << std::endl;
     return std::make_shared<opNode>(type, left, right);
 }
 
 inline std::shared_ptr<iNode> newNumber(int value) {
+    // std::cout << "newNum: " << value << std::endl;
     return std::make_shared<numNode>(value);
 }
+
