@@ -14,15 +14,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(BISON REQUIRED)
 find_package(FLEX REQUIRED)
 
-option(DBG "Debug" ON)
+option(DEBUG_GRAMMAR "Debug" ON)
 
-if(DBG)
+set(GRAMMAR "grammar-sr.y" CACHE STRING "file with grammar" FORCE)
+
+if(DEBUG_GRAMMAR)
   message("Debug")
-  set(GRAMMAR "grammar-dbg.y" CACHE STRING "file with grammar" FORCE)
+  add_definitions(-DDEBUG_GRAMMAR)
 else()
   message("Release")
-  set(GRAMMAR "grammar-sr.y" CACHE STRING "file with grammar" FORCE)
-endif(DBG)
+endif(DEBUG_GRAMMAR)
 
 flex_target(scanner
   lex.l
