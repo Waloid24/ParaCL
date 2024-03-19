@@ -1,17 +1,9 @@
 #!/usr/bin/env bash
 clear
-echo "Checking build directory..."
-cd "$(dirname $0)"
-mkdir -p build
-cd build
+OPTION=$1
 echo "Running CMake..."
-cmake ..
-if [ $? -ne 0 ]; then
-	exit 1
-fi
-
-echo "Running Make..."
-make
+cmake -S . -B build -DDBG=$OPTION
+cmake --build build 
 if [ $? -ne 0 ]; then
 	exit 1
 fi

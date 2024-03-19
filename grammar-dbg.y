@@ -47,22 +47,9 @@ parser::token_type yylex(parser::semantic_type* yylval,
 %start expressions
 
 %%
-
-expressions: expr { std::cout << eval($1) << std::endl; }
+   
+expressions: expr { dumpTree($1, 0);}
            ;
-
-/*
-statement_list: statement
-              | statement_list statement
-*/
-
-/*
-statement: expr SCOLON
-      {
-        std::cout << dumpTree($1, 0) << std::endl;   
-      }
-;
-*/
 
 expr:      expr PLUS term        { $$ = newOp(op_t::PLUS, $1, $3);}
         |  expr MINUS term       { $$ = newOp(op_t::MINUS, $1, $3);}   

@@ -10,7 +10,9 @@ enum class node_t{
 
 enum class op_t{
     PLUS,
-    MINUS
+    MINUS,
+    MULT,
+    DIV
 };
 
 class iNode {    
@@ -25,7 +27,7 @@ public:
     virtual void dump(int) const = 0;
     virtual ~iNode(){}
 
-    virtual double eval() const = 0;
+    virtual int eval() const = 0;
 
     friend void dumpTree(std::shared_ptr<iNode> node, int indent) {
         if (node == nullptr) return;   
@@ -41,9 +43,9 @@ public:
     opNode(op_t op, std::shared_ptr<iNode> left, std::shared_ptr<iNode> right): 
         op_(op), 
         iNode(left, right) {}
-    double eval() const override {
-        double left_value = left_ ? left_->eval(): 0.0;
-        double right_value = right_ ? right_->eval(): 0.0;
+    int eval() const override {
+        int left_value = left_ ? left_->eval(): 0.0;
+        int right_value = right_ ? right_->eval(): 0.0;
 
         switch (op_)
         {
@@ -52,6 +54,12 @@ public:
             break;
             case op_t::MINUS:
                 return left_value - right_value;
+            break;
+            case op_t::MULT:
+                return left_value * right_value;
+            break;
+            case op_t::DIV:
+                return left_value / right_value;
             break;
             default:
                 return 0.0;
@@ -68,6 +76,12 @@ public:
             case op_t::MINUS:
                 std::cout << "-" << std::endl;
             break;
+            case op_t::MULT:
+                std::cout << "*" << std::endl;
+                break;
+            case op_t::DIV:
+                std::cout << "/" << std::endl;
+            break;
             default:
                 break;
         }
@@ -80,15 +94,15 @@ public:
     numNode(int value): 
         value_(value), 
         iNode(nullptr, nullptr) {}
-    double eval() const override {
-        return static_cast<double>(value_); 
+    int eval() const override {
+        return value_; 
     }
     void dump(int indent) const override {
-        std::cout << std::string(indent, ' ') << "Number: " << value_ << std::endl;
+        std::cout << std::string(indent, ' ') << "Num: " << value_ << std::endl;
     }
 };
 
-inline double eval(std::shared_ptr<iNode> node) {
+inline int eval(std::shared_ptr<iNode> node) {
     if (node == nullptr)
         return 0.0; 
     return node->eval(); 
