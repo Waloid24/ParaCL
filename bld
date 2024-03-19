@@ -2,7 +2,7 @@
 clear
 OPTION=$1
 echo "Running CMake..."
-cmake -S . -B build -DDBG=$OPTION
+cmake -S . -B build -DDEBUG_GRAMMAR=$OPTION
 cmake --build build 
 if [ $? -ne 0 ]; then
 	exit 1
