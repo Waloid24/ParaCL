@@ -44,6 +44,7 @@ parser::token_type yylex(parser::semantic_type* yylval,
 
 %left '+' '-' 
 %left '*' '/' 
+%left UMINUS
 
 %start expressions
 
@@ -73,8 +74,8 @@ statement: expr SCOLON
 */
 
 expr:      expr PLUS term        { $$ = newOp(op_t::PLUS, $1, $3);}
-        |  expr MINUS term       { $$ = newOp(op_t::MINUS, $1, $3);}        
-        |  term                  { $$ = $1;}   
+        |  expr MINUS term       { $$ = newOp(op_t::MINUS, $1, $3);}  
+        |  term                   
 ;
 
 term : term MULT factor { $$ = newOp(op_t::MULT, $1, $3);}   
@@ -83,6 +84,8 @@ term : term MULT factor { $$ = newOp(op_t::MULT, $1, $3);}
      ;
  
 factor : NUMBER { $$ = newNumber($1); }
+        | MINUS NUMBER %prec UMINUS { $$ = newNumber(-$2); }
+
 ;
 
 %%
