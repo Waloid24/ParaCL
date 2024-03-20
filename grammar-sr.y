@@ -48,11 +48,15 @@ parser::token_type yylex(parser::semantic_type* yylval,
 %left '*' '/' 
 %left UMINUS
 
-%start expressions
+%start lines
 
 %%
 
-expressions: expr { 
+lines: lines expressions '\n' 
+     | expressions '\n' 
+;
+
+expressions: expr SCOLON  { 
     #ifdef DEBUG_GRAMMAR
       dumpTree($1, 0);  
     #else
@@ -61,32 +65,18 @@ expressions: expr {
   }
 ;
 
-
-/*
-statement_list: statement
-              | statement_list statement
-*/
-
-/*
-statement: expr SCOLON
-      {
-        std::cout << dumpTree($1, 0) << std::endl;   
-      }
-;
-*/
-
-expr:      expr PLUS term        { $$ = newOp(op_t::PLUS, $1, $3);}
-        |  expr MINUS term       { $$ = newOp(op_t::MINUS, $1, $3);}  
+expr:      expr PLUS term           { $$ = newOp(op_t::PLUS, $1, $3);}
+        |  expr MINUS term          { $$ = newOp(op_t::MINUS, $1, $3);}  
         |  term                   
 ;
 
-term : term MULT factor { $$ = newOp(op_t::MULT, $1, $3);}   
-     | term DIV factor { $$ = newOp(op_t::DIV, $1, $3);}   
+term : term MULT factor             { $$ = newOp(op_t::MULT, $1, $3);}   
+     | term DIV factor              { $$ = newOp(op_t::DIV, $1, $3);}   
      | factor
      ;
  
-factor :  NUMBER { $$ = newNumber($1); }
-        | LBRAC expr RBRAC { $$ = $2; }
+factor :  NUMBER                    { $$ = newNumber($1); }
+        | LBRAC expr RBRAC          { $$ = $2; }
         | MINUS NUMBER %prec UMINUS { $$ = newNumber(-$2); }
 
 ;
