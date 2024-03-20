@@ -37,14 +37,16 @@ $ ./bld DEBUG_GRAMMAR
 #### Example 1:
 Input:
 ```
-1+2-3*2
+(1+3)*5+3*2;
 ```
 Output:
 ```
-        Num: 1
-    OP: +
-        Num: 2
-OP: -
+            Num: 1
+        OP: +
+            Num: 3
+    OP: *
+        Num: 5
+OP: +
         Num: 3
     OP: *
         Num: 2
@@ -52,15 +54,17 @@ OP: -
 #### Example 2:
 Input:
 ```
-1+2-3*2
+(1+3)*(5+3)*2;
 ```
 Output:
 ```
             Num: 1
-        OP: -
-            Num: 2
-    OP: -
-        Num: 3
-OP: +
+        OP: +
+            Num: 3
+    OP: *
+            Num: 5
+        OP: +
+            Num: 3
+OP: *
     Num: 2
 ```
