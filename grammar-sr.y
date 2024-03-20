@@ -35,6 +35,8 @@ parser::token_type yylex(parser::semantic_type* yylval,
   MINUS   "-"
   MULT    "*"
   DIV     "/"
+  LBRAC   "("
+  RBRAC   ")"
   SCOLON  ";"
   ERR
 ;
@@ -83,7 +85,8 @@ term : term MULT factor { $$ = newOp(op_t::MULT, $1, $3);}
      | factor
      ;
  
-factor : NUMBER { $$ = newNumber($1); }
+factor :  NUMBER { $$ = newNumber($1); }
+        | LBRAC expr RBRAC { $$ = $2; }
         | MINUS NUMBER %prec UMINUS { $$ = newNumber(-$2); }
 
 ;

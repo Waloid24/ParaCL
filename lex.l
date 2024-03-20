@@ -17,6 +17,8 @@ DIGIT1  [1-9]
 "*"               return yy::parser::token_type::MULT;
 "/"               return yy::parser::token_type::DIV;
 "="               return yy::parser::token_type::EQUAL;
+"("               return yy::parser::token_type::LBRAC;
+")"               return yy::parser::token_type::RBRAC;
 ";"               return yy::parser::token_type::SCOLON;
 {DIGIT1}{DIGIT}*  return yy::parser::token_type::NUMBER;
 .			      return yy::parser::token_type::ERR;
