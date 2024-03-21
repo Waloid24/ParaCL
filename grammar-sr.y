@@ -34,6 +34,11 @@ parser::token_type yylex(parser::semantic_type* yylval,
   PLUS    "+"
   MINUS   "-"
   MULT    "*"
+  GR      ">"
+  GRE     "=>"
+  LW      "<"
+  LWE     "<="
+  NE      "!="
   DIV     "/"
   LBRAC   "("
   RBRAC   ")"
@@ -65,13 +70,18 @@ expressions: expr SCOLON  {
   }
 ;
 
-expr:      expr PLUS term           { $$ = newOp(op_t::PLUS, $1, $3);}
-        |  expr MINUS term          { $$ = newOp(op_t::MINUS, $1, $3);}  
+expr:      expr PLUS term           { $$ = newArith(arith_t::PLUS, $1, $3);}
+        |  expr MINUS term          { $$ = newArith(arith_t::MINUS, $1, $3);}  
+        |  expr GR term             { $$ = newPred(pred_t::GR, $1, $3);}  
+        |  expr GRE term            { $$ = newPred(pred_t::GRE, $1, $3);}  
+        |  expr LW term             { $$ = newPred(pred_t::LW, $1, $3);}  
+        |  expr LWE term            { $$ = newPred(pred_t::LWE, $1, $3);}  
+        |  expr NE term             { $$ = newPred(pred_t::NE, $1, $3);}  
         |  term                   
 ;
 
-term : term MULT factor             { $$ = newOp(op_t::MULT, $1, $3);}   
-     | term DIV factor              { $$ = newOp(op_t::DIV, $1, $3);}   
+term : term MULT factor             { $$ = newArith(arith_t::MULT, $1, $3);}   
+     | term DIV factor              { $$ = newArith(arith_t::DIV, $1, $3);}   
      | factor
      ;
  
